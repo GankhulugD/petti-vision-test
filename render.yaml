@@ -1,0 +1,16 @@
+# FastAPI model server (PyTorch) — Vercel дээр ажиллахгүй; Render/Railway/Fly дээр асаана.
+# Vercel вэб дээр PETTI_API_URL = энэ сервисийн public URL (жишээ нь https://petti-api.onrender.com)
+services:
+  - type: web
+    name: petti-vision-api
+    runtime: python
+    rootDir: apps/model
+    plan: starter
+    buildCommand: pip install -r requirements.txt && python download_models.py
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: PETTI_HALF
+        value: "0"

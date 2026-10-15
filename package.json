@@ -1,0 +1,10 @@
+{
+  "name": "petti-vision",
+  "private": true,
+  "scripts": {
+    "dev:model": "cd apps/model && python3 server.py",
+    "dev:web": "cd apps/web && npm run dev",
+    "build:web": "cd apps/web && npm run build",
+    "test:model": "cd apps/model && PETTI_FAKE_MODELS=1 python3 -m pytest -q tests"
+  }
+}

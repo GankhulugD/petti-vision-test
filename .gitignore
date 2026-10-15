@@ -1,0 +1,22 @@
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+# model data / weights (large, regenerated)
+apps/model/data/
+apps/model/artifacts/cache/
+apps/model/*.pt
+apps/model/yolo*.pt
+apps/model/data/registry.db
+*.onnx
+# keep trained heads small artifacts tracked? (npz/json are < 5 MB) – uncomment to ignore
+# apps/model/artifacts/
+# web
+node_modules/
+.next/
+next-env.d.ts
+.env
+.env.local
+*.tsbuildinfo
+.DS_Store

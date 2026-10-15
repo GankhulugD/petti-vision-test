@@ -1,0 +1,293 @@
+"""Pretrained building blocks: animal detector + two image encoders.
+
+    image ──► Detector (YOLO, ~5-15ms) ──► animal crop
+                                     ├──► ReID encoder  (DINOv2)  → identity vector
+                                     └──► VLM encoder   (SigLIP2) → attribute vector
+                                                                  (+ text tower for zero-shot)
+
+All encoders return L2-normalised float32 numpy arrays so the rest of the
+system (heads, index, matcher) is framework-agnostic.
+
+`Fake*` classes give deterministic numpy-only stand-ins so that tests and UI
+development run without torch or model downloads (PETTI_FAKE_MODELS=1).
+"""
+
+from __future__ import annotations
+
+import hashlib
+import logging
+import time
+from dataclasses import dataclass
+
+import numpy as np
+from PIL import Image, ImageOps
+
+from .config import Config, resolve_device
+from .taxonomy import COCO_TO_SPECIES
+
+log = logging.getLogger("petti.backbones")
+
+try:  # iPhone HEIC/HEIF photos
+    from pillow_heif import register_heif_opener
+
+    register_heif_opener()
+except ImportError:
+    pass
+
+
+@dataclass
+class Detection:
+    box: tuple[float, float, float, float]  # x1,y1,x2,y2 in pixels
+    species: str
+    confidence: float
+    polygon: list[tuple[float, float]] | None = None  # segmentation outline (image coords)
+
+    def mask(self, size: tuple[int, int]) -> np.ndarray | None:
+        """Boolean animal mask for an image of `size` (w,h)."""
+        if not self.polygon or len(self.polygon) < 3:
+            return None
+        from PIL import ImageDraw
+
+        m = Image.new("L", size, 0)
+        ImageDraw.Draw(m).polygon(self.polygon, fill=255)
+        return np.asarray(m) > 0
+
+    def area(self) -> float:
+        x1, y1, x2, y2 = self.box
+        return max(0.0, x2 - x1) * max(0.0, y2 - y1)
+
+
+def l2n(x: np.ndarray) -> np.ndarray:
+    x = np.asarray(x, dtype=np.float32)
+    return x / (np.linalg.norm(x, axis=-1, keepdims=True) + 1e-8)
+
+
+def load_image(data: bytes | str | Image.Image, max_side: int = 1280) -> Image.Image:
+    """Open, fix EXIF rotation (phone photos!), convert RGB, cap resolution."""
+    import io
+
+    if isinstance(data, Image.Image):
+        img = data
+    elif isinstance(data, (bytes, bytearray)):
+        img = Image.open(io.BytesIO(data))
+    else:
+        img = Image.open(data)
+    img = ImageOps.exif_transpose(img).convert("RGB")
+    if max(img.size) > max_side:
+        img.thumbnail((max_side, max_side), Image.BILINEAR)
+    return img
+
+
+def crop_detection(img: Image.Image, det: Detection | None, pad: float = 0.08) -> Image.Image:
+    if det is None:
+        return img
+    x1, y1, x2, y2 = det.box
+    w, h = x2 - x1, y2 - y1
+    x1 = max(0, x1 - pad * w)
+    y1 = max(0, y1 - pad * h)
+    x2 = min(img.width, x2 + pad * w)
+    y2 = min(img.height, y2 + pad * h)
+    return img.crop((int(x1), int(y1), int(x2), int(y2)))
+
+
+# =========================================================================== #
+# Detector
+# =========================================================================== #
+class YoloDetector:
+    def __init__(self, cfg: Config):
+        from ultralytics import YOLO
+
+        self.cfg = cfg
+        self.model = None
+        # segmentation models give an animal mask → colours measured on the
+        # animal only (not gravel/grass/walls). Fall back gracefully.
+        for weights in dict.fromkeys([cfg.detector_weights, "yolo26n-seg.pt", "yolo11n-seg.pt", "yolo11n.pt"]):
+            try:
+                self.model = YOLO(weights)
+                log.info("detector: %s", weights)
+                break
+            except Exception as exc:
+                log.warning("could not load %s (%s)", weights, exc)
+        if self.model is None:
+            raise RuntimeError("no YOLO detector could be loaded")
+        self.device = resolve_device(cfg.device)
+        self.classes = sorted(COCO_TO_SPECIES)
+
+    def detect(self, images: list[Image.Image]) -> list[list[Detection]]:
+        kw = {"half": True} if (self.cfg.half and self.device == "cuda") else {}
+        results = self.model.predict(
+            source=images,
+            conf=self.cfg.detector_conf,
+            imgsz=self.cfg.detector_imgsz,
+            classes=self.classes,
+            device=self.device,
+            verbose=False,
+            **kw,
+        )
+        out: list[list[Detection]] = []
+        for r in results:
+            dets = []
+            if r.boxes is not None:
+                polys = r.masks.xy if getattr(r, "masks", None) is not None else None
+                for i, b in enumerate(r.boxes):
+                    cls = int(b.cls.item())
+                    poly = None
+                    if polys is not None and i < len(polys) and len(polys[i]) >= 3:
+                        poly = [(float(x), float(y)) for x, y in polys[i]]
+                    dets.append(
+                        Detection(
+                            box=tuple(float(v) for v in b.xyxy[0].tolist()),
+                            species=COCO_TO_SPECIES.get(cls, "other"),
+                            confidence=float(b.conf.item()),
+                            polygon=poly,
+                        )
+                    )
+            dets.sort(key=lambda d: d.confidence * (d.area() ** 0.5), reverse=True)
+            out.append(dets)
+        return out
+
+
+# =========================================================================== #
+# Encoders (HuggingFace transformers)
+# =========================================================================== #
+def _load(cls, name, dtype):
+    try:  # transformers >= 4.56 uses `dtype`, older versions `torch_dtype`
+        return cls.from_pretrained(name, dtype=dtype)
+    except TypeError:
+        return cls.from_pretrained(name, torch_dtype=dtype)
+
+
+def _features(out):
+    """get_*_features returns a Tensor (transformers 4.x) or a ModelOutput (5.x)."""
+    import torch
+
+    if isinstance(out, torch.Tensor):
+        return out
+    if isinstance(out, (tuple, list)):
+        return out[1] if len(out) > 1 else out[0]
+    for name in ("image_embeds", "text_embeds", "pooler_output"):
+        v = getattr(out, name, None)
+        if v is not None:
+            return v
+    raise TypeError(f"unexpected feature output {type(out)}")
+
+
+class HFEncoders:
+    """DINOv2 (identity) + SigLIP2 (attributes, zero-shot) in one object."""
+
+    def __init__(self, cfg: Config):
+        import torch
+        from transformers import AutoImageProcessor, AutoModel, AutoProcessor
+
+        self.torch = torch
+        self.cfg = cfg
+        self.device = resolve_device(cfg.device)
+        # fp16 only on CUDA: on Apple MPS fp16 transformer inference can silently
+        # degrade embeddings (→ near-random zero-shot results). fp32 is safe there.
+        self.dtype = torch.float16 if (cfg.half and self.device == "cuda") else torch.float32
+
+        t0 = time.perf_counter()
+        self.reid_proc = AutoImageProcessor.from_pretrained(cfg.reid_model)
+        self.reid = _load(AutoModel, cfg.reid_model, self.dtype).to(self.device).eval()
+        self.vlm_proc = AutoProcessor.from_pretrained(cfg.vlm_model)
+        self.vlm = _load(AutoModel, cfg.vlm_model, self.dtype).to(self.device).eval()
+        log.info("encoders loaded in %.1fs on %s/%s", time.perf_counter() - t0, self.device, self.dtype)
+
+        # SigLIP calibration constants (sigmoid(logit_scale * cos + bias))
+        self.logit_scale = float(self.vlm.logit_scale.exp().item()) if hasattr(self.vlm, "logit_scale") else 100.0
+        self.logit_bias = float(self.vlm.logit_bias.item()) if hasattr(self.vlm, "logit_bias") else 0.0
+
+        self.reid_proj = None  # optional learned projection (training/train_reid.py)
+        if cfg.reid_proj_path.exists():
+            from .heads import load_reid_projection
+
+            self.reid_proj = load_reid_projection(cfg.reid_proj_path)
+            log.info("loaded learned re-ID projection %s", cfg.reid_proj_path)
+
+    def _to(self, batch):
+        return {k: (v.to(self.device, dtype=self.dtype) if v.is_floating_point() else v.to(self.device)) for k, v in batch.items()}
+
+    def encode_images(self, crops: list[Image.Image], tta: bool = True) -> dict[str, np.ndarray]:
+        torch = self.torch
+        imgs = list(crops)
+        if tta:
+            imgs += [ImageOps.mirror(c) for c in crops]
+        n = len(crops)
+        with torch.inference_mode():
+            r_in = self._to(self.reid_proc(images=imgs, return_tensors="pt"))
+            r_out = self.reid(**r_in)
+            # CLS token + mean patch token = robust global descriptor
+            cls = r_out.last_hidden_state[:, 0]
+            patch = r_out.last_hidden_state[:, 1:].mean(1)
+            reid = torch.cat([cls, patch], dim=-1).float().cpu().numpy()
+
+            v_in = self._to(self.vlm_proc(images=imgs, return_tensors="pt"))
+            vlm = _features(self.vlm.get_image_features(**v_in)).float().cpu().numpy()
+
+        if tta:
+            reid = reid[:n] + reid[n:]
+            vlm = l2n(vlm[:n]) + l2n(vlm[n:])
+        reid = l2n(reid)
+        if self.reid_proj is not None:
+            reid = l2n(self.reid_proj(reid))
+        return {"reid": reid, "vlm": l2n(vlm)}
+
+    def encode_texts(self, texts: list[str]) -> np.ndarray:
+        torch = self.torch
+        out = []
+        with torch.inference_mode():
+            for i in range(0, len(texts), 256):
+                t_in = self.vlm_proc(
+                    text=[t.lower() for t in texts[i : i + 256]],
+                    padding="max_length",
+                    max_length=64,
+                    truncation=True,
+                    return_tensors="pt",
+                )
+                t_in = {k: v.to(self.device) for k, v in t_in.items()}
+                feats = _features(self.vlm.get_text_features(**t_in))
+                out.append(feats.float().cpu().numpy())
+        return l2n(np.concatenate(out))
+
+
+# =========================================================================== #
+# Fakes (numpy only)
+# =========================================================================== #
+def _seeded(text: str, dim: int) -> np.ndarray:
+    seed = int(hashlib.md5(text.encode()).hexdigest()[:8], 16)
+    return np.random.default_rng(seed).standard_normal(dim).astype(np.float32)
+
+
+class FakeDetector:
+    def detect(self, images):
+        return [[Detection((0, 0, im.width, im.height), "dog", 0.9)] for im in images]
+
+
+class FakeEncoders:
+    """Embeds the 16x16 thumbnail through fixed random projections, so similar
+    images → similar vectors (good enough to test the matcher end-to-end)."""
+
+    logit_scale = 10.0
+    logit_bias = -1.0
+
+    def __init__(self, reid_dim: int = 128, vlm_dim: int = 64):
+        rng = np.random.default_rng(0)
+        self.Pr = rng.standard_normal((16 * 16 * 3, reid_dim)).astype(np.float32)
+        self.Pv = rng.standard_normal((16 * 16 * 3, vlm_dim)).astype(np.float32)
+        self.vlm_dim = vlm_dim
+
+    def _px(self, crops):
+        return np.stack([np.asarray(c.resize((16, 16)), dtype=np.float32).ravel() / 255.0 - 0.5 for c in crops])
+
+    def encode_images(self, crops, tta: bool = True):
+        x = self._px(crops)
+        return {"reid": l2n(x @ self.Pr), "vlm": l2n(x @ self.Pv)}
+
+    def encode_texts(self, texts):
+        return l2n(np.stack([_seeded(t, self.vlm_dim) for t in texts]))
+
+
+def build(cfg: Config):
+    if cfg.fake_models:
+        return FakeDetector(), FakeEncoders()
+    return YoloDetector(cfg), HFEncoders(cfg)

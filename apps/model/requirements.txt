@@ -1,0 +1,18 @@
+# --- inference server ---
+torch>=2.4
+torchvision>=0.19
+transformers>=4.56      # SigLIP2 + DINOv2 (DINOv3 needs >=4.56)
+ultralytics>=8.4.0      # YOLO26 (falls back to yolo11n on older versions)
+numpy>=1.26
+pillow>=10.4
+pillow-heif>=0.18     # iPhone HEIC photos
+fastapi>=0.115
+uvicorn[standard]>=0.32
+python-multipart>=0.0.17
+sentencepiece>=0.2      # SigLIP tokenizer
+protobuf>=4.25
+# --- training ---
+tqdm>=4.66
+# --- tests ---
+pytest>=8
+httpx>=0.27

@@ -26,7 +26,9 @@ from petti_vision.registry import STATUSES, Registry
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 log = logging.getLogger("petti.server")
 
-PORT = int(os.environ.get("PORT", "8765"))
+# PETTI_PORT wins so a combined container can give $PORT to Next.js
+# and keep the model on 8765. Alone, $PORT (Render/HF) or 8765 is used.
+PORT = int(os.environ.get("PETTI_PORT") or os.environ.get("PORT") or "8765")
 MAX_FILES = 12
 MAX_BYTES = 15 * 1024 * 1024
 

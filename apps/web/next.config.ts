@@ -9,6 +9,7 @@ if (process.env.VERCEL === "1" && !process.env.PETTI_API_URL) {
 }
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   // Browser calls /api/* → proxied to the FastAPI model server (no CORS issues)
   async rewrites() {
     return [

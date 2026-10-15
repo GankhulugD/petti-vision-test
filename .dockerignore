@@ -1,0 +1,9 @@
+.git
+**/.venv
+**/node_modules
+**/.next
+apps/model/data
+apps/model/*.pt
+**/.DS_Store
+**/.env
+**/.env.local

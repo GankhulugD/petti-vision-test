@@ -70,21 +70,11 @@ Apple Silicon дээр автоматаар `mps` (fp32) ашиглана. Ху�
 
 Демо өгөгдөл: `python3 seed_demo.py demo_pets --status lost` (`demo_pets/<нэр>/*.jpg`).
 
-## Вэб + model хамт deploy
+## Үнэгүй deploy (Hugging Face Gradio)
 
-Vercel дээр зөвхөн Next.js багтана. Энэ model (YOLO + DINOv2 + SigLIP, ~2 GB) Vercel-ийн serverless хязгаарт багтахгүй тул `vercel.app` дээр улаан «Model server холбогдохгүй» зурвас гарна. [pinequest team-7](https://github.com/pinecone-studio/pinequest-s4-e1-team-7) жижиг model-оо браузерт ажиллуулдаг; [toothlings](https://github.com/pinecone-studio/pinequest-s4-e2-toothlings) YOLO-гоо Docker дээр (порт **7860**) асаадаг. Petti тэр Docker загвараар **нэг контейнерт** вэб болон model-оо хамт гаргана — нэг линк дээр шууд ажиллана.
+Vercel дээр model багтахгүй. Hugging Face дээр **Docker SDK төлбөртэй**, **Gradio үнэгүй**.
 
-Root `Dockerfile`: Next.js (`$PORT`, анхдагч 7860) + model (`127.0.0.1:8765`). Вэб `/api/*`-г контейнер доторх model руу дамжуулна.
-
-### Hugging Face Space (үнэгүй CPU, ~16 GB RAM)
-
-1. [huggingface.co/new-space](https://huggingface.co/new-space) → **Docker** → энэ GitHub repo-г холбоно
-2. Space repo-ийн үндсэн `Dockerfile`-ийг ашиглана (порт 7860)
-3. Build дуусахад Space-ийн URL дээр UI болон танилт хамт ажиллана. Эхний build жин татдаг тул хэдэн минут болно
-
-### Render
-
-`render.yaml` нь ижил Docker image. Санах ой бага төлөвлөгөөнд model ачаалагдахгүй — дор хаяж 8 GB RAM хэрэгтэй.
+Space: [Gankhulug/petti-vision](https://huggingface.co/spaces/Gankhulug/petti-vision). Орох файл нь root `app.py` — Gradio хуудас болон `/health`, `/analyze` API хамт. Эхний ачаалалт жин татдаг тул хэдэн минут болно.
 
 ## API
 

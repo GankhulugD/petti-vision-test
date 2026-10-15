@@ -20,6 +20,7 @@ os.environ.setdefault("PETTI_HALF", "0")
 os.environ.setdefault("PETTI_DATA_DIR", "/tmp/petti-data")
 
 import gradio as gr
+import spaces
 from PIL import Image
 
 from server import state
@@ -46,6 +47,7 @@ def _load_models() -> None:
 threading.Thread(target=_load_models, daemon=True).start()
 
 
+@spaces.GPU(duration=120)
 def recognize(image):
     if _load_error:
         return f"Model ачаалагдсангүй: {_load_error[0]}"

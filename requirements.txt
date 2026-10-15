@@ -12,4 +12,3 @@ uvicorn[standard]>=0.32
 python-multipart>=0.0.17
 sentencepiece>=0.2
 protobuf>=4.25
-gradio>=5

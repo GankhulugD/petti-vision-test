@@ -1,7 +1,7 @@
 """Free Hugging Face Gradio Space entry.
 
-The Space runs this file (not Docker). Next.js stays on Vercel; this process
-serves both the Gradio page and the existing FastAPI routes (/health, /analyze, …).
+The Space SDK already serves `demo` on port 7860. Starting uvicorn as well
+makes the process crash with "address already in use".
 """
 
 from __future__ import annotations
@@ -10,7 +10,6 @@ import io
 import os
 import sys
 import threading
-from contextlib import asynccontextmanager
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -18,14 +17,11 @@ sys.path.insert(0, str(ROOT / "apps" / "model"))
 
 os.environ.setdefault("PETTI_DEVICE", "cpu")
 os.environ.setdefault("PETTI_HALF", "0")
-os.environ.setdefault("PETTI_PORT", "8765")
 os.environ.setdefault("PETTI_DATA_DIR", "/tmp/petti-data")
 
 import gradio as gr
-import uvicorn
 from PIL import Image
 
-from server import app as api
 from server import state
 
 _load_error: list[str] = []
@@ -47,11 +43,7 @@ def _load_models() -> None:
         _load_error.append(str(exc))
 
 
-@asynccontextmanager
-async def _lifespan(_app):
-    # Bind the port immediately. Weight download happens in the background.
-    threading.Thread(target=_load_models, daemon=True).start()
-    yield
+threading.Thread(target=_load_models, daemon=True).start()
 
 
 def recognize(image):
@@ -75,8 +67,6 @@ with gr.Blocks(title="Petti Vision") as demo:
         result = gr.Textbox(label="Үр дүн", lines=14)
     gr.Button("Шинжлэх").click(recognize, inputs=image, outputs=result)
 
-app = gr.mount_gradio_app(api, demo, path="/")
-app.router.lifespan_context = _lifespan
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", "7860")))
+    demo.launch()

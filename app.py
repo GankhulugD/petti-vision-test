@@ -21,8 +21,10 @@ os.environ.setdefault("PETTI_DATA_DIR", "/tmp/petti-data")
 
 import gradio as gr
 import spaces
+from gradio.routes import App as GradioApp
 from PIL import Image
 
+from server import app as petti_api
 from server import state
 
 _load_error: list[str] = []
@@ -45,6 +47,26 @@ def _load_models() -> None:
 
 
 threading.Thread(target=_load_models, daemon=True).start()
+
+
+def _attach_api(gradio_app):
+    """Serve the existing FastAPI routes on the same port as the Gradio page."""
+    if getattr(gradio_app, "_petti_routes", False):
+        return gradio_app
+    gradio_app.router.routes[:0] = list(petti_api.router.routes)
+    gradio_app._petti_routes = True
+    return gradio_app
+
+
+_create_app = GradioApp.create_app.__func__
+
+
+@classmethod
+def _create_app_with_api(cls, blocks, *args, **kwargs):
+    return _attach_api(_create_app(cls, blocks, *args, **kwargs))
+
+
+GradioApp.create_app = _create_app_with_api
 
 
 @spaces.GPU(duration=120)
@@ -71,4 +93,5 @@ with gr.Blocks(title="Petti Vision") as demo:
 
 
 if __name__ == "__main__":
-    demo.launch()
+    # SSR's Node proxy does not forward /analyze and /health to Python.
+    demo.launch(ssr_mode=False)

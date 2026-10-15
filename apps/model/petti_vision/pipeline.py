@@ -179,6 +179,16 @@ class PettiVision:
             keys = [lab.key for lab in labels]
             probs[task] = self._fuse_task(task, self.zs.probs(f"{task}|{sp_cond}", v)[0], feats, keys)
 
+        # Breed size is the adult weight. A baby of a large breed is not 25-45kg.
+        age_i = int(np.argmax(probs["age"]))
+        shift = 2 if age_i == 0 else 1 if age_i == 1 else 0
+        if shift:
+            src = probs["size"]
+            dst = np.zeros_like(src)
+            for i, mass in enumerate(src):
+                dst[max(0, i - shift)] += mass
+            probs["size"] = dst / max(dst.sum(), 1e-6)
+
         # ---- colours: pixels ⊕ zero-shot ⊕ head ---------------------- #
         color_keys = [c.key for c in T.COLORS]
         px = coat_colors(crop, mask=mask)

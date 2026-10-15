@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
-const API = process.env.PETTI_API_URL ?? "http://localhost:8765";
+const API =
+  process.env.PETTI_API_URL ??
+  (process.env.VERCEL === "1"
+    ? "https://gankhulug-petti-vision.hf.space"
+    : "http://localhost:8765");
 
 if (process.env.VERCEL === "1" && !process.env.PETTI_API_URL) {
   console.warn(

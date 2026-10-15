@@ -58,15 +58,14 @@ def _attach_api(gradio_app):
     return gradio_app
 
 
-_create_app = GradioApp.create_app.__func__
+_create_app = GradioApp.create_app
 
 
-@classmethod
-def _create_app_with_api(cls, blocks, *args, **kwargs):
-    return _attach_api(_create_app(cls, blocks, *args, **kwargs))
+def _create_app_with_api(blocks, *args, **kwargs):
+    return _attach_api(_create_app(blocks, *args, **kwargs))
 
 
-GradioApp.create_app = _create_app_with_api
+GradioApp.create_app = staticmethod(_create_app_with_api)
 
 
 @spaces.GPU(duration=120)

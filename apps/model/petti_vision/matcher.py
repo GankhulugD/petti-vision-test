@@ -1,8 +1,15 @@
 """Lost & Found matcher: query profile → ranked candidate pets with reasons.
 
-score = w_reid · identity(DINOv2 multi-view)        – "is it THIS animal?"
-      + w_vlm  · appearance(SigLIP multi-view)       – "does it look alike?"
-      + w_attr · attribute compatibility             – breed/colour/size/age/marks
+score = sigmoid( (cos_id − μ)/τ  +  β·(2·attr − 1)  −  offset )
+
+  identity logit  – DINOv2 multi-view similarity, calibrated (μ, τ) on real
+                    owner photos: the main signal for "is it THIS animal?"
+  attribute term  – breed/colour/size/age/marks compatibility, a tie-breaker
+                    between look-alikes (β = 3)
+
+Fusing in logit space keeps the ranking driven by identity; the earlier linear
+mix of saturated probabilities let attributes outvote identity (R@1 0.80 vs
+0.87 for identity alone on the re-ID set; logit fusion: R@1 0.87, R@5 1.0).
 
 * species is a hard filter (a cat is never suggested for a lost dog)
 * multi-view: every query photo is compared with every registered photo
@@ -27,8 +34,14 @@ from .registry import PetRecord
 
 DEFAULT_CAL = {
     # cosine → probability-of-same-animal; defaults for dinov2-small CLS‖mean (re-fit with evaluate.py)
-    "reid_mu": 0.62, "reid_tau": 0.06,
-    "vlm_mu": 0.80, "vlm_tau": 0.05,
+    # fitted by training/evaluate.py on 46 dogs (owner photos) + 104 look-alikes, DINOv2-small CLS
+    "reid_mu": 0.437, "reid_tau": 0.047,
+    "vlm_mu": 0.812, "vlm_tau": 0.025,
+    "attr_beta": 3.0,
+    # shown "% match" = sigmoid(z − offset). Offset = median score of the most
+    # similar *different* dog per query on the eval set → a typical look-alike
+    # shows ~50%, the true dog ~80-100% (median 96%). Ranking is unaffected.
+    "display_offset": 5.0,
 }
 
 ATTR_WEIGHTS = {"breed": 0.24, "color": 0.26, "pattern": 0.14, "size": 0.14, "coat": 0.12, "age": 0.10}
@@ -85,7 +98,7 @@ class Matcher:
         cal_path = cfg.artifacts_dir / "calibration.json"
         if cal_path.exists():
             c = json.loads(cal_path.read_text())
-            self.cal.update({k: v for k, v in c.items() if k in self.cal})
+            self.cal.update({k: v for k, v in c.items() if k in self.cal and isinstance(v, (int, float))})
             for k in ("reid", "vlm", "attr"):
                 if f"w_{k}" in c:
                     self.w[k] = float(c[f"w_{k}"])
@@ -115,10 +128,11 @@ class Matcher:
             if not m:
                 continue
             a, b = qm[k], cm[k]
-            if a >= m.threshold and b >= m.threshold:
+            th = m.threshold if m.threshold <= 1.0 else 0.98  # owner-confirmed marks are stored at 0.99
+            if a >= th and b >= th:
                 bonus += 0.04 * m.weight
                 reasons.append(f"Онцгой шинж таарсан: {m.mn}")
-            elif m.weight >= 1.5 and ((a >= m.threshold + 0.1 and b < 0.2) or (b >= m.threshold + 0.1 and a < 0.2)):
+            elif m.weight >= 1.5 and ((a >= th + 0.05 and b < 0.2) or (b >= th + 0.05 and a < 0.2)):
                 # one view might hide it (scar on the other side) → soft penalty only
                 bonus -= 0.03 * m.weight
                 mism.append(f"Онцгой шинж зөрж байна: {m.mn}")
@@ -147,7 +161,9 @@ class Matcher:
         q_species_p = qd["species_probs"]
 
         # hard species filter (keep if query gives the species ≥15%)
-        cands = [c for c in candidates if q_species_p.get(c.species, 0) >= 0.15 and len(c.photo_paths) > 0]
+        cands = [c for c in candidates if q_species_p.get(c.species, 0) >= 0.15 and len(c.photo_paths) > 0
+                 # embeddings from an older model version cannot be compared (see Registry.reembed_stale)
+                 and c.reid.shape[-1] == query.reid.shape[-1] and c.vlm.shape[-1] == query.vlm.shape[-1]]
         if not cands:
             return []
 
@@ -168,8 +184,8 @@ class Matcher:
             r = _sig((reid_raw[i] - self.cal["reid_mu"]) / self.cal["reid_tau"])
             v = _sig((vlm_raw[i] - self.cal["vlm_mu"]) / self.cal["vlm_tau"])
             a, det, reasons, mism = self.attribute_compat(qd, c.profile)
-            score = self.w["reid"] * r + self.w["vlm"] * v + self.w["attr"] * a
-            score *= 0.85 + 0.15 * q_species_p.get(c.species, 0)  # species uncertainty
+            z = (reid_raw[i] - self.cal["reid_mu"]) / self.cal["reid_tau"] + self.cal["attr_beta"] * (2 * a - 1)
+            score = _sig(z - self.cal["display_offset"]) * (0.85 + 0.15 * q_species_p.get(c.species, 0))
             if r > 0.8:
                 reasons.insert(0, "Зураг дээрх төрх маш төстэй (ижил амьтан байх магадлал өндөр)")
             elif r > 0.5:

@@ -17,6 +17,7 @@ you retrain heads on registered pets the fused accuracy goes up.
 from __future__ import annotations
 
 import logging
+import threading
 import time
 from dataclasses import dataclass, field
 from typing import Any
@@ -26,10 +27,10 @@ from PIL import Image
 
 from . import taxonomy as T
 from .backbones import Detection, build, crop_detection, l2n, load_image
-from .color import coat_colors
+from .color import PALETTE_LAB, coat_colors
 from .config import Config
 from .heads import load_heads
-from .zeroshot import ZeroShot
+from .zeroshot import ZeroShot, softmax
 
 log = logging.getLogger("petti.pipeline")
 
@@ -53,6 +54,21 @@ def _square(img: Image.Image, fill=(124, 116, 104)) -> Image.Image:
     canvas = Image.new("RGB", (s, s), fill)
     canvas.paste(img, ((s - w) // 2, (s - h) // 2))
     return canvas
+
+
+def confidence_level(p: float, cuts: tuple[float, float]) -> str:
+    """high / medium / low – what the UI should say ("итгэлтэй" / "магадгүй" / "тодорхойгүй")."""
+    return "high" if p >= cuts[0] else "medium" if p >= cuts[1] else "low"
+
+
+def _square_mask(m: np.ndarray) -> np.ndarray:
+    """Pad a crop mask exactly like _square pads the crop."""
+    h, w = m.shape
+    sz = max(h, w)
+    out = np.zeros((sz, sz), dtype=bool)
+    y, x = (sz - h) // 2, (sz - w) // 2
+    out[y : y + h, x : x + w] = m
+    return out
 
 
 def _label_dict(lab: T.Label, p: float) -> dict:
@@ -100,7 +116,16 @@ class PettiVision:
         if self.heads:
             log.info("trained heads loaded: %s", list(self.heads.tasks))
         self.load_seconds = time.perf_counter() - t0
+        self._lock = threading.Lock()
         self._species_keys = [s.key for s in T.SPECIES]
+        # zero-shot breed softmax is over-confident; T fitted on a labelled set
+        # (training/calibrate.py writes artifacts/calibration.json)
+        self.breed_temperature = 1.5
+        cal = self.cfg.artifacts_dir / "calibration.json"
+        if cal.exists():
+            import json
+
+            self.breed_temperature = float(json.loads(cal.read_text()).get("breed_temperature", 1.5))
         self._breeds = {sp: T.breeds_for(sp) for sp in ("dog", "cat")}
 
     # ------------------------------------------------------------------ #
@@ -115,25 +140,40 @@ class PettiVision:
         labels, p = self.heads.predict(task, feats[None])
         p = p[0]
         idx = {k: i for i, k in enumerate(labels)}
+        seen = self.heads.tasks[task].get("seen")  # classes that had training data
         if self.heads.tasks[task]["multi"]:
             return np.array([p[idx[k]] if k in idx else np.nan for k in keys]), self.heads.tasks[task]["alpha"]
-        out = np.array([p[idx[k]] if k in idx else 1e-4 for k in keys])
-        return _norm(out), self.heads.tasks[task]["alpha"]
+        # classes the head never saw (e.g. Bankhar before we collect photos) are
+        # NaN → they keep their zero-shot probability instead of being zeroed
+        out = np.array([p[idx[k]] if (k in idx and (seen is None or k in seen)) else np.nan for k in keys])
+        return out, self.heads.tasks[task]["alpha"]
 
     def _fuse_task(self, task: str, zs_p: np.ndarray, feats: np.ndarray, keys: list[str], extra=None, zs_w: float = 1.0) -> np.ndarray:
         dists, ws = [zs_p], [zs_w]
-        hp, alpha = self._head(task, feats, keys)
-        if hp is not None:
-            dists, ws = [zs_p, hp], [zs_w * (1.0 - alpha), alpha]
         if extra is not None:
             dists.append(extra[0])
             ws.append(extra[1])
-        return fuse(dists, ws)
+        base = fuse(dists, ws)
+        hp, alpha = self._head(task, feats, keys) if feats is not None else (None, 0.0)
+        if hp is None:
+            return base
+        known = ~np.isnan(hp)
+        if not known.any():
+            return base
+        out = base.copy()
+        mass = base[known].sum()  # probability the answer is one of the head's classes
+        h = _norm(hp[known])
+        out[known] = mass * fuse([_norm(base[known]), h], [1.0 - alpha, alpha])
+        return _norm(out)
 
     # ------------------------------------------------------------------ #
     def _photo(self, img: Image.Image, det: Detection | None, reid: np.ndarray, vlm: np.ndarray, crop: Image.Image,
                mask: np.ndarray | None = None) -> PhotoResult:
         feats = self.heads.features(vlm[None], reid[None])[0] if self.heads else None
+        if feats is not None and self.heads.dim not in (None, feats.shape[-1]):
+            # heads were trained on another backbone → ignore them instead of crashing
+            log.warning("trained heads expect %s-d features, got %s-d: ignoring heads (retrain)", self.heads.dim, feats.shape[-1])
+            self.heads, feats = None, None
         v = vlm[None]
         probs: dict[str, np.ndarray] = {}
 
@@ -144,8 +184,21 @@ class PettiVision:
             prior = np.full(len(self._species_keys), (1 - det.confidence) / len(self._species_keys))
             prior[self._species_keys.index(det.species)] += det.confidence
             # COCO-trained detector is very reliable for dog vs cat: trust it more when confident
-            extra = (_norm(prior), 2.0 if det.confidence >= 0.5 else 1.0)
+            # trust a confident dog/cat detection more; COCO "horse"/"bird" boxes on
+            # pets are a known YOLO confusion (a Doberman can come back as a horse)
+            strong = det.confidence >= 0.5 and det.species in ("dog", "cat")
+            extra = (_norm(prior), 2.0 if strong else 1.0)
         probs["species"] = self._fuse_task("species", p_sp, feats, self._species_keys, extra)
+        # fine-grained species evidence: the best-fitting BREED caption competes
+        # with the other species' captions on the same logit scale. "Sphynx
+        # hairless cat" fits a sphynx far better than "a photo of a cat" (which
+        # loses to "other animal"), and "Doberman Pinscher" beats "horse".
+        ls = self.zs.logits("species|any", v)[0]
+        fine = ls.copy()
+        i_dog, i_cat = self._species_keys.index("dog"), self._species_keys.index("cat")
+        fine[i_dog] = max(ls[i_dog], self.zs.logits("breed|dog", v)[0].max())
+        fine[i_cat] = max(ls[i_cat], self.zs.logits("breed|cat", v)[0].max())
+        probs["species"] = fuse([probs["species"], softmax(fine)], [1.0, 1.0])
         species = self._species_keys[int(np.argmax(probs["species"]))]
         sp_cond = species if species in ("dog", "cat") else "other"
 
@@ -154,7 +207,7 @@ class PettiVision:
         if species in ("dog", "cat"):
             breeds = self._breeds[species]
             breed_keys = [b.key for b in breeds]
-            p_b = self.zs.probs(f"breed|{species}", v)[0]
+            p_b = self.zs.probs(f"breed|{species}", v, temperature=self.breed_temperature)[0]
             probs["breed"] = self._fuse_task("breed", p_b, feats, breed_keys)
 
         # ---- size (breed prior helps a lot: a husky is "medium") ------- #
@@ -200,6 +253,21 @@ class PettiVision:
             mix = (1 - alpha) * mix + alpha * (hc / max(hc.sum(), 1e-6))
         shares = mix / mix.sum()
 
+        # ---- pattern sanity: species-specific patterns + measured pixels ---- #
+        pat_keys = [p.key for p in T.PATTERNS]
+        prior = np.ones(len(pat_keys))
+        for i, k in enumerate(pat_keys):
+            if k in T.PATTERN_SPECIES and species in ("dog", "cat") and species not in T.PATTERN_SPECIES[k]:
+                prior[i] = 1e-3  # e.g. "colour-point" on a dog
+        sig = [k for k in color_keys if px[k] >= 0.2]
+        lightness = {k: float(L) for k, L in zip(color_keys, PALETTE_LAB[:, 0])}
+        spread = max(lightness[k] for k in sig) - min(lightness[k] for k in sig) if sig else 0.0
+        if spread >= 35:  # black + white/tan → not a solid coat
+            prior[pat_keys.index("solid")] *= 0.25
+        elif max(px.values()) >= 0.45:  # one dominant shade (cream+golden lab) → solid
+            prior[pat_keys.index("solid")] *= 5.0
+        probs["pattern"] = fuse([probs["pattern"], _norm(prior)], [1.0, 1.0])
+
         # ---- marks (multi-label) ------------------------------------- #
         marks = {k: float(p[0]) for k, p in self.zs.mark_probs(species, v).items()}
         hm, alpha = self._head("marks", feats, list(marks)) if feats is not None else (None, 0)
@@ -214,7 +282,17 @@ class PettiVision:
 
     # ------------------------------------------------------------------ #
     def analyze(self, images: list[bytes | Image.Image | str]) -> AnimalProfile:
-        """Analyse 1..N photos of the SAME animal and return one profile."""
+        """Analyse 1..N photos of the SAME animal and return one profile.
+
+        Thread-safe: FastAPI runs sync endpoints in a thread pool, and torch
+        models on MPS/CUDA must not be driven by two threads at once (on Apple
+        MPS concurrent calls can deadlock the server). Requests are serialised;
+        each takes ~0.2 s so a queue is far cheaper than a hang.
+        """
+        with self._lock:
+            return self._analyze(images)
+
+    def _analyze(self, images: list[bytes | Image.Image | str]) -> AnimalProfile:
         t0 = time.perf_counter()
         imgs = [load_image(i) for i in images]
         dets = self.detector.detect(imgs)
@@ -226,7 +304,8 @@ class PettiVision:
         for im, d in zip(imgs, chosen):
             m = d.mask(im.size) if d is not None else None
             masks.append(None if m is None else np.asarray(crop_detection(Image.fromarray(m), d)))
-        emb = self.enc.encode_images([_square(c) for c in crops], tta=self.cfg.tta)
+        sq_masks = [None if m is None else _square_mask(m) for m in masks]
+        emb = self.enc.encode_images([_square(c) for c in crops], tta=self.cfg.tta, masks=sq_masks)
         t_enc = time.perf_counter()
 
         photos = [self._photo(im, d, emb["reid"][i], emb["vlm"][i], crops[i], masks[i]) for i, (im, d) in enumerate(zip(imgs, chosen))]
@@ -275,7 +354,7 @@ class PettiVision:
                 warnings.append(f"{outliers}-р зураг бусдаасаа их ялгаатай — өөр амьтан байж магадгүй")
 
         data: dict[str, Any] = {
-            "species": _label_dict(species_lab, sp_p.max()),
+            "species": {**_label_dict(species_lab, sp_p.max()), "level": confidence_level(sp_p.max(), (0.9, 0.6))},
             "species_probs": {s.key: round(float(p), 4) for s, p in zip(T.SPECIES, sp_p)},
         }
 
@@ -291,12 +370,15 @@ class PettiVision:
             order = np.argsort(-breed_p)[:5]
             top = [_label_dict(breeds[i], breed_p[i]) for i in order]
             p1, p2 = breed_p[order[0]], breed_p[order[1]]
-            first_is_mixed = breeds[order[0]].key in ("mixed_dog", "domestic_shorthair", "domestic_longhair")
-            mixed = bool(first_is_mixed or p1 < 0.45 or (p1 - p2) < 0.15)
-            looks_like = [t for t in top if t["key"] not in ("mixed_dog",)][:3 if mixed else 1]
+            first_is_mixed = breeds[order[0]].key in T.MIXED_KEYS
+            # thresholds from the calibration set (T=1.5): top-1 ≥0.6 → ~93% correct,
+            # 0.35-0.6 → top-1 71% / top-3 92% (show alternatives), <0.35 → unsure
+            mixed = bool(first_is_mixed or p1 < 0.6 or (p1 - p2) < 0.15)
+            looks_like = [t for t in top if t["key"] not in ("mixed_dog",) and t["confidence"] >= 0.05][:3 if mixed else 1] or top[:1]
             data["breed"] = {
                 "top": top,
                 "is_mixed": mixed,
+                "level": confidence_level(p1, (0.6, 0.35)),
                 "looks_like": looks_like,
                 "probs": {b.key: round(float(p), 4) for b, p in zip(breeds, breed_p)},
             }
@@ -306,7 +388,8 @@ class PettiVision:
         for task, labels in (("size", T.SIZES), ("age", T.AGES), ("pattern", T.PATTERNS), ("coat", T.COAT_LENGTH)):
             p = avg(task)
             i = int(np.argmax(p))
-            data[task] = {**_label_dict(labels[i], p[i]), "probs": {l.key: round(float(v), 4) for l, v in zip(labels, p)}}
+            data[task] = {**_label_dict(labels[i], p[i]), "level": confidence_level(p[i], (0.6, 0.35)),
+                          "probs": {l.key: round(float(v), 4) for l, v in zip(labels, p)}}
 
         shares = np.average(np.stack([p.color_shares for p in photos]), axis=0, weights=w)
         order = np.argsort(-shares)
@@ -409,9 +492,11 @@ def apply_owner_labels(data: dict, labels: dict) -> dict:
         data["colors"] = [{"key": k, "en": T.label_by_key("color", k).en, "mn": T.label_by_key("color", k).mn, "share": round(probs[k], 3)} for k in cols]
     for m in labels.get("marks") or []:
         if m in T.MARK_BY_KEY:
-            data.setdefault("mark_probs", {})[m] = 0.95
+            data.setdefault("mark_probs", {})[m] = 0.99
     if labels.get("marks"):
-        data["marks"] = [_label_dict(T.MARK_BY_KEY[k], v) for k, v in data["mark_probs"].items() if v >= T.MARK_BY_KEY[k].threshold]
+        owner = set(labels.get("marks") or [])
+        data["marks"] = [_label_dict(T.MARK_BY_KEY[k], v) for k, v in data["mark_probs"].items()
+                         if k in owner or v >= T.MARK_BY_KEY[k].threshold]
     data["category"] = PettiVision.category(data)
     data["description_mn"], data["description_en"] = describe(data)
     return data

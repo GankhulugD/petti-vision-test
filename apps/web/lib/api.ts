@@ -1,12 +1,13 @@
 // Typed client for the Petti Vision FastAPI server (proxied under /api).
 
-export type Labeled = { key: string; en: string; mn: string; confidence: number };
+export type Level = "high" | "medium" | "low";
+export type Labeled = { key: string; en: string; mn: string; confidence: number; level?: Level };
 export type Dist = Record<string, number>;
 
 export type Profile = {
   species: Labeled;
   species_probs: Dist;
-  breed: { top: Labeled[]; is_mixed: boolean; looks_like: Labeled[]; probs: Dist } | null;
+  breed: { top: Labeled[]; is_mixed: boolean; level?: Level; looks_like: Labeled[]; probs: Dist } | null;
   size: Labeled & { probs: Dist };
   age: Labeled & { probs: Dist };
   pattern: Labeled & { probs: Dist };
@@ -48,8 +49,12 @@ export type MatchResult = {
   mismatches: string[];
 };
 
+// Direct calls to the model server skip the Vercel→HF proxy hop (~0.5 s).
+// Set NEXT_PUBLIC_API_URL=https://<space>.hf.space once the Space allows CORS.
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "/api";
+
 async function call<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`/api${path}`, init);
+  const res = await fetch(`${API_BASE}${path}`, init);
   if (!res.ok) {
     let msg = res.statusText;
     try {

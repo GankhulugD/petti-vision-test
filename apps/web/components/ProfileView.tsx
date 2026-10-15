@@ -1,4 +1,4 @@
-import type { Profile } from "@/lib/api";
+import type { Level, Profile } from "@/lib/api";
 
 function Bar({ value }: { value: number }) {
   return (
@@ -8,13 +8,27 @@ function Bar({ value }: { value: number }) {
   );
 }
 
-function Row({ label, value, conf, sub }: { label: string; value: string; conf?: number; sub?: string }) {
+const LEVEL: Record<Level, [string, string]> = {
+  high: ["Итгэлтэй", "bg-green-100 text-green-800"],
+  medium: ["Магадгүй", "bg-amber-100 text-amber-800"],
+  low: ["Тодорхойгүй", "bg-stone-200 text-stone-600"],
+};
+
+function LevelChip({ level }: { level?: Level }) {
+  if (!level) return null;
+  const [txt, cls] = LEVEL[level];
+  return <span className={`chip ${cls}`}>{txt}</span>;
+}
+
+function Row({ label, value, conf, sub, level }: { label: string; value: string; conf?: number; sub?: string; level?: Level }) {
   return (
     <div className="grid grid-cols-[7.5rem_1fr] items-start gap-3 py-2.5">
       <div className="text-sm text-stone-500">{label}</div>
       <div>
         <div className="flex items-baseline justify-between gap-2">
-          <span className="font-semibold">{value}</span>
+          <span className="flex items-center gap-2 font-semibold">
+            {value} <LevelChip level={level} />
+          </span>
           {conf !== undefined && <span className="text-xs tabular-nums text-stone-500">{Math.round(conf * 100)}%</span>}
         </div>
         {conf !== undefined && <Bar value={conf} />}
@@ -33,12 +47,15 @@ export default function ProfileView({ p, compact = false }: { p: Profile; compac
   return (
     <div className="space-y-4">
       <div className="divide-y divide-stone-100">
-        <Row label="Төрөл" value={p.species.mn} conf={p.species.confidence} />
+        <Row label="Төрөл" value={p.species.mn} conf={p.species.confidence} level={p.species.level} />
         {p.breed && (
           <div className="grid grid-cols-[7.5rem_1fr] items-start gap-3 py-2.5">
             <div className="text-sm text-stone-500">Үүлдэр</div>
             <div className="space-y-1.5">
-              {p.breed.is_mixed && <span className="chip bg-amber-100 text-amber-800">Эрлийз байж магадгүй — дараахтай төстэй</span>}
+              <div className="flex flex-wrap gap-1.5">
+                <LevelChip level={p.breed.level} />
+                {p.breed.is_mixed && <span className="chip bg-amber-100 text-amber-800">Эрлийз эсвэл дараахаас аль нэг нь</span>}
+              </div>
               {p.breed.top.slice(0, compact ? 3 : 5).map((b) => (
                 <div key={b.key}>
                   <div className="flex justify-between text-sm">
@@ -51,8 +68,8 @@ export default function ProfileView({ p, compact = false }: { p: Profile; compac
             </div>
           </div>
         )}
-        <Row label="Хэмжээ" value={p.size.mn} conf={p.size.confidence} />
-        <Row label="Нас" value={p.age.mn} conf={p.age.confidence} />
+        <Row label="Хэмжээ" value={p.size.mn} conf={p.size.confidence} level={p.size.level} />
+        <Row label="Нас" value={p.age.mn} conf={p.age.confidence} level={p.age.level} />
         <div className="grid grid-cols-[7.5rem_1fr] items-center gap-3 py-2.5">
           <div className="text-sm text-stone-500">Өнгө</div>
           <div className="flex flex-wrap gap-2">

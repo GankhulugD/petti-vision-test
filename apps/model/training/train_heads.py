@@ -75,6 +75,10 @@ def train_task(task, X, y, tr, va, multi, zs, args, device, init=None):
         counts = np.bincount(y[tr_i], minlength=n_out).astype(np.float32)
         w = 1.0 / np.sqrt(np.clip(counts, 1, None))
         w = w / w[counts > 0].mean()
+        # classes without training data get weight 0: with label smoothing PyTorch
+        # weights the smoothing term per class too, and an unseen class with a
+        # large weight pulled every prediction towards it (species head → 23%)
+        w[counts == 0] = 0.0
         cls_w = torch.tensor(w, dtype=torch.float32, device=device)
 
     opt = torch.optim.AdamW(head.parameters(), lr=args.lr, weight_decay=0.05)
@@ -117,11 +121,16 @@ def train_task(task, X, y, tr, va, multi, zs, args, device, init=None):
         best, best_logits = float("nan"), None
 
     # ---- calibration: temperature + fusion weight with zero-shot ---------- #
-    info = {"labels": SINGLE.get(task) or MULTI[task], "multi_label": multi, "val_acc": round(best, 4),
+    labels_all = SINGLE.get(task) or MULTI[task]
+    info = {"labels": labels_all, "multi_label": multi, "val_acc": round(best, 4),
+            # classes with training data; unseen ones keep their zero-shot score at inference
+            "seen": labels_all if multi else [labels_all[i] for i in np.unique(y[tr_i]).tolist()],
             "n_train": int(len(tr_i)), "n_val": int(len(va_i)), "alpha": 0.5, "temperature": 1.0}
     if best_logits is not None and not multi:
         yv = y[va_i]
-        temps = np.linspace(0.5, 3.0, 26)
+        # T ≥ 1: never sharpen. Public datasets are cleaner than phone photos, so an
+        # in-domain-optimal T<1 makes the head over-confident on real uploads.
+        temps = np.linspace(1.0, 3.0, 21)
         nll = []
         for t in temps:
             z = best_logits / t
@@ -138,7 +147,9 @@ def train_task(task, X, y, tr, va, multi, zs, args, device, init=None):
             zp = zs[zk][va_i]
             zp = zp / np.clip(zp.sum(1, keepdims=True), 1e-9, None)
             accs = [(geo_fuse(zp, hp, a).argmax(1) == yv).mean() for a in np.linspace(0, 1, 11)]
-            info["alpha"] = round(float(np.linspace(0, 1, 11)[int(np.argmax(accs))]), 2)
+            # cap at 0.5: the val split is in-domain; on out-of-domain phone photos
+            # zero-shot keeps an equal vote (validated on the live benchmark)
+            info["alpha"] = min(0.5, round(float(np.linspace(0, 1, 11)[int(np.argmax(accs))]), 2))
             info["zs_val_acc"] = round(float(accs[0]), 4)
             info["fused_val_acc"] = round(float(max(accs)), 4)
     elif multi:
@@ -159,6 +170,7 @@ def main():
     ap.add_argument("--lr", type=float, default=2e-3)
     ap.add_argument("--noise", type=float, default=0.05)
     ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--feature", choices=["vlm", "concat"], default="vlm")
     ap.add_argument("--tasks", default=",".join([*SINGLE, *MULTI]))
     args = ap.parse_args()
 
@@ -167,7 +179,9 @@ def main():
     print(f"{len(rows)} rows from {[m.name for m in manifests]}")
     feats = extract_features(rows, ART / "cache" / "features.npz")
     ok = feats["ok"]
-    X = np.concatenate([feats["vlm"], feats["reid"]], 1)  # must match heads.features('concat')
+    # "vlm" (default): SigLIP features only, so heads stay valid when the re-ID
+    # descriptor changes; "concat" adds DINOv2 features (must match heads.features)
+    X = feats["vlm"] if args.feature == "vlm" else np.concatenate([feats["vlm"], feats["reid"]], 1)
     Y = encode_targets(rows)
     split = np.array([split_of(r) for r in rows])
     tr, va = (split == "train") & ok, (split == "val") & ok
@@ -176,7 +190,7 @@ def main():
 
     prev_w, prev_meta = {}, {}
     if args.resume and (ART / "heads.npz").exists():
-        prev_w = dict(np.load(ART / "heads.npz"))
+        prev_w = {k: np.asarray(v, dtype=np.float32) for k, v in np.load(ART / "heads.npz").items()}
         prev_meta = json.loads((ART / "heads.json").read_text())["tasks"]
 
     weights, meta = {}, {}
@@ -200,8 +214,9 @@ def main():
               f"alpha={info['alpha']} T={info['temperature']} (n={info['n_train']})")
 
     ART.mkdir(parents=True, exist_ok=True)
-    np.savez(ART / "heads.npz", **weights)
-    (ART / "heads.json").write_text(json.dumps({"feature": "concat", "tasks": meta, "trained_at": time.time()}, indent=2))
+    # fp16 halves the artifact (heads are tiny MLPs; no accuracy impact)
+    np.savez_compressed(ART / "heads.npz", **{k: v.astype(np.float16) if v.ndim == 2 else v for k, v in weights.items()})
+    (ART / "heads.json").write_text(json.dumps({"feature": args.feature, "tasks": meta, "trained_at": time.time()}, indent=2))
     lines = [f"{t}: {json.dumps(m)}" for t, m in meta.items()]
     (ART / "heads_report.txt").write_text("\n".join(lines))
     print(f"saved {ART/'heads.npz'} in {time.time()-t0:.1f}s")

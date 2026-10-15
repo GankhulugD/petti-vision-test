@@ -1,5 +1,39 @@
 # Petti Vision — ML сургалтын pipeline
 
+## Хурдан эхлэх (нэг команд)
+
+```bash
+python3 training/auto_train.py            # Oxford Pets + Stanford Dogs (dog.ceo CDN-ээр) → heads → тайлан
+python3 training/fetch_identity_set.py    # re-ID тест багц (46 нохой, эзэдийн утасны зураг + 104 төстэй нохой)
+python3 training/evaluate.py --manifest data/eval/dogceo_ids.csv --distractors data/eval/dogceo_distractors.csv
+python3 training/evaluate.py ... --loo    # зөвхөн identity embedding-ийн хурдан харьцуулалт (168 query)
+```
+
+`data/eval/bench_exclude.txt`-д байгаа зургууд (browser benchmark-ийн) болон эзэдийн зургууд (re-ID тест)
+сургалтад хэзээ ч орохгүй — тэгэхгүй бол тоо хуурамчаар өндөр гарна.
+
+### Server дээрээс сургах (dev горим)
+
+`apps/model/.dev` файл байвал (эсвэл `PETTI_DEV=1`) server нь зөвхөн localhost-оос хандах `/dev/*` endpoint нээнэ:
+
+| Endpoint | Үйлдэл |
+|---|---|
+| `POST /dev/jobs {"script":"auto_train","args":[...],"env":{"PETTI_REID_POOL":"masked"}}` | training/ доторх script-ийг тусдаа process-оор ажиллуулна |
+| `GET /dev/jobs/{id}?tail=40` | log-ийн сүүл, ажиллаж байгаа эсэх |
+| `DELETE /dev/jobs/{id}` | зогсооно |
+| `POST /dev/reload` | шинэ heads / calibration-ийг server-ийг унтраалгүй ачаална |
+
+Deploy (HF Space) дээр `.dev` байхгүй тул эдгээр нээгдэхгүй (`.gitignore`-д орсон).
+
+### Сургалтаас сурсан зүйлс
+* **Size head сургахгүй.** Public dataset-д хэмжээний шошго байхгүй, үүлдрээс гаргасан "сул" шошгоор сургахад
+  benchmark дээр хэмжээний нарийвчлал 76%→50% унасан. Үүлдрийн prior-оор тооцох нь илүү.
+* **Head-ийн итгэлийг хязгаарлана** (alpha ≤ 0.5, temperature ≥ 1). Oxford/Stanford зураг цэвэрхэн, хэрэглэгчийн
+  утасны зураг тийм биш — in-domain val дээр сонгосон alpha=1 out-of-domain дээр zero-shot-оос муу ажилласан.
+* **Heads нь SigLIP feature дээр л** (`--feature vlm`), тиймээс re-ID descriptor солиход heads хүчингүй болохгүй.
+* **Re-ID descriptor = DINOv2 CLS token** (LOO R@1: CLS 0.893, CLS‖animal-mask mean 0.875, CLS‖mean 0.869).
+
+
 Backbone-ууд (YOLO, DINOv2, SigLIP2) **frozen**, бид дээр нь жижиг модел сургадаг. Тиймээс:
 
 * feature-ийг нэг удаа гаргаад cache хийнэ (`artifacts/cache/*.npz`) → дараагийн сургалт 1-2 минут

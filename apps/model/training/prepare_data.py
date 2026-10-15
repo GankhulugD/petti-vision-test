@@ -17,6 +17,7 @@ for the species head). Size labels are derived from the breed's typical size
 from __future__ import annotations
 
 import argparse
+import re
 import tarfile
 import urllib.request
 from pathlib import Path
@@ -63,17 +64,23 @@ def _download(url: str, dest: Path):
     if dest.exists():
         return
     dest.parent.mkdir(parents=True, exist_ok=True)
-    print(f"downloading {url}")
-    urllib.request.urlretrieve(url, dest)
+    print(f"downloading {url}", flush=True)
+    tmp = dest.with_suffix(dest.suffix + ".part")  # an interrupted download is never mistaken for a finished one
+    urllib.request.urlretrieve(url, tmp)
+    tmp.rename(dest)
 
 
 def _extract(tar: Path, into: Path):
     marker = into / ".extracted"
     if marker.exists():
         return
-    print(f"extracting {tar.name}")
-    with tarfile.open(tar) as t:
-        t.extractall(into, filter="data")
+    print(f"extracting {tar.name}", flush=True)
+    try:
+        with tarfile.open(tar) as t:
+            t.extractall(into, filter="data")
+    except (tarfile.TarError, EOFError, OSError) as exc:
+        tar.unlink(missing_ok=True)  # truncated download → fetch again next run
+        raise SystemExit(f"{tar.name} is incomplete ({exc}); deleted, re-run to download again")
     marker.touch()
 
 
@@ -125,10 +132,73 @@ def folder(root: Path) -> list[dict]:
     return rows
 
 
+# dog.ceo breed path → our taxonomy key. dog.ceo serves the Stanford Dogs
+# images one by one from a fast CDN (plus owner phone photos), which is far
+# more reliable than the 750 MB Stanford tarball on slow connections.
+DOGCEO_MAP = {
+    "labrador": "labrador_retriever", "husky": "siberian_husky", "malamute": "alaskan_malamute", "samoyed": "samoyed",
+    "retriever/golden": "golden_retriever", "rottweiler": "rottweiler", "doberman": "doberman", "pug": "pug",
+    "chihuahua": "chihuahua", "beagle": "beagle", "poodle/toy": "toy_poodle", "poodle/miniature": "toy_poodle",
+    "pomeranian": "pomeranian", "shihtzu": "shih_tzu", "corgi/cardigan": "welsh_corgi", "pembroke": "welsh_corgi",
+    "dalmatian": "dalmatian", "chow": "chow_chow", "shiba": "shiba_inu", "bulldog/french": "french_bulldog",
+    "bulldog/english": "bulldog", "boxer": "boxer", "dachshund": "dachshund", "collie/border": "border_collie",
+    "maltese": "maltese", "mastiff/tibetan": "tibetan_mastiff", "stbernard": "saint_bernard",
+    "terrier/yorkshire": "yorkshire_terrier", "akita": "akita", "papillon": "papillon", "german/shepherd": "german_shepherd",
+    "spaniel/cocker": "cocker_spaniel", "malinois": "belgian_malinois", "pekinese": "pekingese",
+    "schnauzer/miniature": "miniature_schnauzer", "weimaraner": "weimaraner", "sheepdog/shetland": "shetland_sheepdog",
+    "australian/shepherd": "australian_shepherd", "spaniel/blenheim": "cavalier_king_charles",
+    "pinscher/miniature": "miniature_pinscher", "frise/bichon": "bichon_frise", "terrier/russell": "jack_russell",
+    "pitbull": "pit_bull", "terrier/staffordshire": "pit_bull", "terrier/american": "pit_bull",
+    "spitz/japanese": "spitz", "keeshond": "spitz", "dane/great": "great_dane", "mountain/bernese": "bernese_mountain",
+    "ovcharka/caucasian": "caucasian_shepherd", "sharpei": "shar_pei",
+}
+
+
+def dogceo(max_per_breed: int = 150, exclude: set[str] | None = None) -> list[dict]:
+    import json
+    from concurrent.futures import ThreadPoolExecutor
+
+    root = DATA / "dogceo"
+
+    def get(url):
+        with urllib.request.urlopen(url, timeout=30) as r:
+            return r.read()
+
+    jobs = []
+    for b, key in DOGCEO_MAP.items():
+        try:
+            urls = json.loads(get(f"https://dog.ceo/api/breed/{b}/images"))["message"]
+        except Exception as exc:
+            print(f"  skip {b}: {exc}", flush=True)
+            continue
+        # Stanford (ImageNet) files only: owner photos (cooper1.jpg…) form the
+        # re-ID test set (fetch_identity_set.py) and must stay unseen
+        urls = [u for u in sorted(urls) if re.match(r"^n\d{8}_", u.rsplit("/", 1)[-1])
+                and u.rsplit("/", 1)[-1] not in (exclude or set())]
+        for u in urls[:: max(1, len(urls) // max_per_breed)][:max_per_breed]:
+            jobs.append((u, root / b.replace("/", "-") / u.rsplit("/", 1)[-1], key))
+
+    def fetch(job):
+        u, dest, key = job
+        if not dest.exists():
+            try:
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                dest.write_bytes(get(u))
+            except Exception:
+                return None
+        return _row(dest, "dog", key, "dogceo")
+
+    with ThreadPoolExecutor(16) as ex:
+        rows = [r for r in ex.map(fetch, jobs) if r]
+    print(f"dog.ceo: {len(rows)} images in {len(DOGCEO_MAP)} breed folders", flush=True)
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--oxford", action="store_true")
     ap.add_argument("--stanford-dogs", action="store_true")
+    ap.add_argument("--dogceo", action="store_true", help="Stanford Dogs + owner photos via the dog.ceo CDN (fast)")
     ap.add_argument("--folder", type=Path, action="append", default=[])
     a = ap.parse_args()
     if a.oxford:
@@ -139,6 +209,10 @@ def main():
         r = stanford_dogs()
         write_manifest(OUT / "stanford_dogs.csv", r)
         print(f"stanford dogs: {len(r)} images, {sum(bool(x['breed']) for x in r)} with mapped breed")
+    if a.dogceo:
+        ex = ROOT / "data" / "eval" / "bench_exclude.txt"
+        r = dogceo(exclude=set(ex.read_text().split()) if ex.exists() else None)
+        write_manifest(OUT / "dogceo.csv", r)
     for f in a.folder:
         r = folder(f)
         write_manifest(OUT / f"folder_{f.name}.csv", r)

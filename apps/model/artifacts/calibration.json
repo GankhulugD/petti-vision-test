@@ -1,0 +1,34 @@
+{
+  "reid_mu": 0.4373623876072482,
+  "reid_tau": 0.04721193835161817,
+  "vlm_mu": 0.8119927568467418,
+  "vlm_tau": 0.025336240926670153,
+  "reid_eval": {
+    "production_before": {
+      "R@1": 0.87,
+      "R@5": 1.0,
+      "R@10": 1.0,
+      "MRR": 0.931
+    },
+    "cv": [
+      {
+        "R@1": 0.913,
+        "R@5": 1.0,
+        "R@10": 1.0,
+        "MRR": 0.949
+      },
+      {
+        "R@1": 0.826,
+        "R@5": 0.957,
+        "R@10": 1.0,
+        "MRR": 0.899
+      }
+    ],
+    "identities": 46,
+    "gallery": 150
+  },
+  "attr_beta": 3.0,
+  "breed_temperature": 1.5,
+  "notes": "reid_*/attr_beta: training/evaluate.py on 46 owner-photo dogs + 104 look-alikes (beta 2-5 is a plateau, 3 chosen). breed_temperature: fitted on 124 benchmark photos.",
+  "display_offset": 5.0
+}

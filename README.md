@@ -106,12 +106,34 @@ Space: [Gankhulug/petti-vision](https://huggingface.co/spaces/Gankhulug/petti-vi
 ```
 *(тоонууд жишээ — бодит утгыг өөрийн машин дээр `benchmark.py`-аар хэмжинэ)*
 
+## Нарийвчлал (benchmark)
+
+Тогтмол тест багц: dog.ceo-оос нохойн 33 үүлдрийн 99 зураг, Wikimedia Commons-оос муурны 15 үүлдрийн 40 зураг.
+Browser console дээр `const m = await import('/test/bench.js'); await m.run(3)` гэж ажиллуулна.
+
+| | v0.2 (deploy) | v0.3 zero-shot | v0.3 + Oxford heads |
+|---|---|---|---|
+| Нохой — төрөл | 98.0% | **100%** | **100%** |
+| Нохой — үүлдэр top-1 / top-3 | 88.9 / 96.0% | 89.9 / 97.0% | **90.9 / 97.0%** |
+| Нохой — хэмжээ (±1 ангилал) | 92.9% | 91.9% | 91.9% |
+| Муур — төрөл | 95.0% | **100%** | **100%** |
+| Муур — үүлдэр top-1 / top-3 | 70.0 / 80.0% | **75.0 / 85.0%** | 72.5 / 82.5% |
+| Онцгой шинж / зураг (ихэнх нь худал) | 0.55 | **0.18** | 0.18 |
+| Нохойд муурын зүс ("колор-поинт" г.м.) | 18 | **0** | 0 |
+
+"Итгэлтэй" гэж гарсан үүлдрийн 97% нь зөв, "Магадгүй" нь 77%, "Тодорхойгүй" нь 36% (confidence calibration).
+
+**Re-ID (яг тэр амьтан мөн үү):** dog.ceo дээрх эзэдийн өөрсдийн оруулсан зургаас 46 нохой (нэрээр нь бүлэглэсэн, 168 зураг),
+мөн ижил үүлдрийн 104 өөр нохойг төөрөгдүүлэх зорилгоор нэмсэн. Нэг зургаар хайхад жинхэнэ нохой **1-рт 82.6%, эхний 5-д 97.8%** гарсан.
+`python3 training/fetch_identity_set.py && python3 training/evaluate.py --manifest data/eval/dogceo_ids.csv --distractors data/eval/dogceo_distractors.csv`
+
 ## Сургалт (үргэлжлүүлж сургах)
 
 Дэлгэрэнгүй: [`apps/model/training/README.md`](apps/model/training/README.md) · Colab: [`colab_train.ipynb`](apps/model/training/colab_train.ipynb)
 
 ```bash
 cd apps/model
+python3 training/auto_train.py                               # НЭГ КОМАНД: dataset татах → feature → heads → тайлан
 python3 training/prepare_data.py --oxford --stanford-dogs   # public dataset → manifest
 python3 training/export_registry.py                          # бүртгэлийн өгөгдөл → manifest
 python3 training/train_heads.py [--resume]                   # attribute heads

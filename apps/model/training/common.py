@@ -131,7 +131,8 @@ def extract_features(rows: list[dict], cache: Path, batch: int = 32) -> dict[str
         zs["species"].append(v.zs.probs("species|any", x))
         # breed zero-shot on full breed list: dog block + cat block weighted by species prob
         sp = zs["species"][-1]
-        pd, pc = v.zs.probs("breed|dog", x), v.zs.probs("breed|cat", x)
+        T_ = getattr(v, "breed_temperature", 1.0)
+        pd, pc = v.zs.probs("breed|dog", x, temperature=T_), v.zs.probs("breed|cat", x, temperature=T_)
         zs["breed"].append(np.concatenate([pd * sp[:, :1], pc * sp[:, 1:2]], axis=1))
         cond = ["dog" if s.argmax() == 0 else "cat" if s.argmax() == 1 else "other" for s in sp]
         for t in ("size", "age", "pattern", "coat", "color"):

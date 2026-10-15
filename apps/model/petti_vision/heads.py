@@ -55,7 +55,7 @@ class AttributeHeads:
     def __init__(self, path: Path):
         self.path = Path(path)
         meta = json.loads(self.path.with_suffix(".json").read_text())
-        w = dict(np.load(self.path))
+        w = {k: np.asarray(v, dtype=np.float32) for k, v in np.load(self.path).items()}
         self.meta = meta
         self.feature = meta.get("feature", "concat")  # vlm | reid | concat
         self.tasks: dict[str, dict] = {}
@@ -68,7 +68,18 @@ class AttributeHeads:
                 "alpha": float(info.get("alpha", 0.5)),
                 "temperature": float(info.get("temperature", 1.0)),
                 "val_acc": info.get("val_acc"),
+                "seen": set(info["seen"]) if info.get("seen") is not None else None,
             }
+
+    @property
+    def dim(self) -> int | None:
+        for t in self.tasks.values():
+            mlp = t["mlp"]
+            if mlp.mu is not None:
+                return int(mlp.mu.shape[-1])
+            if mlp.layers:
+                return int(mlp.layers[0][0].shape[1])
+        return None
 
     def features(self, vlm: np.ndarray, reid: np.ndarray) -> np.ndarray:
         if self.feature == "vlm":
@@ -93,7 +104,7 @@ class AttributeHeads:
 
 class ReidProjection:
     def __init__(self, path: Path):
-        w = dict(np.load(path))
+        w = {k: np.asarray(v, dtype=np.float32) for k, v in np.load(path).items()}
         self.mlp = _MLP(w, "proj")
         self.skip = w.get("proj.skip")  # residual linear path (see train_reid.Proj)
 

@@ -27,6 +27,11 @@ class Config:
     # Options: facebook/dinov2-small (fast) | facebook/dinov2-base (accurate)
     #          facebook/dinov3-vits16-pretrain-lvd1689m (gated on HF)
     reid_model: str = _env("PETTI_REID_MODEL", "facebook/dinov2-small")
+    # identity descriptor pooling (leave-one-out R@1 on 168 owner photos of 46
+    # dogs + 104 look-alikes, see training/evaluate.py --loo):
+    #   "cls" 0.893 · "masked" (CLS ‖ animal-patch mean) 0.875 · "mean" 0.869
+    # ⚠ changing it changes the embedding space → run training/reindex.py
+    reid_pool: str = _env("PETTI_REID_POOL", "cls")
 
     # Vision-language model for zero-shot attributes (breed/colour/age/marks)
     # Options: google/siglip2-base-patch16-224 (default) |

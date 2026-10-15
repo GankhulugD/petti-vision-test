@@ -164,6 +164,32 @@ class Registry:
             rec.event_at = event_at or rec.event_at
             rec.location = location or rec.location
 
+    def reembed_stale(self, vision) -> int:
+        """Re-compute embeddings of pets stored with another descriptor size
+        (e.g. after switching the re-ID backbone/pooling). Profiles are kept;
+        only reid/vlm vectors are refreshed from the stored photos."""
+        from PIL import Image
+
+        dims = vision.enc.encode_images([Image.new("RGB", (64, 64))], tta=False)
+        rd, vd = dims["reid"].shape[1], dims["vlm"].shape[1]
+        n = 0
+        for pet in list(self.pets.values()):
+            if pet.reid.shape[-1] == rd and pet.vlm.shape[-1] == vd:
+                continue
+            paths = [self.images_dir / p for p in pet.photo_paths]
+            if not paths or not all(p.exists() for p in paths):
+                continue
+            prof = vision.analyze([str(p) for p in paths])
+            with self.lock:
+                rows = self.db.execute("SELECT id FROM photos WHERE pet_id=? ORDER BY idx", (pet.id,)).fetchall()
+                for (ph_id,), r, v in zip(rows, prof.reid, prof.vlm):
+                    self.db.execute("UPDATE photos SET reid=?, vlm=? WHERE id=?",
+                                    (r.astype(np.float32).tobytes(), v.astype(np.float32).tobytes(), ph_id))
+                self.db.commit()
+                pet.reid, pet.vlm = prof.reid.astype(np.float32), prof.vlm.astype(np.float32)
+            n += 1
+        return n
+
     def delete(self, pid: str):
         with self.lock:
             self.db.execute("DELETE FROM photos WHERE pet_id=?", (pid,))

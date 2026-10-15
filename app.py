@@ -41,6 +41,7 @@ def _load_models() -> None:
         vision.warmup()
         state["vision"] = vision
         state["registry"] = Registry(cfg.db_path, cfg.images_dir)
+        state["registry"].reembed_stale(vision)  # model changed → refresh old embeddings
         state["matcher"] = Matcher(cfg)
     except Exception as exc:
         _load_error.append(str(exc))
@@ -54,6 +55,12 @@ def _attach_api(gradio_app):
     if getattr(gradio_app, "_petti_routes", False):
         return gradio_app
     gradio_app.router.routes[:0] = list(petti_api.router.routes)
+    try:  # let the Vercel site call the Space directly (skips the proxy hop)
+        from starlette.middleware.cors import CORSMiddleware
+
+        gradio_app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+    except RuntimeError:  # middleware stack already built
+        pass
     gradio_app._petti_routes = True
     return gradio_app
 

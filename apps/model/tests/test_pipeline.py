@@ -121,3 +121,55 @@ def test_api_end_to_end(tmp_path, monkeypatch):
         pid = body["results"][0]["pet"]["id"]
         assert client.patch(f"/pets/{pid}/status", json={"status": "reunited"}).status_code == 200
         assert client.get("/pets?status=lost").json() == []
+
+
+def test_head_fusion_keeps_zero_shot_for_unseen_classes(cfg):
+    """A head trained without Bankhar photos must not wipe out Bankhar."""
+    from petti_vision import PettiVision
+
+    v = PettiVision(cfg)
+
+    class FakeHeads:
+        tasks = {"breed": {"multi": False, "alpha": 0.8, "seen": ["a", "b"]}}
+
+        def has(self, t):
+            return t in self.tasks
+
+        def predict(self, task, feats):
+            return ["a", "b", "c"], np.array([[0.9, 0.1, 0.0]])
+
+    v.heads = FakeHeads()
+    zs = np.array([0.2, 0.2, 0.6])  # zero-shot thinks "c" (unseen by head)
+    out = v._fuse_task("breed", zs, np.zeros(4), ["a", "b", "c"])
+    assert abs(out.sum() - 1) < 1e-6
+    assert abs(out[2] - 0.6) < 1e-6  # unseen class keeps its zero-shot mass
+    assert out[0] > out[1]  # head reorders the seen classes
+
+
+def test_confidence_levels_and_pattern_species(cfg):
+    from petti_vision import PettiVision
+    from petti_vision import taxonomy as T
+
+    v = PettiVision(cfg)
+    d = v.analyze([make_animal(3)]).to_json()
+    assert d["species"]["level"] in ("high", "medium", "low")
+    if d["species"]["key"] == "dog":
+        assert d["pattern"]["key"] not in [k for k, sp in T.PATTERN_SPECIES.items() if "dog" not in sp]
+    assert all(m["key"] != "short_tail" for m in d["marks"])  # disabled for zero-shot
+
+
+def test_stale_embeddings_are_refreshed(cfg):
+    """After a model change old registrations must be re-embedded, not crash search."""
+    from petti_vision import PettiVision
+    from petti_vision.matcher import Matcher
+    from petti_vision.registry import Registry
+
+    v = PettiVision(cfg)
+    reg = Registry(cfg.db_path, cfg.images_dir)
+    imgs = [make_animal(42, jitter=j) for j in (0, 3, -3, 6, -6)]
+    rec = reg.add(profile=v.analyze(imgs), images=imgs, status="lost", name="old")
+    rec.reid = rec.reid[:, :16]  # pretend: stored by an older, smaller model
+    q = v.analyze([make_animal(42, jitter=2)])
+    assert Matcher(cfg).search(q, reg.list(status="lost")) == []  # skipped, no crash
+    assert reg.reembed_stale(v) == 1
+    assert Matcher(cfg).search(q, reg.list(status="lost"))[0].pet.name == "old"

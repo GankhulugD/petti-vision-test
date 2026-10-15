@@ -123,8 +123,8 @@ class ZeroShot:
         """img: (N,D) normalised → (N,C) logits."""
         return self.scale * self.cosines(task_key, img)
 
-    def probs(self, task_key: str, img: np.ndarray) -> np.ndarray:
-        return softmax(self.logits(task_key, img))
+    def probs(self, task_key: str, img: np.ndarray, temperature: float = 1.0) -> np.ndarray:
+        return softmax(self.logits(task_key, img) / temperature)
 
     def mark_probs(self, species: str, img: np.ndarray) -> dict[str, np.ndarray]:
         """P(mark) = sigmoid(scale·(cos(mark caption) − cos(neutral caption)) − margin).

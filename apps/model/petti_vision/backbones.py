@@ -207,19 +207,62 @@ class HFEncoders:
     def _to(self, batch):
         return {k: (v.to(self.device, dtype=self.dtype) if v.is_floating_point() else v.to(self.device)) for k, v in batch.items()}
 
-    def encode_images(self, crops: list[Image.Image], tta: bool = True) -> dict[str, np.ndarray]:
+    def _patch_weights(self, masks: list[np.ndarray | None], grid: int):
+        """Square crop masks → (B, grid*grid) weights on DINOv2's patch grid,
+        replicating the processor's resize + centre-crop geometry."""
+        size = getattr(self.reid_proc, "size", {}) or {}
+        crop = getattr(self.reid_proc, "crop_size", {}) or {}
+        S = size.get("shortest_edge") or size.get("height") or 224
+        C = crop.get("height", S) if getattr(self.reid_proc, "do_center_crop", False) else S
+        off = (S - C) // 2
+        out = []
+        for m in masks:
+            if m is None or not m.any():
+                out.append(None)
+                continue
+            mi = Image.fromarray(m.astype(np.uint8) * 255).resize((S, S), Image.BILINEAR).crop((off, off, off + C, off + C))
+            w = np.asarray(mi.resize((grid, grid), Image.BOX), dtype=np.float32).ravel() / 255.0
+            out.append(w if w.sum() >= 3 else None)  # too few animal patches → plain mean
+        return out
+
+    def encode_images(self, crops: list[Image.Image], tta: bool = True, masks: list | None = None) -> dict[str, np.ndarray]:
+        """masks: optional per-crop bool arrays (same size as crop). With
+        PETTI_REID_POOL=masked the identity descriptor averages only patches on
+        the animal, so the background (grass, sofa, street) cannot make two
+        different dogs look alike or the same dog look different."""
         torch = self.torch
         imgs = list(crops)
+        mks = list(masks) if masks is not None else [None] * len(crops)
         if tta:
             imgs += [ImageOps.mirror(c) for c in crops]
+            mks += [None if m is None else m[:, ::-1] for m in mks]
         n = len(crops)
         with torch.inference_mode():
             r_in = self._to(self.reid_proc(images=imgs, return_tensors="pt"))
             r_out = self.reid(**r_in)
-            # CLS token + mean patch token = robust global descriptor
-            cls = r_out.last_hidden_state[:, 0]
-            patch = r_out.last_hidden_state[:, 1:].mean(1)
-            reid = torch.cat([cls, patch], dim=-1).float().cpu().numpy()
+            hs = r_out.last_hidden_state
+            cls = hs[:, 0]
+            n_reg = int(getattr(self.reid.config, "num_register_tokens", 0) or 0)
+            patches = hs[:, 1 + n_reg :]
+            patch = patches.mean(1)
+            if self.cfg.reid_pool in ("masked", "masked_only", "masked_norm"):
+                grid = int(round(patches.shape[1] ** 0.5))
+                ws = self._patch_weights(mks, grid) if grid * grid == patches.shape[1] else [None] * len(mks)
+                rows = []
+                for i, w in enumerate(ws):
+                    if w is None:
+                        rows.append(patch[i])
+                    else:
+                        wt = torch.tensor(w, device=patches.device, dtype=patches.dtype)
+                        rows.append((patches[i] * wt[:, None]).sum(0) / wt.sum())
+                patch = torch.stack(rows)
+            # CLS token + (animal-)mean patch token = robust global descriptor
+            if self.cfg.reid_pool == "cls":
+                reid = cls.float().cpu().numpy()
+            elif self.cfg.reid_pool == "masked_only":
+                reid = patch.float().cpu().numpy()
+            else:
+                reid = torch.cat([torch.nn.functional.normalize(cls, dim=-1), torch.nn.functional.normalize(patch, dim=-1)], dim=-1).float().cpu().numpy() if self.cfg.reid_pool == "masked_norm" else torch.cat([cls, patch], dim=-1).float().cpu().numpy()
 
             v_in = self._to(self.vlm_proc(images=imgs, return_tensors="pt"))
             vlm = _features(self.vlm.get_image_features(**v_in)).float().cpu().numpy()
@@ -279,7 +322,7 @@ class FakeEncoders:
     def _px(self, crops):
         return np.stack([np.asarray(c.resize((16, 16)), dtype=np.float32).ravel() / 255.0 - 0.5 for c in crops])
 
-    def encode_images(self, crops, tta: bool = True):
+    def encode_images(self, crops, tta: bool = True, masks=None):
         x = self._px(crops)
         return {"reid": l2n(x @ self.Pr), "vlm": l2n(x @ self.Pv)}
 

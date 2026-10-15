@@ -207,33 +207,45 @@ COAT_LENGTH: list[Label] = [
 class Mark(Label):
     negative: str = ""
     species: tuple[str, ...] = ("dog", "cat")
-    threshold: float = 0.65  # probability needed to report it
+    # probability needed to REPORT it from zero-shot. Calibrated on 124 breed
+    # photos (dog.ceo + Wikimedia) so that ≤3% of ordinary photos trigger it.
+    # 1.01 = never reported from zero-shot alone (too unreliable: a hidden tail
+    # looks "short") – still usable via owner labels / trained heads.
+    threshold: float = 0.65
     weight: float = 1.0  # how discriminative it is for matching
     tags: tuple[str, ...] = field(default=())
 
 
 MARKS: list[Mark] = [
-    Mark("collar", "wearing a collar", "Хүзүүвчтэй", negative="without a collar", weight=0.4),
-    Mark("harness", "wearing a harness", "Оосортой (harness)", negative="without a harness", weight=0.3),
-    Mark("clothes", "wearing clothes", "Хувцастай", negative="not wearing clothes", weight=0.3),
-    Mark("ear_tip", "with a clipped ear tip", "Чихний үзүүр тайрсан (TNR)", negative="with intact ears", weight=1.5, threshold=0.8),
+    Mark("collar", "wearing a collar", "Хүзүүвчтэй", negative="without a collar", weight=0.4, threshold=0.6),
+    Mark("harness", "wearing a harness", "Оосортой (harness)", negative="without a harness", weight=0.3, threshold=0.65),
+    Mark("clothes", "wearing clothes", "Хувцастай", negative="not wearing clothes", weight=0.3, threshold=0.9),
+    Mark("ear_tip", "with a clipped ear tip", "Чихний үзүүр тайрсан (TNR)", negative="with intact ears", weight=1.5, threshold=0.85),
     Mark("heterochromia", "with two different coloured eyes", "Хоёр өөр өнгийн нүдтэй", negative="with matching eye colours", weight=2.0, threshold=0.8),
-    Mark("blue_eyes", "with blue eyes", "Цэнхэр нүдтэй", negative="with brown or yellow eyes", weight=1.0),
-    Mark("one_eye", "with one eye missing", "Нэг нүдгүй", negative="with two eyes", weight=2.5, threshold=0.85),
-    Mark("short_tail", "with a docked or very short tail", "Сүүл богино/тайрсан", negative="with a long tail", weight=1.2),
-    Mark("three_legs", "with three legs, missing a leg", "Гурван хөлтэй", negative="with four legs", weight=2.5, threshold=0.85),
-    Mark("scar", "with a visible scar or wound", "Сорви/шархтай", negative="with no scars", weight=1.5, threshold=0.8),
-    Mark("white_chest", "with a white patch on the chest", "Цээжиндээ цагаан толботой", negative="with no white on the chest", weight=1.0),
-    Mark("white_paws", "with white paws like socks", "Цагаан сарвуутай (оймс)", negative="with no white on the paws", weight=1.0),
-    Mark("face_mask", "with a dark mask on the face", "Нүүрэндээ бараан масктай", negative="with no dark face mask", weight=0.8),
-    Mark("eye_patch", "with a patch of colour around one eye", "Нэг нүдэндээ толботой", negative="with an evenly coloured face", weight=1.5),
-    Mark("blaze", "with a white stripe down the middle of the face", "Магнайдаа цагаан зураастай", negative="with no white stripe on the face", weight=1.2),
-    Mark("floppy_ears", "with floppy ears", "Унжсан чихтэй", negative="with erect pointed ears", weight=0.6),
-    Mark("folded_ears", "with folded ears", "Нугалсан чихтэй", negative="with upright ears", species=("cat",), weight=1.0),
-    Mark("curled_tail", "with a tail curled over its back", "Сүүлээ дээш муруйлгасан", negative="with a straight hanging tail", species=("dog",), weight=0.6),
-    Mark("four_eyes", "with tan spots above the eyes", "Дөрвөн нүдтэй (хөмсөг толбо)", negative="with no spots above the eyes", species=("dog",), weight=1.0),
+    Mark("blue_eyes", "with blue eyes", "Цэнхэр нүдтэй", negative="with brown or yellow eyes", weight=1.0, threshold=0.75),
+    Mark("one_eye", "with one eye missing", "Нэг нүдгүй", negative="with two eyes", weight=2.5, threshold=0.95),
+    Mark("short_tail", "with a docked or very short tail", "Сүүл богино/тайрсан", negative="with a long tail", weight=1.2, threshold=1.01),
+    Mark("three_legs", "with three legs, missing a leg", "Гурван хөлтэй", negative="with four legs", weight=2.5, threshold=0.9),
+    Mark("scar", "with a visible scar or wound", "Сорви/шархтай", negative="with no scars", weight=1.5, threshold=0.85),
+    Mark("white_chest", "with a white patch on the chest", "Цээжиндээ цагаан толботой", negative="with no white on the chest", weight=1.0, threshold=0.8),
+    Mark("white_paws", "with white paws like socks", "Цагаан сарвуутай (оймс)", negative="with no white on the paws", weight=1.0, threshold=0.7),
+    Mark("face_mask", "with a dark mask on the face", "Нүүрэндээ бараан масктай", negative="with no dark face mask", weight=0.8, threshold=0.7),
+    Mark("eye_patch", "with a patch of colour around one eye", "Нэг нүдэндээ толботой", negative="with an evenly coloured face", weight=1.5, threshold=0.85),
+    Mark("blaze", "with a white stripe down the middle of the face", "Магнайдаа цагаан зураастай", negative="with no white stripe on the face", weight=1.2, threshold=0.85),
+    Mark("floppy_ears", "with floppy ears", "Унжсан чихтэй", negative="with erect pointed ears", weight=0.6, threshold=0.7),
+    Mark("folded_ears", "with folded ears", "Нугалсан чихтэй", negative="with upright ears", species=("cat",), weight=1.0, threshold=0.9),
+    Mark("curled_tail", "with a tail curled over its back", "Сүүлээ дээш муруйлгасан", negative="with a straight hanging tail", species=("dog",), weight=0.6, threshold=0.9),
+    Mark("four_eyes", "with tan spots above the eyes", "Дөрвөн нүдтэй (хөмсөг толбо)", negative="with no spots above the eyes", species=("dog",), weight=1.0, threshold=0.6),
 ]
 MARK_BY_KEY = {m.key: m for m in MARKS}
+
+# coat patterns that only make sense for one species (colour-point on a dog = error)
+PATTERN_SPECIES = {
+    "pointed": ("cat",), "tabby": ("cat",), "tortoiseshell": ("cat",),
+    "merle": ("dog",), "brindle": ("dog",), "black_and_tan": ("dog",),
+}
+# breed classes that mean "no specific breed"
+MIXED_KEYS = ("mixed_dog", "domestic_shorthair", "domestic_longhair")
 
 
 TASKS = {

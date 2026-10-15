@@ -1,0 +1,10 @@
+# keep Cursor's indexer away from datasets, caches and environments
+apps/model/data/
+apps/model/artifacts/cache/
+**/.venv/
+**/node_modules/
+**/.next/
+*.tar
+*.tar.gz
+*.npz
+*.pt

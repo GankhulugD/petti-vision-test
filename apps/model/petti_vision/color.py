@@ -29,6 +29,7 @@ def _srgb_to_lab(rgb: np.ndarray) -> np.ndarray:
 
 
 _PALETTE_LAB = _srgb_to_lab(np.array([COLOR_RGB[k] for k in _KEYS], dtype=np.float32))
+PALETTE_LAB = _PALETTE_LAB  # (C, 3) in taxonomy.COLORS order
 
 
 def coat_colors(crop: Image.Image, size: int = 64, mask: np.ndarray | None = None) -> dict[str, float]:

@@ -34,6 +34,23 @@ MAX_BYTES = 15 * 1024 * 1024
 
 cfg = Config()
 state: dict = {}
+MODEL_VERSION = "0.4.0"  # bump when inference behaviour changes
+
+
+def _code_hash() -> str:
+    import hashlib
+    import pathlib
+
+    h = hashlib.md5()
+    for f in sorted(pathlib.Path(__file__).resolve().parent.joinpath("petti_vision").glob("*.py")):
+        h.update(f.read_bytes())
+    return h.hexdigest()[:8]
+
+
+CODE_HASH = _code_hash()  # which inference code is actually loaded
+# enables /dev/* (training jobs, hot reload) – localhost only. Turn on with
+# PETTI_DEV=1 or by creating an (untracked) file apps/model/.dev
+DEV = os.environ.get("PETTI_DEV") == "1" or os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".dev"))
 
 
 @asynccontextmanager
@@ -45,6 +62,9 @@ async def lifespan(app: FastAPI):
     vision.warmup()  # first call compiles kernels; do it before traffic
     state["vision"] = vision
     state["registry"] = Registry(cfg.db_path, cfg.images_dir)
+    n_stale = state["registry"].reembed_stale(state["vision"])  # model changed → refresh old embeddings
+    if n_stale:
+        log.info("re-embedded %d pets for the current model", n_stale)
     state["matcher"] = Matcher(cfg)
     log.info("ready in %.1fs (%d pets in registry)", time.perf_counter() - t0, len(state["registry"].pets))
     yield
@@ -94,6 +114,10 @@ def health():
             "fake": cfg.fake_models,
         },
         "load_seconds": round(v.load_seconds, 2),
+        "model_version": MODEL_VERSION,
+        "code": CODE_HASH,
+        "breed_temperature": getattr(v, "breed_temperature", None),
+        "dev": DEV,
         "pets": {s: len(state["registry"].list(status=s)) for s in STATUSES},
         "min_photos": cfg.min_photos,
     }
@@ -242,8 +266,101 @@ def search(
     return {"query": q, "searched": len(cands), "results": [m.to_json() for m in matches]}
 
 
+# --------------------------------------------------------------------------- #
+# Dev-only: run training jobs on the machine that serves the model and hot-reload
+# the result. Enabled with PETTI_DEV=1, accepted only from localhost.
+# --------------------------------------------------------------------------- #
+if DEV:
+    import subprocess
+    import sys
+    import uuid
+
+    from fastapi import Request
+
+    JOBS: dict[str, dict] = {}
+    SCRIPTS = {"auto_train", "train_heads", "train_reid", "evaluate", "prepare_data", "reindex", "fetch_identity_set"}
+    JOB_DIR = cfg.data_dir / "jobs"
+
+    def _local(request: Request):
+        host = request.client.host if request.client else ""
+        if host not in ("127.0.0.1", "::1", "localhost"):
+            raise HTTPException(403, "dev endpoints are localhost-only")
+
+    class JobIn(BaseModel):
+        script: str
+        args: list[str] = []
+        env: dict[str, str] = {}  # only PETTI_* overrides, e.g. {"PETTI_REID_MODEL": "facebook/dinov2-base"}
+
+    @app.post("/dev/jobs")
+    def dev_start(body: JobIn, request: Request):
+        _local(request)
+        if body.script not in SCRIPTS:
+            raise HTTPException(400, f"script must be one of {sorted(SCRIPTS)}")
+        JOB_DIR.mkdir(parents=True, exist_ok=True)
+        jid = uuid.uuid4().hex[:8]
+        log_path = JOB_DIR / f"{jid}.log"
+        here = os.path.dirname(os.path.abspath(__file__))
+        env = {**os.environ, **{k: v for k, v in body.env.items() if k.startswith("PETTI_")}}
+        env.pop("PETTI_DEV", None)
+        proc = subprocess.Popen(
+            [sys.executable, "-u", os.path.join(here, "training", f"{body.script}.py"), *body.args],
+            cwd=here, stdout=open(log_path, "w"), stderr=subprocess.STDOUT, env=env,
+            start_new_session=True,  # survives server reloads
+        )
+        (JOB_DIR / f"{jid}.pid").write_text(str(proc.pid))
+        JOBS[jid] = {"proc": proc, "log": log_path, "script": body.script, "started": time.time()}
+        return {"id": jid}
+
+    @app.get("/dev/jobs/{jid}")
+    def dev_status(jid: str, request: Request, tail: int = 60):
+        _local(request)
+        log_path = JOB_DIR / f"{jid}.log"
+        if not log_path.exists():
+            raise HTTPException(404, "no such job")
+        j = JOBS.get(jid)
+        if j:
+            rc = j["proc"].poll()
+        else:  # server reloaded since: is the process still alive?
+            try:
+                os.kill(int((JOB_DIR / f"{jid}.pid").read_text()), 0)
+                rc = None
+            except (OSError, ValueError):
+                rc = "finished (exit code unknown)"
+        lines = log_path.read_text(errors="replace").splitlines()
+        # tqdm writes \r progress; keep the last state of each line
+        lines = [ln.split("\r")[-1] for ln in lines]
+        return {"running": rc is None, "returncode": rc, "lines": len(lines), "tail": lines[-tail:]}
+
+    @app.delete("/dev/jobs/{jid}")
+    def dev_kill(jid: str, request: Request):
+        _local(request)
+        import signal
+
+        try:
+            pid = int((JOB_DIR / f"{jid}.pid").read_text())
+            os.killpg(os.getpgid(pid), signal.SIGTERM)  # job runs in its own session
+            return {"killed": pid}
+        except (OSError, ValueError) as exc:
+            raise HTTPException(404, f"not running: {exc}") from exc
+
+    @app.post("/dev/reload")
+    def dev_reload(request: Request):
+        """Reload heads / calibration / re-ID projection without restarting."""
+        _local(request)
+        v = PettiVision(cfg)
+        state["vision"] = v
+        state["matcher"] = Matcher(cfg)
+        return health()
+
+
 if __name__ == "__main__":
     import uvicorn
 
     # PETTI_RELOAD=1 → auto-restart when code changes (development)
-    uvicorn.run("server:app", host="0.0.0.0", port=PORT, reload=os.environ.get("PETTI_RELOAD") == "1")
+    here = os.path.dirname(os.path.abspath(__file__))
+    uvicorn.run(
+        "server:app", host="0.0.0.0", port=PORT, reload=os.environ.get("PETTI_RELOAD") == "1",
+        # watch only code: data/ holds ~13k dataset images, scanning it burns CPU
+        reload_dirs=[here], reload_includes=["*.py"],
+        reload_excludes=["data/*", "artifacts/*", ".venv/*", "training/*"],
+    )

@@ -1,0 +1,335 @@
+[
+  {
+    "file": "car_0.jpg",
+    "kind": "car",
+    "split": "train",
+    "license": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Concept_automobile_sportif_qui_a_%C3%A9t%C3%A9_mod%C3%A9lis%C3%A9_en_3D_sur_Onshape.jpg",
+    "sha256": "b36a52b9e4e4fd0aa3111f4f8723ffe271fe2bb02365e1d35fb45b4495190d5f",
+    "phash": "1111111110000010100000001110000011111100111111101111110001111000"
+  },
+  {
+    "file": "person_0.jpg",
+    "kind": "person",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Ajay_soam.jpg",
+    "sha256": "50b3445f1bf2c5048e1e22827a7e162e92d704bc27803389ab310cd278af395e",
+    "phash": "1111111110000001111111111100011110000011111000111111111111111111"
+  },
+  {
+    "file": "person_1.jpg",
+    "kind": "person",
+    "split": "train",
+    "license": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Bogot%C3%A1_Cargo_Bike_Festival_-_2016_-_29302674423.jpg",
+    "sha256": "d82dbfb4ab5f1670a572be21acb5f33a76aac7c663d6eb9ddd3f56313d759420",
+    "phash": "0111110001111100011000001100000011000111110001111101111111111111"
+  },
+  {
+    "file": "person_2.jpg",
+    "kind": "person",
+    "split": "train",
+    "license": "CC BY 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Brothers_in_sea_beach_by_Soura_Nath.jpg",
+    "sha256": "12fbecc04af27b1d14a99ae0a6397743d147d07b554adc08148e43244a4f295d",
+    "phash": "1111111111111111111111010000000000000000000000000000000000000000"
+  },
+  {
+    "file": "person_3.jpg",
+    "kind": "person",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Danny_Lim_at_Central_Station.jpg",
+    "sha256": "28fd2447e6ea96c666c8c40ce0357288eb9ac9315152cc2f7fd3b797ee5f32e4",
+    "phash": "1000000010001000000111110011011000110110001101100011111000111110"
+  },
+  {
+    "file": "person_4.jpg",
+    "kind": "person",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:DAP_Experience_Centre_Lagos_Nigeria.jpg",
+    "sha256": "d28bde654e8db2be85cdf13541b30042f23ad4c7b903af9b554360732bdf4fc8",
+    "phash": "0111111111111111101111111011101100111011000000010000000101000000"
+  },
+  {
+    "file": "person_5.jpg",
+    "kind": "person",
+    "split": "train",
+    "license": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Degustazione_WikiMARCA.jpg",
+    "sha256": "66af901ae3379a8e85b85ee058fa04f0f0fdd67ff1ce2ab4cecc8b3eb0763c1c",
+    "phash": "0000000000000000000000000001110001111110011111100111110001110000"
+  },
+  {
+    "file": "person_6.jpg",
+    "kind": "person",
+    "split": "train",
+    "license": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Ecwa_Goodnews_School_02.jpg",
+    "sha256": "b3a95cc32ca6c8eb850d597f8a548a050281733812b1a4f8c74e824d906857a0",
+    "phash": "1111111001111000100000001111110011111111011111100011000000000000"
+  },
+  {
+    "file": "person_7.jpg",
+    "kind": "person",
+    "split": "train",
+    "license": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Flying_Pigeon_LA_cargo_bike_test_rides_at_Santa_Monica_Family_Bike_Festival.jpg",
+    "sha256": "b2179b8c10d22b780184584824f6f9a9a65e3732e010b74ff1a3e53725b53786",
+    "phash": "1011100110111001100011101110001111100001111000011111000111110001"
+  },
+  {
+    "file": "person_8.jpg",
+    "kind": "person",
+    "split": "eval",
+    "license": "CC BY 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Friday_Mapusa_Market.jpg",
+    "sha256": "16d04cc922a75e8ee59b79f4adf71da2dfd72f7102ccf9bd6c6c83bb5c7faa46",
+    "phash": "0000000000000001000000111000001111110011111111111111111100011111"
+  },
+  {
+    "file": "person_9.jpg",
+    "kind": "person",
+    "split": "eval",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Friends_with_harvey_at_TNP.jpg",
+    "sha256": "a3a34be25cf9238b804b95fe42ddc63f3657ca0b268a6fec84e2ef26e631996d",
+    "phash": "0000000000001000110011001111110011111000111101001111110000111100"
+  },
+  {
+    "file": "person_10.jpg",
+    "kind": "person",
+    "split": "eval",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Ga_erstes_kollegium_1967.jpg",
+    "sha256": "378a866c5af33424a45adb11de2167789ad6c07ce84e13cd7f7533368a8fd771",
+    "phash": "1111111111110101111001001001010010010000100001001000000011000001"
+  },
+  {
+    "file": "person_11.jpg",
+    "kind": "person",
+    "split": "eval",
+    "license": "CC BY-SA 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Group_outside_(27027285871).jpg",
+    "sha256": "82ab9614257d5c3163aed63d1d905ec036ffcb3abfd9f3a250604103187599f4",
+    "phash": "1111111111111111100011110000111100000111000010000000000000000001"
+  },
+  {
+    "file": "furniture_0.jpg",
+    "kind": "furniture",
+    "split": "train",
+    "license": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:05.07_%E7%B8%BD%E7%B5%B1%E5%8F%83%E8%A8%AA%E3%80%8C%E5%8F%B0%E7%81%A3%E5%9C%8B%E5%AE%B6%E5%A9%A6%E5%A5%B3%E9%A4%A8%E3%80%8D_(51162768166).jpg",
+    "sha256": "8aa684a6d03b6c39f0bc5a3ca7f5e4214ff4e391a9ff7574887294466c5f58d1",
+    "phash": "1111000111110011111110111111001111010011100100011111000011100000"
+  },
+  {
+    "file": "furniture_1.jpg",
+    "kind": "furniture",
+    "split": "train",
+    "license": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:05.07_%E7%B8%BD%E7%B5%B1%E5%8F%83%E8%A8%AA%E3%80%8C%E5%8F%B0%E7%81%A3%E5%9C%8B%E5%AE%B6%E5%A9%A6%E5%A5%B3%E9%A4%A8%E3%80%8D_(51162768211).jpg",
+    "sha256": "8adcdcbb4083ac110348852d2a35acbd834b41959ec6aec3f2a0da54f117cf06",
+    "phash": "0001111101111111011011111110011110001011100000010000000000000011"
+  },
+  {
+    "file": "furniture_2.jpg",
+    "kind": "furniture",
+    "split": "train",
+    "license": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:09.03_%E7%B8%BD%E7%B5%B1%E8%BF%BD%E8%B4%88%E6%8D%B7%E5%85%8B%E5%85%B1%E5%92%8C%E5%9C%8B%E6%95%85%E5%8F%83%E8%AD%B0%E9%95%B7%E6%9F%AF%E4%BD%B3%E6%B4%9B%E3%80%8C%E7%89%B9%E7%A8%AE%E5%A4%A7%E7%B6%AC%E5%8D%BF%E9%9B%B2%E5%8B%B3%E7%AB%A0%E3%80%8D%E6%9A%A8%E8%88%87%E7%8F%BE%E4%BB%BB%E5%8F%83%E8%AD%B0%E9%95%B7%E9%9F%8B%E5%BE%B7%E9%BD%8A%E6%9C%83%E8%AB%87_(50299737843).jpg",
+    "sha256": "28632a27939d525ff01bef6087fa3a815ff68c19ca89b513505ada48d3512fc3",
+    "phash": "0011101110011000000111000110001101100111001011010000000100000001"
+  },
+  {
+    "file": "furniture_3.jpg",
+    "kind": "furniture",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:150229-ColourwithStorage-Scene1_output.jpg",
+    "sha256": "02e8a1f3512be83722a60b0178f8983cf3031b26d54593fbd5a4bc27655b6ae6",
+    "phash": "1110000000001101000111111011111110001000100000001111011011110111"
+  },
+  {
+    "file": "furniture_4.jpg",
+    "kind": "furniture",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:19-charles_radtke-01_(1).jpg",
+    "sha256": "593dea900fccce8ac52fdb2d49cf26ed0854596cce6a17222ddf8fd990fa9c79",
+    "phash": "0000000001100010011111100111111001111110001111100000000011110000"
+  },
+  {
+    "file": "furniture_5.jpg",
+    "kind": "furniture",
+    "split": "train",
+    "license": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:1914_Annonce_Tischer-Amt_Hannover_Jalousie-Schrank.jpg",
+    "sha256": "94f94ff18dc032d263c15aa79fab1285040443d45405674477e4cfe88ee3131e",
+    "phash": "0011001100010001000111110001011100010111000100110001111111111111"
+  },
+  {
+    "file": "furniture_6.jpg",
+    "kind": "furniture",
+    "split": "train",
+    "license": "CC BY-SA 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2_casual_days_-4_(2093866).jpg",
+    "sha256": "34a98db830f4f7410048fb73f8afbbeb5486189de13d919b28137491e72fee87",
+    "phash": "1111111111111111111110001111111101111000010000000000000000000000"
+  },
+  {
+    "file": "furniture_7.jpg",
+    "kind": "furniture",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2013_%D0%9A%D0%B0%D0%BC%D0%BE%D0%B4.jpg",
+    "sha256": "1f6a86ed4349c20f38bfa7918d320a49c76126a570a0430cfca5b9817e46c7f5",
+    "phash": "1111111111111111011011110011111000111100100000001000000000000000"
+  },
+  {
+    "file": "furniture_8.jpg",
+    "kind": "furniture",
+    "split": "eval",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2016_Tibro_M%C3%B6belutst%C3%A4llning_Inredia.jpg",
+    "sha256": "4cf8df312057f2dac53a0b2435fc1b17f6f9333513d0aa91f251b67ac62c09f6",
+    "phash": "0000111100011111100000111000001110000011111000111110001110100111"
+  },
+  {
+    "file": "furniture_9.jpg",
+    "kind": "furniture",
+    "split": "eval",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2017-09-10_Segnung_Feuerwehrhaus_und_Musikerheim_St._Georgen_an_der_Leys_(148).jpg",
+    "sha256": "4d0bb77257d8f29ef308ef057e4e4c22cdfc1eec7b99a9d9be98d3f6329121d5",
+    "phash": "1111111011111110111011101110000011100000111000001100000011100000"
+  },
+  {
+    "file": "furniture_10.jpg",
+    "kind": "furniture",
+    "split": "eval",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2018_Sekret%C3%A4r.jpg",
+    "sha256": "1f1a26a35f7189deba8ab6da1f9ae29645d0bc65b6e0377f379adaf9bc04a5ae",
+    "phash": "0000000000010000000111000000111100001111000111111001111111111111"
+  },
+  {
+    "file": "furniture_11.jpg",
+    "kind": "furniture",
+    "split": "eval",
+    "license": "CC BY-SA 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2019_05_02_IMG_161413_(33887625418).jpg",
+    "sha256": "1dc766a2e70656d1a37d3aed438ed7f30a6605f420f1721b70a486026c9201e6",
+    "phash": "1011111110111111101110011111100000111000111110001110000011110000"
+  },
+  {
+    "file": "toy_0.jpg",
+    "kind": "toy",
+    "split": "train",
+    "license": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:1907_American_Juvenile_Electric_Runabout.jpg",
+    "sha256": "04cd9a8e75ca13106c2ee8d6065b95cf4022d201dd6ef8ac1198f0ce19f37756",
+    "phash": "0000011100000001111110001111111111011111000011101000000011000000"
+  },
+  {
+    "file": "toy_1.jpg",
+    "kind": "toy",
+    "split": "train",
+    "license": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2010-10-02-Balaton-Korbmacher.jpg",
+    "sha256": "0d89fe4ddc768c28f748bf59327ff87604dde3635e62fb15d1e4c434572ffd44",
+    "phash": "0001100000011110000101110010111100001111111111011111110011111100"
+  },
+  {
+    "file": "toy_2.jpg",
+    "kind": "toy",
+    "split": "train",
+    "license": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:2010-365-7_My_Tech_Toys_Are_Crucial_(4255306429).jpg",
+    "sha256": "b31d43c8b4aef51e40181e6d22044ccf6c32601b6dcbeb30a930db2d53727afd",
+    "phash": "0000001100000011001100110011100101111101011111000111100001111101"
+  },
+  {
+    "file": "toy_3.jpg",
+    "kind": "toy",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2014%EB%85%84_11%EC%9B%94_11%EC%9D%BC_%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C_%EC%A4%91%EA%B5%AC_%EC%8B%9C%EB%AF%BC%EC%B2%AD_%EC%A0%9C24%ED%9A%8C_%EC%84%9C%EC%9A%B8%EC%86%8C%EB%B0%A9%EC%95%88%EC%A0%84_%EC%9E%91%ED%92%88%EA%B3%B5%EB%AA%A8%EC%A0%84_%EC%8B%9C%EC%83%81%EC%8B%9D_DSC_2057.jpg",
+    "sha256": "34ba8405467a2a9a9703eb1eaf4022d72e770a7e8e4a3a422fd9ba74d6b8d167",
+    "phash": "0000111100001111000001110000011101100011111000111100011111100011"
+  },
+  {
+    "file": "toy_4.jpg",
+    "kind": "toy",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2025-03-22_11_18_40_Air_tube_section_of_the_Bucks_County_Children%27s_Museum_in_New_Hope,_Bucks_County,_Pennsylvania.jpg",
+    "sha256": "13721533e710d3ba9103fc1c12b7d514b4c550e9fdfe9eb6b0dd33e2da928b62",
+    "phash": "1111111101011111111111111111111101111111000000010000000000000000"
+  },
+  {
+    "file": "toy_5.jpg",
+    "kind": "toy",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2025-03-30_11_49_08_The_Motion_Machine_at_the_Bucks_County_Children%27s_Museum_in_New_Hope,_Bucks_County,_Pennsylvania.jpg",
+    "sha256": "3be2bcfd12b317066e1c7633f85dd510bc7d255c2bed4d289415e82445567c73",
+    "phash": "1111111111111111000111011000000110000001100000011000000010000000"
+  },
+  {
+    "file": "toy_6.jpg",
+    "kind": "toy",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2025-05-08_12_47_52_Toys_in_the_interior_of_Playpad_Bucks_in_Middletown_Township,_Bucks_County,_Pennsylvania.jpg",
+    "sha256": "ce83d60b0220ce0443e2a5be497cf5904212d323dda064a0c01384a289577e17",
+    "phash": "1111111111111111111111100111111100000000000000000000000000000000"
+  },
+  {
+    "file": "toy_7.jpg",
+    "kind": "toy",
+    "split": "train",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2025-05-08_12_49_37_Toys_in_the_interior_of_Playpad_Bucks_in_Middletown_Township,_Bucks_County,_Pennsylvania.jpg",
+    "sha256": "73c3fab6d59d17d15c18346d17ca4fc8cb5e927414c5eb42e82b554ffa9eed57",
+    "phash": "1111111111111111111111110001111000000000000100000000000000000000"
+  },
+  {
+    "file": "toy_8.jpg",
+    "kind": "toy",
+    "split": "eval",
+    "license": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2025-06-01_11_48_09_The_Motion_Machine_at_the_Bucks_County_Children%27s_Museum_in_New_Hope,_Bucks_County,_Pennsylvania.jpg",
+    "sha256": "19de073a0a0dc4476fb5ac0479686d681ee8fe195be339569808d4ff283f1e09",
+    "phash": "1111111111111111100011001100000111000001110000011000000010000000"
+  },
+  {
+    "file": "toy_9.jpg",
+    "kind": "toy",
+    "split": "eval",
+    "license": "CC BY 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:31_minutos.png",
+    "sha256": "3f33a871b25d1239faf60a35533f5a95edb4860006a0810db950796b3f13a5fc",
+    "phash": "0000001000011011111110011111111110111111001111010010001000000000"
+  },
+  {
+    "file": "toy_10.jpg",
+    "kind": "toy",
+    "split": "eval",
+    "license": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:500px_photo_(53002208).jpeg",
+    "sha256": "55cb78fc57bff64411b44ccb7d44ebee63753f37c2ca0a565070dad4be74a9c4",
+    "phash": "0111111011111110111111000000000000000100001111110011111100000010"
+  },
+  {
+    "file": "toy_11.jpg",
+    "kind": "toy",
+    "split": "eval",
+    "license": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:A_baby_is_reaching_for_a_vibrant_toy_piano.jpg",
+    "sha256": "d6d5be4c7432a731833a726981abd0e21d119f29a23d5bfebf84a994d7410fe0",
+    "phash": "1110000011001100110011001111100001111000111111001101100001100000"
+  }
+]

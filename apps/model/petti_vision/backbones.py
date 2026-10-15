@@ -41,9 +41,13 @@ class Detection:
     species: str
     confidence: float
     polygon: list[tuple[float, float]] | None = None  # segmentation outline (image coords)
+    mask_small: np.ndarray | None = None  # patch-grid foreground, stretched onto the image
 
     def mask(self, size: tuple[int, int]) -> np.ndarray | None:
         """Boolean animal mask for an image of `size` (w,h)."""
+        if self.mask_small is not None and self.mask_small.any():
+            im = Image.fromarray((self.mask_small.astype(np.uint8) * 255)).resize(size, Image.NEAREST)
+            return np.asarray(im) > 127
         if not self.polygon or len(self.polygon) < 3:
             return None
         from PIL import ImageDraw
@@ -78,16 +82,20 @@ def load_image(data: bytes | str | Image.Image, max_side: int = 1280) -> Image.I
     return img
 
 
+def crop_box(img: Image.Image, det: Detection | None, pad: float = 0.08) -> tuple[int, int, int, int]:
+    """Padded detection box clipped to the image (the whole image without a detection)."""
+    if det is None:
+        return 0, 0, img.width, img.height
+    x1, y1, x2, y2 = det.box
+    w, h = x2 - x1, y2 - y1
+    return (int(max(0, x1 - pad * w)), int(max(0, y1 - pad * h)),
+            int(min(img.width, x2 + pad * w)), int(min(img.height, y2 + pad * h)))
+
+
 def crop_detection(img: Image.Image, det: Detection | None, pad: float = 0.08) -> Image.Image:
     if det is None:
         return img
-    x1, y1, x2, y2 = det.box
-    w, h = x2 - x1, y2 - y1
-    x1 = max(0, x1 - pad * w)
-    y1 = max(0, y1 - pad * h)
-    x2 = min(img.width, x2 + pad * w)
-    y2 = min(img.height, y2 + pad * h)
-    return img.crop((int(x1), int(y1), int(x2), int(y2)))
+    return img.crop(crop_box(img, det, pad))
 
 
 # =========================================================================== #
@@ -99,11 +107,13 @@ class YoloDetector:
 
         self.cfg = cfg
         self.model = None
+        self.name = "yolo"
         # segmentation models give an animal mask → colours measured on the
         # animal only (not gravel/grass/walls). Fall back gracefully.
         for weights in dict.fromkeys([cfg.detector_weights, "yolo26n-seg.pt", "yolo11n-seg.pt", "yolo11n.pt"]):
             try:
                 self.model = YOLO(weights)
+                self.name = weights
                 log.info("detector: %s", weights)
                 break
             except Exception as exc:
@@ -242,6 +252,10 @@ class HFEncoders:
             r_out = self.reid(**r_in)
             hs = r_out.last_hidden_state
             cls = hs[:, 0]
+            n_reg0 = int(getattr(self.reid.config, "num_register_tokens", 0) or 0)
+            pt = torch.nn.functional.normalize(hs[:n, 1 + n_reg0 :].float(), dim=-1)
+            # "where the identity model looks": similarity of every patch to the CLS token
+            attn = (pt @ torch.nn.functional.normalize(cls[:n].float(), dim=-1).unsqueeze(-1)).squeeze(-1).cpu().numpy()
             n_reg = int(getattr(self.reid.config, "num_register_tokens", 0) or 0)
             patches = hs[:, 1 + n_reg :]
             patch = patches.mean(1)
@@ -273,7 +287,11 @@ class HFEncoders:
         reid = l2n(reid)
         if self.reid_proj is not None:
             reid = l2n(self.reid_proj(reid))
-        return {"reid": reid, "vlm": l2n(vlm)}
+        size = getattr(self.reid_proc, "size", {}) or {}
+        crop = getattr(self.reid_proc, "crop_size", {}) or {}
+        S = size.get("shortest_edge") or size.get("height") or 224
+        C = crop.get("height", S) if getattr(self.reid_proc, "do_center_crop", False) else S
+        return {"reid": reid, "vlm": l2n(vlm), "attn": attn, "attn_frac": C / S}
 
     def encode_texts(self, texts: list[str]) -> np.ndarray:
         torch = self.torch
@@ -324,7 +342,8 @@ class FakeEncoders:
 
     def encode_images(self, crops, tta: bool = True, masks=None):
         x = self._px(crops)
-        return {"reid": l2n(x @ self.Pr), "vlm": l2n(x @ self.Pv)}
+        attn = np.abs(np.stack([np.asarray(c.convert("L").resize((16, 16)), dtype=np.float32).ravel() / 255.0 for c in crops]))
+        return {"reid": l2n(x @ self.Pr), "vlm": l2n(x @ self.Pv), "attn": attn, "attn_frac": 1.0}
 
     def encode_texts(self, texts):
         return l2n(np.stack([_seeded(t, self.vlm_dim) for t in texts]))
@@ -333,4 +352,13 @@ class FakeEncoders:
 def build(cfg: Config):
     if cfg.fake_models:
         return FakeDetector(), FakeEncoders()
-    return YoloDetector(cfg), HFEncoders(cfg)
+    backend = cfg.detector_backend
+    if backend == "auto":
+        backend = "dino" if cfg.seg_head_path.exists() else "yolo"
+    if backend == "yolo":
+        log.warning("YOLO detector is AGPL-3.0 and dev-only (PETTI_DETECTOR_BACKEND=yolo)")
+        return YoloDetector(cfg), HFEncoders(cfg)
+    enc = HFEncoders(cfg)
+    from .segmenter import DinoSegmenter
+
+    return DinoSegmenter(cfg, enc), enc

@@ -2,7 +2,7 @@
 torch>=2.4
 torchvision>=0.19
 transformers>=4.56      # SigLIP2 + DINOv2 (DINOv3 needs >=4.56)
-ultralytics>=8.4.0      # YOLO26 (falls back to yolo11n on older versions)
+ultralytics>=8.4.0      # dev only: PETTI_DETECTOR_BACKEND=yolo (AGPL). Default segmenter does not import it.
 numpy>=1.26
 pillow>=10.4
 pillow-heif>=0.18     # iPhone HEIC photos

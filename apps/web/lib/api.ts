@@ -4,6 +4,19 @@ export type Level = "high" | "medium" | "low";
 export type Labeled = { key: string; en: string; mn: string; confidence: number; level?: Level };
 export type Dist = Record<string, number>;
 
+/** How the result was reached (only on /analyze and /search responses). */
+export type Explain = {
+  photo_index: number;
+  image: { w: number; h: number };
+  detections: { box: number[]; species: string; confidence: number }[];
+  chosen: number | null;
+  polygon: number[][] | null;
+  attention: { grid: number; values: number[]; box: number[] } | null;
+  models: { detector: string; identity: string; vision_language: string; heads: string[] };
+  breed_votes?: { key: string; mn: string; zero_shot: number; head: number | null; final: number }[];
+  fingerprint: number[];
+};
+
 export type Profile = {
   species: Labeled;
   species_probs: Dist;
@@ -20,8 +33,9 @@ export type Profile = {
   description_mn: string;
   description_en: string;
   detection: { found: boolean; box: number[] | null; confidence: number };
-  quality: { warnings: string[]; photos: number };
+  quality: { warnings: string[]; photos: number; no_animal?: boolean; multi_animal?: boolean };
   timing_ms?: Record<string, number>;
+  explain?: Explain;
 };
 
 export type Pet = {

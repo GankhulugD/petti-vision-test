@@ -2670,6 +2670,122 @@
           "source": "synthetic_negative:drawing"
         }
       ]
+    },
+    "negatives_photo": {
+      "source": "Wikimedia Commons categories Automobiles, People, Furniture, Toys",
+      "license": "per-file, see negatives_photo_licenses.json; NC skipped",
+      "allowed_use": "evaluation only",
+      "n": 12,
+      "files": [
+        {
+          "path": "data/eval/negatives_photo/person_8.jpg",
+          "sha256": "16d04cc922a75e8ee59b79f4adf71da2dfd72f7102ccf9bd6c6c83bb5c7faa46",
+          "phash": "0000000000000001000000111000001111110011111111111111111100011111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:person"
+        },
+        {
+          "path": "data/eval/negatives_photo/person_9.jpg",
+          "sha256": "a3a34be25cf9238b804b95fe42ddc63f3657ca0b268a6fec84e2ef26e631996d",
+          "phash": "0000000000001000110011001111110011111000111101001111110000111100",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:person"
+        },
+        {
+          "path": "data/eval/negatives_photo/person_10.jpg",
+          "sha256": "378a866c5af33424a45adb11de2167789ad6c07ce84e13cd7f7533368a8fd771",
+          "phash": "1111111111110101111001001001010010010000100001001000000011000001",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:person"
+        },
+        {
+          "path": "data/eval/negatives_photo/person_11.jpg",
+          "sha256": "82ab9614257d5c3163aed63d1d905ec036ffcb3abfd9f3a250604103187599f4",
+          "phash": "1111111111111111100011110000111100000111000010000000000000000001",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:person"
+        },
+        {
+          "path": "data/eval/negatives_photo/furniture_8.jpg",
+          "sha256": "4cf8df312057f2dac53a0b2435fc1b17f6f9333513d0aa91f251b67ac62c09f6",
+          "phash": "0000111100011111100000111000001110000011111000111110001110100111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:furniture"
+        },
+        {
+          "path": "data/eval/negatives_photo/furniture_9.jpg",
+          "sha256": "4d0bb77257d8f29ef308ef057e4e4c22cdfc1eec7b99a9d9be98d3f6329121d5",
+          "phash": "1111111011111110111011101110000011100000111000001100000011100000",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:furniture"
+        },
+        {
+          "path": "data/eval/negatives_photo/furniture_10.jpg",
+          "sha256": "1f1a26a35f7189deba8ab6da1f9ae29645d0bc65b6e0377f379adaf9bc04a5ae",
+          "phash": "0000000000010000000111000000111100001111000111111001111111111111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:furniture"
+        },
+        {
+          "path": "data/eval/negatives_photo/furniture_11.jpg",
+          "sha256": "1dc766a2e70656d1a37d3aed438ed7f30a6605f420f1721b70a486026c9201e6",
+          "phash": "1011111110111111101110011111100000111000111110001110000011110000",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:furniture"
+        },
+        {
+          "path": "data/eval/negatives_photo/toy_8.jpg",
+          "sha256": "19de073a0a0dc4476fb5ac0479686d681ee8fe195be339569808d4ff283f1e09",
+          "phash": "1111111111111111100011001100000111000001110000011000000010000000",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:toy"
+        },
+        {
+          "path": "data/eval/negatives_photo/toy_9.jpg",
+          "sha256": "3f33a871b25d1239faf60a35533f5a95edb4860006a0810db950796b3f13a5fc",
+          "phash": "0000001000011011111110011111111110111111001111010010001000000000",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:toy"
+        },
+        {
+          "path": "data/eval/negatives_photo/toy_10.jpg",
+          "sha256": "55cb78fc57bff64411b44ccb7d44ebee63753f37c2ca0a565070dad4be74a9c4",
+          "phash": "0111111011111110111111000000000000000100001111110011111100000010",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:toy"
+        },
+        {
+          "path": "data/eval/negatives_photo/toy_11.jpg",
+          "sha256": "d6d5be4c7432a731833a726981abd0e21d119f29a23d5bfebf84a994d7410fe0",
+          "phash": "1110000011001100110011001111100001111000111111001101100001100000",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "commons:toy"
+        }
+      ]
     }
   }
 }

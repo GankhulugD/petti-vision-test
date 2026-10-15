@@ -7,6 +7,7 @@ __pycache__/
 apps/model/data/**
 !apps/model/data/eval/
 !apps/model/data/eval/manifest.json
+!apps/model/data/eval/negatives_photo_licenses.json
 !apps/model/data/eval/bench_exclude.txt
 !apps/model/data/eval/*.csv
 !apps/model/data/eval/negatives/

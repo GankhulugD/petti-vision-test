@@ -1,0 +1,13 @@
+{
+  "backend": "yolo",
+  "n": 200,
+  "recall": 0.985,
+  "recall_small": 1.0,
+  "small_n": 8,
+  "mask_iou": 0.945,
+  "latency_p50_ms": 25.3,
+  "negative_fpr": 0.0,
+  "negative_n": 22,
+  "photo_fpr": 0.0,
+  "photo_n": 12
+}

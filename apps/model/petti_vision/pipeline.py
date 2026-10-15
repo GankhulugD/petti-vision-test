@@ -26,7 +26,7 @@ import numpy as np
 from PIL import Image
 
 from . import taxonomy as T
-from .backbones import Detection, build, crop_detection, l2n, load_image
+from .backbones import Detection, build, crop_box, crop_detection, l2n, load_image
 from .color import PALETTE_LAB, coat_colors
 from .config import Config
 from .heads import load_heads
@@ -88,6 +88,7 @@ class PhotoResult:
     color_shares: np.ndarray
     marks: dict[str, float]
     weight: float = 1.0
+    extras: dict = field(default_factory=dict)  # explainability (zero-shot vs head votes)
 
 
 @dataclass
@@ -103,6 +104,17 @@ class AnimalProfile:
 
     def to_json(self) -> dict:
         return self.data
+
+
+def _despeckle(a: np.ndarray) -> np.ndarray:
+    """ViTs without registers have a few high-norm 'artifact' patches that light up
+    in any CLS-similarity map; replace isolated spikes by their neighbourhood."""
+    p = np.pad(a, 1, mode="edge")
+    nb = np.stack([p[1 + dy : 1 + dy + a.shape[0], 1 + dx : 1 + dx + a.shape[1]]
+                   for dy in (-1, 0, 1) for dx in (-1, 0, 1) if dy or dx])
+    med = np.median(nb, axis=0)
+    spike = a > nb.max(0) + 0.5 * (a.std() + 1e-6)
+    return np.where(spike, med, a)
 
 
 # --------------------------------------------------------------------------- #
@@ -121,6 +133,8 @@ class PettiVision:
         # zero-shot breed softmax is over-confident; T fitted on a labelled set
         # (training/calibrate.py writes artifacts/calibration.json)
         self.breed_temperature = 1.5
+        self._gate_pos = None
+        self._gate_neg = None
         cal = self.cfg.artifacts_dir / "calibration.json"
         if cal.exists():
             import json
@@ -180,7 +194,7 @@ class PettiVision:
         # ---- species -------------------------------------------------- #
         p_sp = self.zs.probs("species|any", v)[0]
         extra = None
-        if det is not None:
+        if det is not None and det.species in ("dog", "cat"):
             prior = np.full(len(self._species_keys), (1 - det.confidence) / len(self._species_keys))
             prior[self._species_keys.index(det.species)] += det.confidence
             # COCO-trained detector is very reliable for dog vs cat: trust it more when confident
@@ -209,6 +223,10 @@ class PettiVision:
             breed_keys = [b.key for b in breeds]
             p_b = self.zs.probs(f"breed|{species}", v, temperature=self.breed_temperature)[0]
             probs["breed"] = self._fuse_task("breed", p_b, feats, breed_keys)
+            hp, _ = self._head("breed", feats, breed_keys) if feats is not None else (None, 0.0)
+            extras = {"breed_zs": p_b, "breed_head": hp}
+        else:
+            extras = {}
 
         # ---- size (breed prior helps a lot: a husky is "medium") ------- #
         size_keys = [s.key for s in T.SIZES]
@@ -278,10 +296,10 @@ class PettiVision:
 
         crop_ratio = 1.0 if det is None else det.area() / (img.width * img.height)
         weight = (det.confidence if det else 0.3) * (0.5 + min(crop_ratio, 0.5))
-        return PhotoResult(det, crop_ratio, reid, vlm, probs, breed_keys, shares, marks, weight)
+        return PhotoResult(det, crop_ratio, reid, vlm, probs, breed_keys, shares, marks, weight, extras)
 
     # ------------------------------------------------------------------ #
-    def analyze(self, images: list[bytes | Image.Image | str]) -> AnimalProfile:
+    def analyze(self, images: list[bytes | Image.Image | str], explain: bool = False) -> AnimalProfile:
         """Analyse 1..N photos of the SAME animal and return one profile.
 
         Thread-safe: FastAPI runs sync endpoints in a thread pool, and torch
@@ -290,9 +308,9 @@ class PettiVision:
         each takes ~0.2 s so a queue is far cheaper than a hang.
         """
         with self._lock:
-            return self._analyze(images)
+            return self._analyze(images, explain)
 
-    def _analyze(self, images: list[bytes | Image.Image | str]) -> AnimalProfile:
+    def _analyze(self, images: list[bytes | Image.Image | str], explain: bool = False) -> AnimalProfile:
         t0 = time.perf_counter()
         imgs = [load_image(i) for i in images]
         dets = self.detector.detect(imgs)
@@ -310,6 +328,7 @@ class PettiVision:
 
         photos = [self._photo(im, d, emb["reid"][i], emb["vlm"][i], crops[i], masks[i]) for i, (im, d) in enumerate(zip(imgs, chosen))]
         profile = self._aggregate(photos)
+        self._apply_gates(profile, imgs, dets, photos)
         t_end = time.perf_counter()
         profile.data["timing_ms"] = {
             "detect": round((t_det - t0) * 1000, 1),
@@ -318,7 +337,103 @@ class PettiVision:
             "total": round((t_end - t0) * 1000, 1),
             "photos": len(imgs),
         }
+        if explain:
+            profile.data["explain"] = self._explain(imgs, dets, chosen, emb, photos, profile.data)
         return profile
+
+    def _animal_scores(self, vlm: np.ndarray) -> tuple[float, float]:
+        from .segmenter import ANIMAL_PROMPTS, NOT_ANIMAL_PROMPTS
+
+        if self._gate_pos is None:
+            self._gate_pos = self.enc.encode_texts(list(ANIMAL_PROMPTS))
+            self._gate_neg = self.enc.encode_texts(list(NOT_ANIMAL_PROMPTS))
+        scale = float(getattr(self.enc, "logit_scale", 1.0))
+        bias = float(getattr(self.enc, "logit_bias", 0.0))
+
+        def peak(text_emb: np.ndarray) -> float:
+            logits = scale * (vlm @ text_emb.T) + bias
+            return float(1 / (1 + np.exp(-logits.max())))
+
+        return peak(self._gate_pos), peak(self._gate_neg)
+
+    def _apply_gates(self, profile: AnimalProfile, imgs, dets, photos) -> None:
+        from .segmenter import MULTI_MN, apply_no_animal, decide_no_animal
+
+        data = profile.data
+        if any(len(ds) >= 2 for ds in dets):
+            warnings = data["quality"]["warnings"]
+            if MULTI_MN not in warnings:
+                warnings.insert(0, MULTI_MN)
+            data["quality"]["multi_animal"] = True
+        if self.cfg.fake_models:
+            return
+        i = max(range(len(photos)), key=lambda k: photos[k].weight)
+        det = dets[i][0] if dets[i] else None
+        if det is not None and det.mask_small is not None:
+            fg = float(det.mask_small.mean())
+        elif det is not None:
+            fg = det.area() / max(imgs[i].width * imgs[i].height, 1)
+        else:
+            fg = 0.0
+        animal, other = self._animal_scores(photos[i].vlm)
+        if decide_no_animal(fg, animal, other, det is not None):
+            apply_no_animal(data)
+
+    # ------------------------------------------------------------------ #
+    def _explain(self, imgs, dets, chosen, emb, photos, data) -> dict:
+        """What the UI needs to show *how* the result was reached, for the most
+        informative photo: detections, mask outline, where the identity model
+        looked, zero-shot vs trained-head votes and the identity fingerprint."""
+        i = max(range(len(photos)), key=lambda k: photos[k].weight)
+        im, det = imgs[i], chosen[i]
+        out: dict[str, Any] = {
+            "photo_index": i,
+            "image": {"w": im.width, "h": im.height},
+            "detections": [{"box": [round(v, 1) for v in d.box], "species": d.species, "confidence": round(d.confidence, 3)} for d in dets[i][:6]],
+            "chosen": next((j for j, d in enumerate(dets[i][:6]) if d is det), None),
+            "polygon": None,
+            "attention": None,
+            "models": {"detector": getattr(self.detector, "name", self.cfg.detector_weights), "identity": self.cfg.reid_model, "vision_language": self.cfg.vlm_model,
+                       "heads": sorted(self.heads.tasks) if self.heads else []},
+        }
+        if det is not None and det.polygon:
+            step = max(1, len(det.polygon) // 90)
+            out["polygon"] = [[round(x, 1), round(y, 1)] for x, y in det.polygon[::step]]
+        attn = emb.get("attn")
+        if attn is not None:
+            a = np.asarray(attn[i], dtype=np.float32)
+            g = int(round(len(a) ** 0.5))
+            if g * g == len(a):
+                a = _despeckle(a.reshape(g, g)).ravel()
+                lo, hi = np.percentile(a, 5), np.percentile(a, 99)
+                a = np.clip((a - lo) / max(float(hi - lo), 1e-6), 0, 1)
+                # DINOv2's processor keeps aspect ratio (short side → 256) and centre-crops
+                # 224², i.e. a centred square of side short_side·224/256 of our crop
+                x1, y1, x2, y2 = crop_box(im, det)
+                cx, cy, side = (x1 + x2) / 2, (y1 + y2) / 2, min(x2 - x1, y2 - y1) * float(emb.get("attn_frac", 1.0))
+                out["attention"] = {"grid": g, "values": [round(float(v), 3) for v in a],
+                                    "box": [round(cx - side / 2, 1), round(cy - side / 2, 1), round(cx + side / 2, 1), round(cy + side / 2, 1)]}
+        # zero-shot vs trained head vs final, for the final top breeds
+        b = data.get("breed")
+        ex = photos[i].extras
+        if b and "breed_zs" in ex and photos[i].breed_keys:
+            keys = photos[i].breed_keys
+            idx = {k: j for j, k in enumerate(keys)}
+            hp = ex.get("breed_head")
+            votes = []
+            for t in b["top"][:5]:
+                j = idx.get(t["key"])
+                if j is None:
+                    continue
+                h = None if hp is None or np.isnan(hp[j]) else round(float(hp[j]), 4)
+                votes.append({"key": t["key"], "mn": t["mn"], "zero_shot": round(float(ex["breed_zs"][j]), 4), "head": h, "final": t["confidence"]})
+            out["breed_votes"] = votes
+        # identity fingerprint: the re-ID embedding folded to 48 bins
+        r = photos[i].reid
+        bins = np.array_split(r, 48)
+        f = np.array([float(c.mean()) for c in bins])
+        out["fingerprint"] = [round(float(v), 3) for v in f / max(float(np.abs(f).max()), 1e-6)]
+        return out
 
     # ------------------------------------------------------------------ #
     def _aggregate(self, photos: list[PhotoResult]) -> AnimalProfile:

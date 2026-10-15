@@ -18,6 +18,8 @@ python3 training/evaluate.py ... --loo    # зөвхөн identity embedding-ий
 python3 training/freeze_eval.py                         # hash + synthetic negatives
 python3 training/eval_all.py --version v0.4             # artifacts/reports/v0.4.json + .md
 python3 training/gate.py artifacts/reports/v0.4.json    # baseline.json-оос 1 оноо / latency 15%
+python3 training/train_seg.py                           # Oxford trainval trimap → artifacts/seg_head.npz
+python3 training/eval_seg.py --backend dino             # Oxford test IoU, YOLO-той --backend yolo
 ```
 
 ### Server дээрээс сургах (dev горим)

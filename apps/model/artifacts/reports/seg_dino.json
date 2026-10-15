@@ -1,0 +1,13 @@
+{
+  "backend": "dino",
+  "n": 3669,
+  "recall": 1.0,
+  "recall_small": 1.0,
+  "small_n": 233,
+  "mask_iou": 0.938,
+  "latency_p50_ms": 17.1,
+  "negative_fpr": 0.0,
+  "negative_n": 22,
+  "photo_fpr": 0.0,
+  "photo_n": 12
+}

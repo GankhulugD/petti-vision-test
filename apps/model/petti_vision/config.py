@@ -16,8 +16,9 @@ def _env(name: str, default: str) -> str:
 @dataclass
 class Config:
     # --- models ----------------------------------------------------------- #
-    # Detector: Ultralytics YOLO (COCO has dog/cat/bird/horse). yolo26n is
-    # NMS-free and the fastest; fall back to yolo11n.pt on older ultralytics.
+    # Detector. "auto" uses the DINOv2 segmenter when seg_head.npz exists.
+    # "yolo" is dev-only: Ultralytics YOLO26n-seg is AGPL-3.0 and must not ship.
+    detector_backend: str = _env("PETTI_DETECTOR_BACKEND", "auto")
     detector_weights: str = _env("PETTI_DETECTOR", "yolo26n-seg.pt")
     detector_conf: float = float(_env("PETTI_DETECTOR_CONF", "0.25"))
     detector_imgsz: int = int(_env("PETTI_DETECTOR_IMGSZ", "640"))
@@ -73,6 +74,10 @@ class Config:
     @property
     def heads_path(self) -> Path:
         return self.artifacts_dir / "heads.npz"
+
+    @property
+    def seg_head_path(self) -> Path:
+        return self.artifacts_dir / "seg_head.npz"
 
     @property
     def reid_proj_path(self) -> Path:

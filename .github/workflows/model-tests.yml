@@ -1,0 +1,21 @@
+name: model-tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  fake-models:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: install test dependencies
+        run: pip install numpy pillow pytest
+      - name: fake-model unit tests
+        working-directory: apps/model
+        run: PETTI_FAKE_MODELS=1 python -m pytest -q tests
+        env:
+          PETTI_FAKE_MODELS: "1"

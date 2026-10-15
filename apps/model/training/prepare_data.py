@@ -22,7 +22,7 @@ import tarfile
 import urllib.request
 from pathlib import Path
 
-from common import ROOT, T, write_manifest
+from common import ROOT, T, ahash, eval_phashes, write_manifest
 
 DATA = ROOT / "data" / "public"
 OUT = ROOT / "data" / "manifests"
@@ -165,6 +165,7 @@ def dogceo(max_per_breed: int = 150, exclude: set[str] | None = None) -> list[di
             return r.read()
 
     jobs = []
+    phashes = eval_phashes()
     for b, key in DOGCEO_MAP.items():
         try:
             urls = json.loads(get(f"https://dog.ceo/api/breed/{b}/images"))["message"]
@@ -186,6 +187,8 @@ def dogceo(max_per_breed: int = 150, exclude: set[str] | None = None) -> list[di
                 dest.write_bytes(get(u))
             except Exception:
                 return None
+        if ahash(dest) in phashes:
+            return None  # frozen eval photo (perceptual hash)
         return _row(dest, "dog", key, "dogceo")
 
     with ThreadPoolExecutor(16) as ex:

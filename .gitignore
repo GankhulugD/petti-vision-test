@@ -3,12 +3,17 @@ __pycache__/
 *.pyc
 .venv/
 .pytest_cache/
-# model data / weights (large, regenerated)
-apps/model/data/
+# model data / weights (large, regenerated). The frozen eval contract is tracked.
+apps/model/data/**
+!apps/model/data/eval/
+!apps/model/data/eval/manifest.json
+!apps/model/data/eval/bench_exclude.txt
+!apps/model/data/eval/*.csv
+!apps/model/data/eval/negatives/
+!apps/model/data/eval/negatives/**
 apps/model/artifacts/cache/
 apps/model/*.pt
 apps/model/yolo*.pt
-apps/model/data/registry.db
 *.onnx
 # keep trained heads small artifacts tracked? (npz/json are < 5 MB) – uncomment to ignore
 # apps/model/artifacts/
@@ -23,4 +28,3 @@ next-env.d.ts
 
 # local dev switch for /dev/* endpoints
 apps/model/.dev
-apps/model/data/

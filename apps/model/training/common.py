@@ -36,6 +36,39 @@ SINGLE = {
 MULTI = {"color": [c.key for c in T.COLORS], "marks": [m.key for m in T.MARKS]}
 
 
+def file_sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def ahash(path: Path, size: int = 8) -> str:
+    """Average-hash. Identical bits mean the photo is the same for leak checks."""
+    from PIL import Image
+
+    im = Image.open(path).convert("L").resize((size, size))
+    a = np.asarray(im, dtype=np.float32)
+    bits = a > float(a.mean())
+    return "".join("1" if b else "0" for b in bits.ravel())
+
+
+def eval_phashes(manifest: Path | None = None) -> set[str]:
+    path = manifest or (ROOT / "data" / "eval" / "manifest.json")
+    if not path.exists():
+        return set()
+    import json
+
+    doc = json.loads(path.read_text())
+    out = set()
+    for group in doc.get("sets", {}).values():
+        for item in group.get("files", []):
+            if item.get("phash"):
+                out.add(item["phash"])
+    return out
+
+
 def read_manifest(paths: list[Path]) -> list[dict]:
     rows = []
     for p in paths:

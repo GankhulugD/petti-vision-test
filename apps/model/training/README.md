@@ -10,7 +10,15 @@ python3 training/evaluate.py ... --loo    # зөвхөн identity embedding-ий
 ```
 
 `data/eval/bench_exclude.txt`-д байгаа зургууд (browser benchmark-ийн) болон эзэдийн зургууд (re-ID тест)
-сургалтад хэзээ ч орохгүй — тэгэхгүй бол тоо хуурамчаар өндөр гарна.
+сургалтад хэзээ ч орохгүй — тэгэхгүй бол тоо хуурамчаар өндөр гарна. `training/freeze_eval.py`
+зураг бүрийн perceptual hash-ийг `data/eval/manifest.json`-д бичдэг бөгөөд `prepare_data.py --dogceo`
+тэр hash-тай зургийг сургалтаас хасна.
+
+```bash
+python3 training/freeze_eval.py                         # hash + synthetic negatives
+python3 training/eval_all.py --version v0.4             # artifacts/reports/v0.4.json + .md
+python3 training/gate.py artifacts/reports/v0.4.json    # baseline.json-оос 1 оноо / latency 15%
+```
 
 ### Server дээрээс сургах (dev горим)
 

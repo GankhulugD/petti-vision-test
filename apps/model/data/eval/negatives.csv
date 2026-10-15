@@ -1,0 +1,11 @@
+path,species,breed,size,age,colors,pattern,coat,marks,pet_id,source
+data/eval/negatives/car_0.jpg,,,,,,,,,,synthetic_negative:car
+data/eval/negatives/car_1.jpg,,,,,,,,,,synthetic_negative:car
+data/eval/negatives/person_0.jpg,,,,,,,,,,synthetic_negative:person
+data/eval/negatives/person_1.jpg,,,,,,,,,,synthetic_negative:person
+data/eval/negatives/furniture_0.jpg,,,,,,,,,,synthetic_negative:furniture
+data/eval/negatives/furniture_1.jpg,,,,,,,,,,synthetic_negative:furniture
+data/eval/negatives/toy_0.jpg,,,,,,,,,,synthetic_negative:toy
+data/eval/negatives/toy_1.jpg,,,,,,,,,,synthetic_negative:toy
+data/eval/negatives/drawing_0.jpg,,,,,,,,,,synthetic_negative:drawing
+data/eval/negatives/drawing_1.jpg,,,,,,,,,,synthetic_negative:drawing

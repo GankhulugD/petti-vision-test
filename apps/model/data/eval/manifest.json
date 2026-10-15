@@ -1,0 +1,2675 @@
+{
+  "version": "v0.4",
+  "role": "frozen evaluation \u2014 excluded from training by filename (bench_exclude.txt) and perceptual hash",
+  "bench_exclude_names": [
+    "512px-ainu-dog.jpg",
+    "akita_hiking_in_shpella_e_pellumbasit.jpg",
+    "an_akita_inu_resting.jpg",
+    "cooper1.jpg",
+    "cooper2.jpg",
+    "dachshund-5.jpg",
+    "dog-1083690_640.jpg",
+    "dog-495122_640.jpg",
+    "dscf7495-2.jpg",
+    "img_20181221_161745_654.jpg",
+    "img_3507.jpg",
+    "joey_img_0633.jpg",
+    "mamehiko02.jpg",
+    "n02085620_2507.jpg",
+    "n02085620_4814.jpg",
+    "n02085620_7738.jpg",
+    "n02085936_10377.jpg",
+    "n02085936_7537.jpg",
+    "n02085936_9141.jpg",
+    "n02086079_1020.jpg",
+    "n02086079_10613.jpg",
+    "n02086079_3832.jpg",
+    "n02086240_11139.jpg",
+    "n02086240_1725.jpg",
+    "n02086240_5096.jpg",
+    "n02086910_4011.jpg",
+    "n02086910_5010.jpg",
+    "n02086910_7301.jpg",
+    "n02088364_13236.jpg",
+    "n02088364_16635.jpg",
+    "n02088364_3752.jpg",
+    "n02092339_2006.jpg",
+    "n02092339_2731.jpg",
+    "n02092339_4965.jpg",
+    "n02094433_10184.jpg",
+    "n02094433_1376.jpg",
+    "n02094433_8977.jpg",
+    "n02097047_2470.jpg",
+    "n02097047_6553.jpg",
+    "n02099601_5679.jpg",
+    "n02099601_8181.jpg",
+    "n02099712_2473.jpg",
+    "n02099712_6997.jpg",
+    "n02099712_854.jpg",
+    "n02102318_14006.jpg",
+    "n02102318_8482.jpg",
+    "n02105162_4120.jpg",
+    "n02105162_5927.jpg",
+    "n02105162_8043.jpg",
+    "n02106166_117.jpg",
+    "n02106166_1236.jpg",
+    "n02106166_6437.jpg",
+    "n02106550_1323.jpg",
+    "n02106550_2197.jpg",
+    "n02106550_4150.jpg",
+    "n02106662_13599.jpg",
+    "n02106662_25775.jpg",
+    "n02106662_4059.jpg",
+    "n02107142_1193.jpg",
+    "n02107142_2418.jpg",
+    "n02107142_7311.jpg",
+    "n02108089_2917.jpg",
+    "n02108089_5043.jpg",
+    "n02108089_625.jpg",
+    "n02108551_1968.jpg",
+    "n02108551_240.jpg",
+    "n02108551_2514.jpg",
+    "n02108915_4731.jpg",
+    "n02108915_5667.jpg",
+    "n02108915_977.jpg",
+    "n02109525_10992.jpg",
+    "n02109525_11747.jpg",
+    "n02109525_13420.jpg",
+    "n02110063_11756.jpg",
+    "n02110063_5727.jpg",
+    "n02110063_938.jpg",
+    "n02110185_11138.jpg",
+    "n02110185_2593.jpg",
+    "n02110185_2614.jpg",
+    "n02110958_13276.jpg",
+    "n02111889_2136.jpg",
+    "n02111889_5075.jpg",
+    "n02112018_514.jpg",
+    "n02112018_5554.jpg",
+    "n02112018_627.jpg",
+    "n02112137_1830.jpg",
+    "n02112137_528.jpg",
+    "n02112137_6857.jpg",
+    "n02113186_11220.jpg",
+    "n02113186_13413.jpg",
+    "n02113186_2211.jpg",
+    "n02113624_1801.jpg",
+    "n02113624_2595.jpg",
+    "n02113624_4221.jpg",
+    "ruby.jpg",
+    "shiba-11.jpg",
+    "shiba-16.jpg",
+    "wilma1.jpg"
+  ],
+  "sets": {
+    "identity": {
+      "source": "dog.ceo owner-named phone photos (same-name files in one breed folder)",
+      "license": "uploaded by owners to dog.ceo; no commercial grant found",
+      "allowed_use": "evaluation only",
+      "n": 168,
+      "files": [
+        {
+          "path": "data/eval/dogceo/beagle__barnaby/0.jpg",
+          "sha256": "e3a92e8dd9ed87aa558ddf526a58060351ba22f78046d42f691140ca994e024c",
+          "phash": "0000011100000001000011010011110000111100101111000001110000010001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "beagle__barnaby",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/beagle__barnaby/1.jpg",
+          "sha256": "f8fdcb9e66b35f2604dfa529b4f398d55687fdf022a0de40ab89225a441dfaad",
+          "phash": "0000000101000001010000010001110101011111111111111111010111100000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "beagle__barnaby",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/buhund-norwegian__hakon/0.jpg",
+          "sha256": "c29edc153532d7dfac48c37ef1830068d69510ed16b56847f7767f68f5757471",
+          "phash": "1111111011111100011111000011110000011000000110000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "buhund-norwegian__hakon",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/buhund-norwegian__hakon/1.jpg",
+          "sha256": "90e817990c2381a3d22b334e6546aea35e63c549e6dcae8417ddc2660a5af53a",
+          "phash": "1111000000111100001111000001110000001100000111000001100000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "buhund-norwegian__hakon",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/buhund-norwegian__hakon/2.jpg",
+          "sha256": "dddb3421496b3be3c3db82794f46fe1ff7043b0fe7f01dab8092ad45bf69201e",
+          "phash": "0111111000111110001111001011000011110000011100000111000011111000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "buhund-norwegian__hakon",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/bulldog-english__jager/0.jpg",
+          "sha256": "3f3b3695fffe782bae36b5b62b4d50380fc2c7a59923ff05b9de7868b0ffc0ac",
+          "phash": "1111110010001100000100000001000010011111111000111000011111001111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "bulldog-english__jager",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/bulldog-english__jager/1.jpg",
+          "sha256": "f6af24dff43aad1e96d4681c69be039e8d00602d198129f86bd0317928a5c835",
+          "phash": "1111111111111111111111111001111100000100000001000000010000000011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "bulldog-english__jager",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/cockapoo__guri/0.jpg",
+          "sha256": "4b885cfde9cb5d9ce49d6738fb24d621e148bf33ba6f440e0a4596e5e5acd701",
+          "phash": "1101000011110000110000000001110001111100011110000111110000001100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "cockapoo__guri",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/cockapoo__guri/1.jpg",
+          "sha256": "f757c93d753ad2183a212846cf00ba69a6d9531eb67e90a265010df31af49d44",
+          "phash": "0000000011100000110110110011111100001000000111001001111111000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "cockapoo__guri",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/cockapoo__guri/2.jpg",
+          "sha256": "e2ea92b76e45748f880ba4214e7a4b0515f1870c9f743f48e375d9925d2e1024",
+          "phash": "1100000001100000111100001111110011000111110000111110000111111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "cockapoo__guri",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/cockapoo__guri/3.jpg",
+          "sha256": "27dd96a87fdbaee80ed497ac65212fbeaafffc5629f9cfab0e056ff6dc78366f",
+          "phash": "1000000000010000111110001111100011111000111110001111111000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "cockapoo__guri",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/cockapoo__guri/4.jpg",
+          "sha256": "29f83e0271d6a68ea9985e70dba06a0a990a29a77d503d9650be48d4f87ec670",
+          "phash": "0000000000000000000110001111111111100111110011111110111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "cockapoo__guri",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/cockapoo__guri/5.jpg",
+          "sha256": "1611d2465540f77ca1d885ebd3fcb91eb3587715bcc631b04721d64d10b305bc",
+          "phash": "1111111111111111111111000000110000001100000111000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "cockapoo__guri",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/cockapoo__guri/6.jpg",
+          "sha256": "8dffbb7c368b7dd63a0f162c72c318e1ff7f4d01377b4319f5ec210b86424a6d",
+          "phash": "0000111000001111001101101111111001111100000001100000011000001000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "cockapoo__guri",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/cockapoo__guri/7.jpg",
+          "sha256": "0d72b5494d1ecac07116c2f1679b90e1fc998012b1c50c10f4fc3e4d6323d08f",
+          "phash": "0000111100011111000111110011110000111100000011110000011100001111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "cockapoo__guri",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/collie-border__whiskey/0.jpg",
+          "sha256": "3aa2e0f317b61bde981cbf9bf79a01036cd07a7b6b4cca6c4742c829c6ec8919",
+          "phash": "0011111001101110011000111110001111110011111101110111111101111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "collie-border__whiskey",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/collie-border__whiskey/1.jpg",
+          "sha256": "44879af3e9da7b2a13e0d5b44a819ce23bfe0bd91924e95c18f796b49cdbd30c",
+          "phash": "1111111111111111100100110011001101011001000110110000000100000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "collie-border__whiskey",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/collie-border__pippin/0.jpg",
+          "sha256": "9730d7938e4742300497e28b055851830df279795d466699d136bb7222d66a84",
+          "phash": "1111111111111111111111110000000000000000000100000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "collie-border__pippin",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/collie-border__pippin/1.jpg",
+          "sha256": "2a825c63e39225ea13f538537d7757adde5d563e023f3d20792e73f633e8fe13",
+          "phash": "1000000111111111011111110000000000000111001001110011111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "collie-border__pippin",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/collie-border__pippin/2.jpg",
+          "sha256": "ac588e356e87529ec0615e6d8106e782d85fceed536f7c965f4b9b786898132d",
+          "phash": "1111110011111111110001111110001110000000000110001110000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "collie-border__pippin",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/collie-border__pippin/3.jpg",
+          "sha256": "054f43baf614fe9c031a7c65713fd64f582451c2eb41ba7688020cd727f41ae9",
+          "phash": "0000000000100100001011000011100000110000011100101111100000111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "collie-border__pippin",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/collie-border__pippin/4.jpg",
+          "sha256": "844d9e398d3eea8a597a1ea08905363eacb460c3fca2a2cc8a56379fd5fd6ba1",
+          "phash": "1100000010000010111110001110111011000110111000001110000011000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "collie-border__pippin",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/dalmatian__cooper/0.jpg",
+          "sha256": "e788ae43c16e795ccaea93c0af3079b013c25a945f1ba66b556ca93050fda2ae",
+          "phash": "0011100000111101001011000111110011111100111110011110000101000011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "dalmatian__cooper",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/dalmatian__cooper/1.jpg",
+          "sha256": "b68a8b85a9be814a83ee7b4f18f3ee78abfa8724c5c6fb89ce3b1d499bf2527d",
+          "phash": "0000000000000000000000000000000000110000111111001111110011111000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "dalmatian__cooper",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/danishswedish-farmdog__ebba/0.jpg",
+          "sha256": "7dbb2f75b0fadaecb850f99c6c856c44c6e9cdca878405ff55afc2d938c8b9ad",
+          "phash": "0000000000000000000000000011110001111100011111100000011100000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "danishswedish-farmdog__ebba",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/danishswedish-farmdog__ebba/1.jpg",
+          "sha256": "3f4ee01f717a350fb0cf83c4ae046d4ffbca3e3a9b32888824ccd653e471c3d2",
+          "phash": "0011100000000110000111100011110000111100001100000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "danishswedish-farmdog__ebba",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/danishswedish-farmdog__ebba/2.jpg",
+          "sha256": "561acf2f5d18a8b4374fd4f09cbed86caaa650b972f7c5f9f998a7a51b2e989a",
+          "phash": "0001111100101111011110010111100101111001011110010000110000011100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "danishswedish-farmdog__ebba",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/danishswedish-farmdog__ebba/3.jpg",
+          "sha256": "319aa78170f81cc7dd4ece5d33d2453ba3b1844b9612efa46bd83772b16480f0",
+          "phash": "0000000000000000001001101111111111111111011011111100100111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "danishswedish-farmdog__ebba",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/frise-bichon__jh-ezio/0.jpg",
+          "sha256": "a9acb82d43ba4be8b88ba96030df96540bb3af186cdd99a8606b84f9494d9487",
+          "phash": "0000111111111111111111111111011100000011000000010000000000011001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "frise-bichon__jh-ezio",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/frise-bichon__jh-ezio/1.jpg",
+          "sha256": "270698919c492a2c4e5a42bedffe7b87cd252392f79852a513f513fad06c2d3f",
+          "phash": "0100111111111111001111110011111100111110000101000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "frise-bichon__jh-ezio",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/frise-bichon__jh-ezio/2.jpg",
+          "sha256": "715df52071d86be5d55ab7da8e9ab73b77406077dbf5449891ead2a2f054ea37",
+          "phash": "1111100111111100111111001110111011101111000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "frise-bichon__jh-ezio",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/german-shepherd__storm/0.jpg",
+          "sha256": "dc3d2537eb120f69b39558eb65c1a3eb3271f6f18290f4d23d78bf6f5dc8a691",
+          "phash": "1000111100000000000001110000001100000011001001110111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "german-shepherd__storm",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/german-shepherd__storm/1.jpg",
+          "sha256": "029c5a344f64dfc527114deeecaa3ba335dd098e50fb0e4a0e77bd4e20836b62",
+          "phash": "1111111111111111111001110010011000100011000000010000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "german-shepherd__storm",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/german-shepherd__storm/2.jpg",
+          "sha256": "e56cfb74c1a62f8ffa1b8d8c883ba3b4e15c3313bb0d416d3eb554f8851dcd80",
+          "phash": "1111111111111111011001110100010101000001000000110000001100000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "german-shepherd__storm",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/german-shepherd__storm/3.jpg",
+          "sha256": "d45f50472d3fd93e4b7a8ffa31517c58d7fb973d74365ac8e9432ec3d0b0d9c7",
+          "phash": "1111111111111111111001110110011000000011000000010000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "german-shepherd__storm",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/husky__unibooboo/0.jpg",
+          "sha256": "770ea8972a4704de0b2ac4d87af3698999b239e42d61a1e280e192a8dc3c9999",
+          "phash": "0001011100000111100011111001110110011111000010000011111101111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "husky__unibooboo",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/husky__unibooboo/1.jpg",
+          "sha256": "e7e68ddc5333b663dce9c2db7f69ba4d0474f8f1abd9290cd81f4a6811b53ee3",
+          "phash": "1111111111111111111111111110011100000111000100000010000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "husky__unibooboo",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/labrador__fury/0.jpg",
+          "sha256": "e3269cd34525ae0823f700a54054b53aaba893bdf5c598f2fd7a6787b1b65767",
+          "phash": "1111111111111111110000001100000011000011110001110000111100001111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "labrador__fury",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/labrador__fury/1.jpg",
+          "sha256": "6764cc5e4a83ab5528ece168baa54cf41ad3ff3f542d7ec52e6194bc0d251408",
+          "phash": "0111111111111111111101111111001100000011000000010000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "labrador__fury",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/labrador__toblerone/0.jpg",
+          "sha256": "e166a21b99200925d26da75d972a0d418b9536653539efe19de26dc55e17a319",
+          "phash": "1011111101101111111000111100001100000111000001111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "labrador__toblerone",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/labrador__toblerone/1.jpg",
+          "sha256": "6c95f5c19f701108e5dc29c3b3314a2cad7226d503dd8f9effedd8637eb7f5c5",
+          "phash": "0011011100000011000000110000001110000011100001111000111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "labrador__toblerone",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/labrador__toblerone/2.jpg",
+          "sha256": "58b7a1c7d3285f6c134cfc342452dd39d9b25d0335a874fd5f7da8cc4c7b1950",
+          "phash": "1111000010000000100000011000001110001011100000111001001111011011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "labrador__toblerone",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/labrador__toblerone/3.jpg",
+          "sha256": "022a79b876681267af41ab4bb9f9a19ab9aab2b36a2f2e0c6c89ab64cb6dce45",
+          "phash": "1111100111110001110100110000001100000001110000011100001111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "labrador__toblerone",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__noah/0.jpg",
+          "sha256": "22dd4b3deb8496ae5d89f9d0d41776129e5746735429c9e508f70c0c57393fd6",
+          "phash": "0000000000111100001111000011110000111100000111000000100000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__noah",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__noah/1.jpg",
+          "sha256": "cfbfd22e72c94d6248ca161d0b972dcfe47f237cb0bb9cc8fad0496f4c07e9b4",
+          "phash": "1100000111000111111100011100001100000011000001110011111101111100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__noah",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__noah/2.jpg",
+          "sha256": "4d2287ef6c9aa0dcce6e3b1c8936b5821cf3dd0f2f742108f3366a83cdf3dae4",
+          "phash": "1000000010000000111111001011111111101111111111011011100100000011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__noah",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__milka/0.jpg",
+          "sha256": "7cea0c015f739195e081603a57850e08de1ece093668c22b383ae3a32d67b9dc",
+          "phash": "1111111111111111100000001000000000011000100110000000000010000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__milka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__milka/1.jpg",
+          "sha256": "50eb663fb70439360a10fb3ad32674efc32f21165bbff86ed71a5df2480d0ac9",
+          "phash": "1111011111000011100001101100010011000110000011100000111110011111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__milka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__milka/2.jpg",
+          "sha256": "d043c4af867788b897a7cc62328f577b4d6a994b58e827b97fc7afea827a2789",
+          "phash": "0000011100100011000010010000000011100000111111111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__milka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__milka/3.jpg",
+          "sha256": "6e76e831a06e62312b23da251aba6876c315ffd3a6fdf27d90bbbef634af6de6",
+          "phash": "1111111111110111000001110000000100001111000111110001010000000100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__milka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__milka/4.jpg",
+          "sha256": "59a11fd9d4b9a414f158a175185db7a5ad9322b28809b47c3204d2a530c10399",
+          "phash": "1111111111111111000001110000000001000000011100000110011111001111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__milka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__milka/5.jpg",
+          "sha256": "98de7657079a4c0de1f2eaff8d65429fb0977b6b232d7bb662ded5afbdc3c7bc",
+          "phash": "1111111110000110100011010001000101111001001011110000110000001000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__milka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__milka/6.jpg",
+          "sha256": "5b5ad8e2ddc8936834321f3c49679234ce74fba68eb4fce0339dd17a296aab37",
+          "phash": "1111111111111111111111110000000000000000000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__milka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__xeshabelka/0.jpg",
+          "sha256": "f2bb8e3c5758c93856cf0e7116b12a935461fb25b9f52d91f761b0dc35a3cc85",
+          "phash": "1111111111001110111011011101000011010000000110111111100100101000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__xeshabelka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__xeshabelka/1.jpg",
+          "sha256": "82efe6bb58d769a232558b7ad079bfafb7fc9c785abe9ed5c8a61856b49ec92f",
+          "phash": "0001111100011111000001111110010010010000000110111000010011000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__xeshabelka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__xeshabelka/2.jpg",
+          "sha256": "77ccc9e8b4041220b672688cc0b6f2339455f8061eb2f8aa44127e2e9bf7c497",
+          "phash": "1100000010000000100000011111001111110011011101110011000011110000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__xeshabelka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__xeshabelka/3.jpg",
+          "sha256": "32fb950b4efa1cbdd894797f7f272804f9fd1019096eedb3d77ac9ca233ab7ff",
+          "phash": "1111101010010011100000110000000000011000111110111000011111000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__xeshabelka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__xeshabelka/4.jpg",
+          "sha256": "1b5f6736ac702ad5ee06e1b23fd174ec40a75f3944930aa3dd5cb3bb397f270e",
+          "phash": "1111111111000110110000011111100100111001001100001111000001110010",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__xeshabelka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__xeshabelka/5.jpg",
+          "sha256": "797e9359f8237f3e4a69c8195086e74c7c6b8c54135cce84ab7487e012071498",
+          "phash": "1111001110110111110000111100001100010011000011110000111000001100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__xeshabelka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__xeshabelka/6.jpg",
+          "sha256": "8dbab32dd3a2cabb29234a4366d0c630a9231b3d00821658828186f40e45e797",
+          "phash": "1111110110101111100001011110000000110000000100000010000000100001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__xeshabelka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__xeshabelka/7.jpg",
+          "sha256": "f39f701270458b1a28ddd075a5f54f5a18882a6a9475050f2b4fa2cd82cc2984",
+          "phash": "0001110111000111111001111011000000110011000000100110111000001100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__xeshabelka",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__archie/0.jpg",
+          "sha256": "e0cbdf034e12fe8e9332101d4655c408ca407e407bfd8d95d682464834b970e9",
+          "phash": "1001111111111111111011111110001111000001110000111100011111000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__archie",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__archie/1.jpg",
+          "sha256": "2c3f7328cdccbc1ee540162e542dd3dac3605ea6e6c96c9d33a45d2b0e345075",
+          "phash": "0010000000111111010011110111111001110000010100000101000000010000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__archie",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__linus/0.jpg",
+          "sha256": "1ef5730e48f62245e585aa526ce1deee4455319fb9176bf68a1f7e9bf54b7870",
+          "phash": "1111111011111111000000110000000000000000000111000011110000011100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__linus",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__linus/1.jpg",
+          "sha256": "2e495d4080d6c020ef6e05e995250751b4aa0a817ce4eae669b197100a0baf89",
+          "phash": "1110000011110000111100011111001110000011000000110000111000011111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__linus",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__linus/2.jpg",
+          "sha256": "bdd672ebbbb4b548f04ae13dd9db2afe6495b50f75f361336592e133abf1d88b",
+          "phash": "0011111100111111001111110001110000010100000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__linus",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__linus/3.jpg",
+          "sha256": "e0505bd6a7be0069b67cbdcbf7747020f5dde55074ea545875110d8fe1462d20",
+          "phash": "1100000011000000110110001101100011111010111100001110000011100000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__linus",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__cisco/0.jpg",
+          "sha256": "0bc1ab3059a8302dd57067a3a5ac82195ed20ab6612ae42dd997d10f63b98935",
+          "phash": "1111111111111111011111110000000000000000000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__cisco",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__cisco/1.jpg",
+          "sha256": "066176089ce684caef77d12365e455c6aa7dbdcc0ae553e70c1272313eed21af",
+          "phash": "1111111111100111111001111110011100000111000001110000011100000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__cisco",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__cisco/2.jpg",
+          "sha256": "7ba1bc7c30e37d83187dec15a351ac92eb6df95afa4d669a50ed2b55f62b19aa",
+          "phash": "1101111111111111111111110000111100000000000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__cisco",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__blaze/0.jpg",
+          "sha256": "0346a988f3bb6a06d40a21b4ccf219206c97ac7c7eb2b020bba2af7464a34e21",
+          "phash": "0000000000000000111111111111111111110001111110001111100011111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__blaze",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__blaze/1.jpg",
+          "sha256": "943aefa79a00f53f1fc2cc18b4554dd2257bfe9703f1606a54d244f73e1ad42e",
+          "phash": "0000111100011111001111110011111100111111000011100000110100011000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__blaze",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__blaze/2.jpg",
+          "sha256": "da151b11fbdbc268564c36fabdae9f80023c3ec356d90cdfc10f30612ce6d38f",
+          "phash": "0000011100000111000001110000011100010011000110010011100011110001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__blaze",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__blaze/3.jpg",
+          "sha256": "7f8ca4585e3db81c33c209e16ec0d08cfbe165a8e4b3a2cddefff2b5be0cff86",
+          "phash": "0101100010000000100000001111100011111100011111101111111111111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__blaze",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__blaze/4.jpg",
+          "sha256": "73afdc5f4cff6c520fb85bda816c947b77e640935d0cfdc4201827453a1146ff",
+          "phash": "0000001100000001000000000000111100011111111110111111100111111000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__blaze",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__blaze/5.jpg",
+          "sha256": "bc835acf8eeef093c2a6b19147d112a1259004a5dedcb73dac150ec1bc32e079",
+          "phash": "0000000100011111111111110000111100011111100001110000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__blaze",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__blaze/6.jpg",
+          "sha256": "035dae47f26ef475c3af8b91bb928b41399b03d98cec590c0a43ea434f1af935",
+          "phash": "0000000000111111111111110000011100011111000011110000001100000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__blaze",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__toby/0.jpg",
+          "sha256": "a807f503af041da4d3701cc13eabdc2201aa6591bf14ae7169c850686798af27",
+          "phash": "1110000111100111111001111110011111100011111000111100001111011101",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__toby",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__toby/1.jpg",
+          "sha256": "87f8834e08145f505ce96b4fd2ab882b7d3e237a82e4d56ab5250734b5974d90",
+          "phash": "0000001101110001111100000000100100000001011100111111001111110000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__toby",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__toby/2.jpg",
+          "sha256": "ec1aee986d3781c71f772d7d57e2008bf76aa8a36e770795cf902f37d7c83941",
+          "phash": "1111111111111111111101111110010000000000000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__toby",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__toby/3.jpg",
+          "sha256": "890ea9221c1526789bc840f457c6257792368c325b2a7cd07ad6d7a2f02281a8",
+          "phash": "0001001000111110111100001110000011100000111000001110001111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__toby",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__toby/4.jpg",
+          "sha256": "6713733975fd4d7922b775ee21f63e4dee3963fc917c2dcfc8384c95d4920033",
+          "phash": "0000111100011111111111110011111000011100000110000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__toby",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__annabelle/0.jpg",
+          "sha256": "6cd67f385c26d2e02c425cf8a2fb0d38bc3a04a424eb40b79ea978f68639e8eb",
+          "phash": "1111111111111111100000011000000110000001000001111110010111100011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__annabelle",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__annabelle/1.jpg",
+          "sha256": "d0840fd4810b7fd7a87b6711297f4b184e8f04ad7cfab12863d756c89aaa07f0",
+          "phash": "1111101101000011010000010100000000000000011101001110111111000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__annabelle",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__annabelle/2.jpg",
+          "sha256": "4269628e40009c0ce899364eeb6940c200c4368869145ded56762d8bb87f5fa6",
+          "phash": "1111100011100000111000001110000011110000111100011110001111100111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__annabelle",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__annabelle/3.jpg",
+          "sha256": "c1d52c81935a8c7b388b81cd3f280e8cf2d6757864df7848d5d4e88ca2b41c23",
+          "phash": "1101011111000011110000001110000011100000111000001110000011100000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__annabelle",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__annabelle/4.jpg",
+          "sha256": "6f182f8e3be77296a08ab28d9de6d1f748a5a3e20c970bd73a3ce4e49a40c844",
+          "phash": "1110110010001100100000000100000011101000111111111111100111001100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__annabelle",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__annabelle/5.jpg",
+          "sha256": "d8954cb530a828ec25d0623baf33bb809851bd182ce0818ef3ceb2703519a83d",
+          "phash": "1111111111111111111001111000000011100001011000000111001011001110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__annabelle",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__annabelle/6.jpg",
+          "sha256": "723af51efc0bfd5255d4dbdfccfae1cc523175b7b4ca67a7b09839ec319f15b4",
+          "phash": "1111111111110011000000010000000110000001000000111111001111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__annabelle",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__annabelle/7.jpg",
+          "sha256": "18e7730bc1a1a8a13b349730a436579c4e82ea0cc9d3cb959ea71fc9e49f18c0",
+          "phash": "1111001100000001110000011100000111000000110000001111100011111000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__annabelle",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__puma/0.jpg",
+          "sha256": "29cd70a8edb70d6a32e85c62268d61056950aee8640bdbc0f2005b24b9f7b6a8",
+          "phash": "0000000000000000000000000001001100000001111111111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__puma",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__puma/1.jpg",
+          "sha256": "459d1e82275dbd76c700a6f5dc244ad692c7b978753ef56f92608fdb6492be8a",
+          "phash": "1111111111111000110000011100000111000000100000011111001111110111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__puma",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__squeeze-domastif-chibul/0.jpg",
+          "sha256": "0d76f182b4a10fc6bb738bcfda3cce7f0dcd5d7708f1a8d5345e89bea13ea153",
+          "phash": "1111101101100000000000000000001011100010110000001111011011110111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__squeeze-domastif-chibul",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__squeeze-domastif-chibul/1.jpg",
+          "sha256": "6d9d84043a5b217d1a6e5732d16a6ba93c55cb8865145f2bb22a8aa325ae1d03",
+          "phash": "1111111111110011101100111000011100000111000001110000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__squeeze-domastif-chibul",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__roxy/0.jpg",
+          "sha256": "00a9d7bc78e512d90b368114e987d07259a8fc475e5e53a99f9aeb13d4f7527d",
+          "phash": "0011111000000010000010000001110000011110000111101111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__roxy",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__roxy/1.jpg",
+          "sha256": "1a3b5d7351eec97fe0d3e87bc916fa60c00c182a082d47ee86901dfc4addbc5e",
+          "phash": "1111111111111111000000010100010011111111000111110000001000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__roxy",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__floki-the-chilean-mutt/0.jpg",
+          "sha256": "50d0886035abba3e44ca110fc54e97987bb44b142567eb3a3b57c715292cee71",
+          "phash": "1100111100000011111000011111000110101100100001001100001100000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__floki-the-chilean-mutt",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__floki-the-chilean-mutt/1.jpg",
+          "sha256": "671a4ffac639a60f866005bd7bdc2178c478fdec3c51899514fdbe750a2c8951",
+          "phash": "1111111111101111111011011110100010001100000000000000010000001100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__floki-the-chilean-mutt",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__floki-the-chilean-mutt/2.jpg",
+          "sha256": "35bdf8cd6d93e17a194dc6bce6bf0b15d26309f99973937801485f58d9615a8f",
+          "phash": "1111111101111111011111110111110011100000110000111100111110011111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__floki-the-chilean-mutt",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__floki-the-chilean-mutt/3.jpg",
+          "sha256": "8fcd69681afe645c5506aedc1a0a28944b7d8eaa2a3cb2356ccf5ee77d278a64",
+          "phash": "1111111111111111111111111111001111100001000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__floki-the-chilean-mutt",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__floki-the-chilean-mutt/4.jpg",
+          "sha256": "db4d942dd28d01ba3fe863788468a13a3e427ebb71c83a40a87b17d405a24f28",
+          "phash": "1111111111111111111000111100000011000000100000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__floki-the-chilean-mutt",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__floki-the-chilean-mutt/5.jpg",
+          "sha256": "c571a717eaafc4c26e91a7bf204938d0c2bb0a088d8158d0259507c937916048",
+          "phash": "0111111111111111111111010111100100000001000000000000000000110100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__floki-the-chilean-mutt",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__floki-the-chilean-mutt/6.jpg",
+          "sha256": "fe3ea2af26e28e47cc917fd3b7541c0097da5f663cae819a17e2ec11364f1cc9",
+          "phash": "1111011000100011000011110000011100010111000111110000111100001111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__floki-the-chilean-mutt",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__floki-the-chilean-mutt/7.jpg",
+          "sha256": "c0f31c8b1ddff9909e7af133cd5194e4b66f9c8181efd19b6c37b7c6dae77e01",
+          "phash": "1111111111111110111111100100000011000000000000010000011100000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__floki-the-chilean-mutt",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__jim/0.jpg",
+          "sha256": "b514f9e329b1c978d55da3eef9e4b3e29c6923f33f7ae1788a5a650a96381ec0",
+          "phash": "1111111111111111100000110000001110000011100000011111001111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__jim",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__jim/1.jpg",
+          "sha256": "eadedd5bd024a62af981990b5ba7a09a7a55ed03787304a21fbdd0b74395c2fb",
+          "phash": "1100000011110000111111001110010011100000110000000001000000111100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__jim",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__jim/2.jpg",
+          "sha256": "fc9646d83f0b4d44a3da2e915350521994747e40bc45034fe404071097450b43",
+          "phash": "0000000001100000001110000111110001111100011111000011000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__jim",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__cheyenne/0.jpg",
+          "sha256": "bdc43e7b50959892be879027ed9ed71d89023ed8a00f61a7b86c29d5582d80d3",
+          "phash": "1111111111111001110110000011101000011000000000000001101000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__cheyenne",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__cheyenne/1.jpg",
+          "sha256": "3b0e828168ae4b7e8d41726867511054a17a0baf2681bcd105ec178ee07d591b",
+          "phash": "1001101111111111110011111101110011110000000100001000000010000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__cheyenne",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__leia/0.jpg",
+          "sha256": "d1a6941a66e91daf2d8c50b91c3796c011f27a233da2df35e15835da5d862c10",
+          "phash": "0111111111111111011100110000000100000000000001100011111100111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__leia",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__leia/1.jpg",
+          "sha256": "b082edc143ca18eadf09c9257481b6a78d255415d47f1a4319753d3c72b36de7",
+          "phash": "1111111111111111100001111100001110000001111000111111111101111101",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__leia",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__lea/0.jpg",
+          "sha256": "21c9d4b390a44f3d30035f9f96d0c8985d3ba9713c02a1f36eb6ce587926ed29",
+          "phash": "0000000000110000111110001111100011111000111111001111100011101000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__lea",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/mix__lea/1.jpg",
+          "sha256": "a6d52eff45f9fe1c9656793149336b9c40edc586fe9c53b3a92ed47aaa18a745",
+          "phash": "1111100011111111111000111110001111111111001111000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "mix__lea",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pointer-germanlonghair__hans/0.jpg",
+          "sha256": "934ddc5559c454fb8e6165620edd54f65d2f65e0eeddbdd7ace1a50e59d206a7",
+          "phash": "0011111110111111101101111010000110000000000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pointer-germanlonghair__hans",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pointer-germanlonghair__hans/1.jpg",
+          "sha256": "812bc9b3a9d16d8e7b24500724d132586f8fc660197ff91b443cdddcefd26af6",
+          "phash": "1111011111100011111100111110001110000001100100011001000110000001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pointer-germanlonghair__hans",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pointer-germanlonghair__hans/2.jpg",
+          "sha256": "5cebeac3623483d9e2f7b738aefb4a62e9a5bf309020994af7aaec5f002f67c7",
+          "phash": "1111111111100111110000111100101111000011110000011100000011101000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pointer-germanlonghair__hans",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pointer-germanlonghair__hans/3.jpg",
+          "sha256": "c826fdd84fa04c17167896e99fa6a27277345ebb6e0a3a8a41534f142c8221dc",
+          "phash": "1111111011001100000000110000000000000000000000000011111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pointer-germanlonghair__hans",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pomeranian__pom-sophie/0.jpg",
+          "sha256": "de5a8f182cdf68cce94e7240096b632f62811f103ba0ccf25b3164158fd958d2",
+          "phash": "1111111111010111110001111100001111000011110000111000011100111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pomeranian__pom-sophie",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pomeranian__pom-sophie/1.jpg",
+          "sha256": "c7d481780fc46c56abeb72668092c7952bb97a40f8404c97a90584eb620172cd",
+          "phash": "0000111100000111100000011100000111000001111001111110011111100111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pomeranian__pom-sophie",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pyrenees__oslo/0.jpg",
+          "sha256": "df4070b2f97d842957c2606ac24bce16ad2140e464a067946c578b5ceb85a111",
+          "phash": "0000111100001111000111110000111100011111011111010011110100001101",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pyrenees__oslo",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pyrenees__oslo/1.jpg",
+          "sha256": "6236a0ddd23f800156307a5e82526c8d450af6c67094ac1a7aa444d993b0ef2c",
+          "phash": "0000011100000111011111110011111000111111000101111111111011111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pyrenees__oslo",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pyrenees__sarge/0.jpg",
+          "sha256": "49c6ea22e73510a62ad5d59a5535f04a188ca5c13cf32fda8b2a5c641f3165bf",
+          "phash": "0000111100011111000011110011101100111111001111110000111100001111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pyrenees__sarge",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/pyrenees__sarge/1.jpg",
+          "sha256": "b4ebd66464ee9f762c8a4fa8f80d0b73524ca588539c19c5faf663f00111edc8",
+          "phash": "0010111100101111111111111011111000111110000000000000000011111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "pyrenees__sarge",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/retriever-golden__mori/0.jpg",
+          "sha256": "7bf0fda53725a8fb1f16cc97133eccd390d9fdc169d921d70d1bf3285e20f7b6",
+          "phash": "1111111011000110111001010110010100000000011000001010101101101111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "retriever-golden__mori",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/retriever-golden__mori/1.jpg",
+          "sha256": "dcbdb949892983897e640146ca92dac754eaf53c7b23d16fb7ba71d6eac72c77",
+          "phash": "1100110000111100001101100111001101001111000011110001111100001111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "retriever-golden__mori",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/retriever-golden__mori/2.jpg",
+          "sha256": "4f59c3ab61bf0371bf899c3df74d37a7e98860b4b6431c63ef4adcf4317298e2",
+          "phash": "1111000011111100000111100010110000001100000001000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "retriever-golden__mori",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/retriever-golden__mori/3.jpg",
+          "sha256": "d4001943931b75a65d9218b060fdab0ffc411974c4d777af93ec4a98a76a8436",
+          "phash": "1111011111000100110111101100000011100000111100011111100101111000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "retriever-golden__mori",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/retriever-golden__mori/4.jpg",
+          "sha256": "8c928f4eaca9fa0c2005788740099b4900dbfc3ee083ad81f8724f88f8bd6154",
+          "phash": "0011100000111100011101000111011001111110001111100001111001001000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "retriever-golden__mori",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/ridgeback-rhodesian__boaz/0.jpg",
+          "sha256": "ce1ea793f3d4629abcd838c792f5454d975cb44530ab513cc7c12d7d64e3405a",
+          "phash": "1110010000100111000001111110000111010000111000001111100011110000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "ridgeback-rhodesian__boaz",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/ridgeback-rhodesian__boaz/1.jpg",
+          "sha256": "4daa4448a2cb3e49944eba5dcbf4f7e402f26bb8b55fae70ce9a6be721877a65",
+          "phash": "0000000111000011100000001100000111000001110001111000011111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "ridgeback-rhodesian__boaz",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/ridgeback-rhodesian__boaz/2.jpg",
+          "sha256": "109cfce15adfc29fe5c384b1999d2c0b6aa5c2d321e08142c8fc8245e45e6f0e",
+          "phash": "0110111101100111011001101110011011100100111000001110010011111100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "ridgeback-rhodesian__boaz",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/ridgeback-rhodesian__boaz/3.jpg",
+          "sha256": "0a4a292c6ffb03ab40bfddbd018d2d8df61129a08fc73f3c6e84cf72bacab5db",
+          "phash": "1111111111110111110111111100001111000011001100000101000000110000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "ridgeback-rhodesian__boaz",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/ridgeback-rhodesian__boaz/4.jpg",
+          "sha256": "157b0f3de67195a1d60c311fa980d0b22c79ae17e97ea4ef1d4023cb77b6b096",
+          "phash": "1111000011000000100000000000001010000011110010111011111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "ridgeback-rhodesian__boaz",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/schnauzer-miniature__wilma/0.jpg",
+          "sha256": "14558252c3a431f5e2ab375e37e883074994d555e8dc4cac773b8e5516b4276f",
+          "phash": "1100111100000111110001011100001111100001111100001110000111111001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "schnauzer-miniature__wilma",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/schnauzer-miniature__wilma/1.jpg",
+          "sha256": "ceb379237efda3b3b242142698b1d866bfd3b8e0a404c71b4722ea89874b38b0",
+          "phash": "1000111110001111100011110000000100000001000000111000011111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "schnauzer-miniature__wilma",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/sheepdog-shetland__pippin/0.jpg",
+          "sha256": "8ae5fbdd4afa72abbcada36558ffc41d991888cbfb9f95f6098f6ab332032add",
+          "phash": "0000011100011111000111010001110000011100000111010000011100000110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "sheepdog-shetland__pippin",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/sheepdog-shetland__pippin/1.jpg",
+          "sha256": "83674abe86aae512a572d6bb80aefcb5da3de96d4ef91b8fa1fc92ccfefc08c9",
+          "phash": "1111111111111111000000000010000101101001001100010001001100100001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "sheepdog-shetland__pippin",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shiba__mamehiko/0.jpg",
+          "sha256": "e1590d8777d756058ad9bec1a54b72c292114e15e49f4a1320c70418cce59a29",
+          "phash": "1000000000000000000000000010000001101110111011111110111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shiba__mamehiko",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shiba__mamehiko/1.jpg",
+          "sha256": "3548ab6bb5ca254fa9a3f6d545e3dfe11ac041d5e980b09536d615c8e84a2137",
+          "phash": "0011111100011100001111001110011111100010010001000100010001000100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shiba__mamehiko",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shiba__mamehiko/2.jpg",
+          "sha256": "6845f4717573a29b5402bf7e06742533801b8676c02140936cbecf13c28b393d",
+          "phash": "1111111111001111110000000010000000000000110000001110011111101111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shiba__mamehiko",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shihtzu__zoi/0.jpg",
+          "sha256": "60b5be17e158062f71e0564ba77d9db93beeb69e61d4b951dfb0b2887f89208e",
+          "phash": "1111101000010000000001000001110101111001011100010110011100011110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shihtzu__zoi",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shihtzu__zoi/1.jpg",
+          "sha256": "0e795992f1065addff10c7d5df145e34892083fb69f66b909c5cb4e57ca6b7cc",
+          "phash": "1111111110101111000000010001110100001111000000010000001101111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shihtzu__zoi",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shihtzu__zoi/2.jpg",
+          "sha256": "1911ace3df5d6de4ac5ba2d2258734543eea83518511e126cc9019cbe44dc32b",
+          "phash": "1111111111111111111111111111100111111000111100000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shihtzu__zoi",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shihtzu__zoi/3.jpg",
+          "sha256": "1dffa0e0472b8876a89372093c1b1ca59122aa402fcb8ae2cf2ba01a337eee9d",
+          "phash": "0000000000000000100010001101110011111100111111111111111011111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shihtzu__zoi",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shihtzu__zoi/4.jpg",
+          "sha256": "5aa996180c7422507f9d7f266b157c1b241f1932f859661fd755b603ebe31114",
+          "phash": "0100110100011101011111110000011100000011000001011100001111110011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shihtzu__zoi",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shihtzu__zoi/5.jpg",
+          "sha256": "c28e52d396645a9b7177c40b09b40f657ae233697491e49d83c1e76a51299c08",
+          "phash": "0011111100111111000001110000011100001111001111110000011000000100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shihtzu__zoi",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/shihtzu__zoi/6.jpg",
+          "sha256": "509aa0883f2ad1bdb77284a16cb9cf925bef9a3acd360c4c2c31ffaaf34b689e",
+          "phash": "0000000000100000000000101111111111000000001111111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "shihtzu__zoi",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__bella/0.jpg",
+          "sha256": "27c27394505b2b1e32abfde9f993d07e90573e2c6db66a5654fc4c4787c06a1d",
+          "phash": "0010001100000011110000011110010111000001110000001000001110000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__bella",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__bella/1.jpg",
+          "sha256": "dbc554c60dde63577ef8cbe2206d5d375bbeac6321aaf770db1ae406029ea2fd",
+          "phash": "1111111111000011100000010000100110001001110010111100000110000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__bella",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__bella/2.jpg",
+          "sha256": "25524109e570104460f90e9e70d2ea4060b91bc9bd7df076c6f8b606c10837a8",
+          "phash": "1111111111000000100000011000000111000001100000110010011001100111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__bella",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__bella/3.jpg",
+          "sha256": "abbc47a80aacd6c09439152ec25d1c751446c7b9882b279a89e1f120c16f07ca",
+          "phash": "1111110111000001000000110000100000001000000111110001111100111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__bella",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__bella/4.jpg",
+          "sha256": "aece224972d4a9e4534ec343b4f5a555a5b48b9bc3d636980681b16349a89186",
+          "phash": "0011100110000000100000011010000011100000111000001111100111111001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__bella",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__ekko/0.jpg",
+          "sha256": "df6cf8822a52c3b30e29ffccd56e0beaeb4801b6f242825059de4b996d6fb0fd",
+          "phash": "1111111110011111001001110000001100000000000000110000001100000011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__ekko",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__ekko/1.jpg",
+          "sha256": "315dbf7ba7e5115f38091db0ce4bd99e692602c4c118416999dcc61449810d50",
+          "phash": "0011111100011111000111110000011100000000000000010010000111110011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__ekko",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__ekko/2.jpg",
+          "sha256": "aca4327409df123d57b0d859243e2e21dca782e7ecf4d5782645b889dd8a3830",
+          "phash": "0111111101110111111111000001100000010000000110000001110000111100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__ekko",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__guusje/0.jpg",
+          "sha256": "36c757aa4607523ffee27e5b2fe466d5b53da2d649d3775a1e8d47d833f8efc9",
+          "phash": "1111111111111111111111111111111100010000000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__guusje",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spaniel-cocker__guusje/1.jpg",
+          "sha256": "89113d6eb6986cb4f829747a42ed4f189369f44ec8f940c3be2fc8018967fe1e",
+          "phash": "1000000110001001000111110111110111111101110011001111000011111100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spaniel-cocker__guusje",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spitz-japanese__beet/0.jpg",
+          "sha256": "09aaf354f05f14a461d577105012d04e40b08312e74a41a298792b1df5fc82d3",
+          "phash": "1111111111111011111101111111011111000011100000110000000100000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spitz-japanese__beet",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spitz-japanese__beet/1.jpg",
+          "sha256": "a23e71c77697ec15b6481d67f06cdcd270326153e10d80ade7a5ec19a7e5dcce",
+          "phash": "1111111111111111110111111111111011100110110001100000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spitz-japanese__beet",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spitz-japanese__beet/2.jpg",
+          "sha256": "c663b1282dee4010ca53b91641259aabe47208d635237bb0ac2d3a0e13e02b1f",
+          "phash": "0111111101111111111111111111111101100100010000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spitz-japanese__beet",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spitz-japanese__beet/3.jpg",
+          "sha256": "a2b85d6afb775fa2c136e53bb7aaa237dd6d270d76cf14383e4ef5705c380a0d",
+          "phash": "0000000011111110111011101111000000010000110000011000011111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spitz-japanese__beet",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/spitz-japanese__beet/4.jpg",
+          "sha256": "578e7906ecc71db58a8b858b9b2b8ef0d66f5907cc3ed7ad373f894b09c7276c",
+          "phash": "1111111100000000001111001111110011111100011111000110000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "spitz-japanese__beet",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/terrier-russell__jack-koda/0.jpg",
+          "sha256": "f534f36c61612330fedc9d25464f24a31ee974e2a216170993302042076cdc1f",
+          "phash": "0001101101001011010111100110110001111100010111010100011100000011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "terrier-russell__jack-koda",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/terrier-russell__jack-koda/1.jpg",
+          "sha256": "3a1af6de1df1475d94d59506853361fd9ba3cbce9871fd576f304502afcc19b8",
+          "phash": "1110111111101111011111010011110000110000000110000001000001110110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "terrier-russell__jack-koda",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/terrier-russell__iguet/0.jpg",
+          "sha256": "d01f74bdc5e80ec27378a2691972e0d63afa30f010116910edb18909490b2919",
+          "phash": "0000000000001110100111111111011011110110001001000111000001100000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "terrier-russell__iguet",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/terrier-russell__iguet/1.jpg",
+          "sha256": "82165e1bd0504896344ddebb8e36a69591a3f40e42029fb0573654f65db82f21",
+          "phash": "1111000011010000000101111001010111110011010000110000111000010000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "terrier-russell__iguet",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/terrier-russell__iguet/2.jpg",
+          "sha256": "2ec04100c1a0b5cbc4e5d1a446edce03f98d666188ef1bb7f2e15f29c7cb1bc7",
+          "phash": "0000001100100000001100000001111000011110001110111111000001000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "terrier-russell__iguet",
+          "source": "dogceo_id"
+        },
+        {
+          "path": "data/eval/dogceo/terrier-russell__iguet/3.jpg",
+          "sha256": "968ff4db8053c952ed62701496f4aeffb28a3d5e4bcce4fca7aac9d03c783379",
+          "phash": "0000001100000011011000000011000000111110001111101111101111100010",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "terrier-russell__iguet",
+          "source": "dogceo_id"
+        }
+      ]
+    },
+    "distractors": {
+      "source": "Stanford Dogs images served by dog.ceo (ImageNet synsets)",
+      "license": "ImageNet: non-commercial research and education",
+      "allowed_use": "evaluation only",
+      "n": 104,
+      "files": [
+        {
+          "path": "data/eval/dogceo/_distractors/n02105855_3292.jpg",
+          "sha256": "f10d52e93b358a259b1efba384318089209ac0b62ca027111a53e8550529fc14",
+          "phash": "0000011100000101001000110000001101000011111111111110110000000100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02105855_15724.jpg",
+          "sha256": "ba7e938867b7f70e477d5c45673ee199c22ab82a21fafedf7429214a1183ac12",
+          "phash": "0000000000000000100110111111001111111100111111001100010010000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02105855_10619.jpg",
+          "sha256": "4ceb0238037b25c07f1f411ec6faaf45d32bb52728322734bcd5a737762eee98",
+          "phash": "1111111101111111001111110000111100000111000000011100000111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02105855_11876.jpg",
+          "sha256": "ecda1f18faafbee7829e81cab1e8543ae0618880ae5112594c30ced4f2183acc",
+          "phash": "1111111111100111111000111110000111100000111100001111100011111100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02105855_17258.jpg",
+          "sha256": "afe4e2b13cf4af30eb620e0c4a24398183d5de391ca6a3979626fdac862d0b6e",
+          "phash": "0000000000000000000000000000110011111100100110001111111011111000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02105855_8378.jpg",
+          "sha256": "a919832decb7cec7ff8718011fd9ae17e0d7990651f61fe268b48d00e2ed7e7d",
+          "phash": "1110000011100000111000001110000011110000111111001111110010110000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02105855_15233.jpg",
+          "sha256": "7a32fcecf166d72a4a29eec2bdf74bdf8de87b3c3c9704b7e24ed5b356bb163e",
+          "phash": "0000000000000100000001100000011011000111111011111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02105855_10729.jpg",
+          "sha256": "43d011acfbabdd0bbb6f0c81e8a5be7099d558a8b3b15ac65912a679216a1126",
+          "phash": "0000000000000000000100000011100111111011111111111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02088364_12713.jpg",
+          "sha256": "a97b61623c74377077d72b483929204d6d0d754c3029eca7c34e4ff6021a88d9",
+          "phash": "0011100001111100001100000011000000111110000111100001011001011110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02088364_14055.jpg",
+          "sha256": "66eceef7d0ec60bbff5d990598eef9fd3569ecc2c371e870322b1c5cb1087d56",
+          "phash": "0000000000010010000110100001110000111100000111000001110000000100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02088364_4281.jpg",
+          "sha256": "cc9aabed973bfb690df98ce7c4d1d4694bcc0424c52c836f78acc4facc570ea3",
+          "phash": "0000000000000000110000001100100011111001111111111110111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02088364_11930.jpg",
+          "sha256": "2d0c86fb6433b6714d44013f42d87f045af6bea94444627789374671f3f289b7",
+          "phash": "1111111110001111100001111000011110001111111111111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02088364_12710.jpg",
+          "sha256": "d8985ff1a6d1966d4c64cbdee474946c831ee1a8a23afe67fab39a89eaa65cac",
+          "phash": "1111110000100000000000000011000000011001111110111111111010111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02088364_4823.jpg",
+          "sha256": "c4a5a3f6c31cd5d8841b59120ee3920749fe6dece64cd9c91e5b9bf110d65fc9",
+          "phash": "0000000000000000000011000001110000110000001101011111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02088364_15690.jpg",
+          "sha256": "9eebacea367d2255d372aeae4633756b64651edcc22bf67cbf8763c78b1cbbb2",
+          "phash": "0011111100010010000000110000001100010111110011101111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02088364_2652.jpg",
+          "sha256": "ddb3f55aa2961544df6fd10d7ff94d9da2855169bae5b1eaec53061067604e80",
+          "phash": "1110000011111000110110001101100000011000000110000001110110011111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099601_846.jpg",
+          "sha256": "98f2832ae6603df2755d3fec2f59dfecf179b116e032175b8767ef5c3044fc42",
+          "phash": "0000000000001110011111100111110001111100001101000110000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099601_7123.jpg",
+          "sha256": "240a630ddeb2357414149b9b8dc7cd3e4b0c69e4e2854aa041382b5de5fe7e3e",
+          "phash": "1111111111111000000000000000000100001001101101111111111111111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099601_8429.jpg",
+          "sha256": "8d61bdfc0f58191228fb771188cac9d26eb16bfee5a82e7d568f52afd4318266",
+          "phash": "1111111111111111110000011100101111000011110000111000000110000011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099601_2495.jpg",
+          "sha256": "f749901ca1306df2cec6b8cd43876f6d993a52cd265103c288e5a4bd01aa2073",
+          "phash": "1111110011101011111000110110011100001100100001001111110001111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099601_124.jpg",
+          "sha256": "a60eecb1cf4a73321bc08b9d4a5a73fa7d1afae8410e0fb546e7e9230886d210",
+          "phash": "0000000100000011000000100110111101111111001111010011110010011100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099601_6331.jpg",
+          "sha256": "2243d75d6ab86ff1969a38c5e1bc8be3214ae49c5ac020165b86e81601bc1fe3",
+          "phash": "1111000000111000000110000111110001111100001110000011100000001000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099601_6814.jpg",
+          "sha256": "aade7660b1f1410a2a9a310fdae173db39a7a029f16d5bf1490c6e633cb9f3eb",
+          "phash": "1100001110000011100100011100000111000001111000111110011111101000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099601_2688.jpg",
+          "sha256": "33c2caaf65b553da14ae7ac6e2725fb189fdd61550bb58c7b89d37777f76dcb4",
+          "phash": "0000100000001100001111000111111001111110111111101110011011111100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02112018_12953.jpg",
+          "sha256": "72464983579889038f6f62d62f7e82f6049a293fd5d87fa8343bde7e3a973692",
+          "phash": "0000000000000000000000000011100000111110111111101111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02112018_8351.jpg",
+          "sha256": "39f242243394fef3731deca95f273f1e634c3a6c59d6ae2726a5b9784ee2c1f9",
+          "phash": "0000000000000000000110000011110011111100111111111111111000110100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02112018_4583.jpg",
+          "sha256": "37c653e119c5e976d391c77584753d24c201604637595272114c1a15eb5cc6ad",
+          "phash": "0000111000011010001110000111100001001101011011110111111100111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02112018_1090.jpg",
+          "sha256": "a42934aa91c0bab440839457c06d53221d4fe3b00bcd2cd9e556a8512bc57337",
+          "phash": "1011111110011111100001110000001110000000110000001100000011000011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02112018_7707.jpg",
+          "sha256": "4b8e1db3683e4faadbee8486e5a73c8ced4efa7bbc440ccab79d59cdb55f63dd",
+          "phash": "0000000101111000001111110000010000011000111111001111110111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02112018_3097.jpg",
+          "sha256": "1d24d3e676ccd0554ef6abbeb43f77d99e353b73f4e570be5ac34e26dc8dbca6",
+          "phash": "0111110010001110000000100011001011011010111110100111101001110000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02112018_514.jpg",
+          "sha256": "b131e7eb8e7b312f09ffe518e01330b67d297cdf91f58964d7bcacf6fac16cde",
+          "phash": "1100111011100110111001100111111001111100001110000001000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02112018_2691.jpg",
+          "sha256": "d310cecc166265aa1b64a007d6a8a7a57394fc07b09c25d3d560097fa9995a81",
+          "phash": "0000000000000000111111001111110011111100011111100111110000011000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02111500_5897.jpg",
+          "sha256": "7066ad69c5bd6752f7ef1b3bdf1b68683db3c3cc6b51cfcb1c141ea7f93e4914",
+          "phash": "0110000001111000001111110011111100011111000011110000001100000001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02111500_514.jpg",
+          "sha256": "b4c9c8a535233824111fc58183d639431de45fdfe4dac5d83cf11b4ca04db3ec",
+          "phash": "0000001101100111111101100000011100000000000010001000000011111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02111500_4687.jpg",
+          "sha256": "30a6e7bf11e3fe7a48f78ed8f93699bae2c6c3a7fa85467043d105dd065f9cad",
+          "phash": "1111111111111111000010100001100000001100000111000001000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02111500_109.jpg",
+          "sha256": "d492291e81cef849ca7204f95dcb86fefba42c0f9b847c172c8b49e0767106e5",
+          "phash": "1111100011111100011111000111111000110110000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02111500_6338.jpg",
+          "sha256": "1d4e9c1471fa3df81e565c391a23b6f86cb1eeb85791ca16ba6e0fb9474d5885",
+          "phash": "0000000100000001000111010111110100111100011111000011110000110000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02111500_2018.jpg",
+          "sha256": "7c25688b54d8d886d3f1bce4fe95010258bfd0baf161e47f5f99d21c32a3df23",
+          "phash": "0000000000000100001111100011111000111110000100100000000000001000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02111500_655.jpg",
+          "sha256": "49a3a66ea9b7ad24cb402a990d8a01b737face8470ac3e5963d66a1adb95cedf",
+          "phash": "0000000001111100111111001111110011111000011000000010100000100000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02111500_2272.jpg",
+          "sha256": "3dc084252d35af397edc799e7b647068d74b42c7b51f8d8cecabb2618a37b86c",
+          "phash": "0000000000000000001111101111101111101011111110011111100111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099712_4133.jpg",
+          "sha256": "849bd2ba565aea16991db8b242babe75101aa07540ae16c2ef0bbdedcb2b866f",
+          "phash": "1111111111111111111010101101101001000000001000000000000000000100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099712_3773.jpg",
+          "sha256": "68478e1ae9ba6b519d349902112705165f5851e85239e0c71c37fbd3462cc100",
+          "phash": "1111110011110000111000001100000111000011100001111100111111011111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099712_5599.jpg",
+          "sha256": "8e7e4b9a14b9269e84fe903883152e987068bba6e4c45ff6d5a13d6a1a63e171",
+          "phash": "0000000011110000111101111110011111111111011111110000111100000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099712_7481.jpg",
+          "sha256": "c192690c83ce5c23d08435c4f5cb5d82ba7e6d2847c02ef40cee610acf8e5a18",
+          "phash": "1111111111111111011110010000000100000011000110000001100000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099712_788.jpg",
+          "sha256": "bf751b33d835ead75e306838c726d9d6e779dd3355ebf27a13061148bf53bcb7",
+          "phash": "0011110000011101000111010000110000001100011111001110010011001100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099712_3988.jpg",
+          "sha256": "1befed3ea1df576248792c56d3cb5b1fadf837411e2ad6c3060566b76e4f9273",
+          "phash": "0000111100001111011111010111110001110000111000000000000001111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099712_7533.jpg",
+          "sha256": "385e515f18bdec2dc655f7e488b747d2adb9ccf6e51637fb5a9c0507b9b9c4fb",
+          "phash": "1011100010111000101110001010000010100000100000001100010011111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02099712_2118.jpg",
+          "sha256": "d1ee0180d7f342e27fa0af07711d91eab8a3cff42712c7c21ef7ab3bac789c63",
+          "phash": "1111111011011110100111100100111101000111000001110000011000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106166_4966.jpg",
+          "sha256": "2895a0237038f359ce1afbb21ead883a81345f99bd648810e6ddb0d040219c38",
+          "phash": "0011111100010111000100110000001101000111000101110101111000101110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106166_470.jpg",
+          "sha256": "89475ab35478f8d068b052c56f086816853271e20cc8c3e899187a6e1e3e8036",
+          "phash": "1110011111100001110001011100011100000011000000110000001100001000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106166_7447.jpg",
+          "sha256": "aff69756c393f77fe8b7cdf4060fb5ff0408a0240afb73220515f4ca01999486",
+          "phash": "1100101110011000100110001101000011111010111111101111011011111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106166_549.jpg",
+          "sha256": "49024ad0faf202c925d253927e174de39e8374c99f0a49e512ddffdc60b59aae",
+          "phash": "0000111100000001100100011101000111100001110111111111101111101111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106166_1204.jpg",
+          "sha256": "1196f941c885ccff247667f2f8af976086f7debae419a612c95359e61589ab8c",
+          "phash": "0011111100110011000100001100000011000000110100001101100010101001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106166_1983.jpg",
+          "sha256": "96b8893812dbff3e1238345e95515946cddc4413455081d9a6ca33cb0e05954c",
+          "phash": "0000011100011001000110000001100000011100000111100001111000111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106166_5057.jpg",
+          "sha256": "c94e9eef69afa1ae702b0bdf883f1f376a5b428bd2b237a90a47b394943cbd10",
+          "phash": "1111111111111111111000111100000110001001000010001000100010000010",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106166_3253.jpg",
+          "sha256": "9bfd81a93666141a774728e335c5a94f013d1fb3c147ee4f476dafa49a588558",
+          "phash": "0000000000011100001111000001111000011100100011000111110000111000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02097047_581.jpg",
+          "sha256": "3a8435ec894f612a31603d627a43630c7ff4d816d16f4be7d7d0d2c1c3e3e729",
+          "phash": "0000111100000011000100110111001111100001111110011111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02097047_2871.jpg",
+          "sha256": "6cbf7495c3d6bd8e4e01cbc53876bada5b25a36cac473785ff383894cd14fec3",
+          "phash": "0010100000100000000110000011100000111100011001000110111000001100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02097047_2511.jpg",
+          "sha256": "3f6ec80b9b7b7679b80e1e9f12db2779e5628b49cb60e80ee32a70e6935a4c0c",
+          "phash": "1101001111000011110000111000000110000001100000011110100111111001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02097047_5869.jpg",
+          "sha256": "3fd2d4c3a4407f887bcfcc069ae5429189c1b57017a728d9f9a033adc42eb66d",
+          "phash": "0000000000011000000000000000001011010111111000101100101111101111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02097047_4274.jpg",
+          "sha256": "5a238b455cc9010908ea5437d5283ec6a631587acb222ff38044a8bf28437f8d",
+          "phash": "1101110011011100111000001111000111110100111100001111000011010000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02097047_3074.jpg",
+          "sha256": "6a442f6dd15aeb0d2d998499d9f04ba5417fb1debb265b0721a0ad8428485feb",
+          "phash": "1111000000001111001001110010001111110001111100001111000011111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02097047_1556.jpg",
+          "sha256": "d7a1ff52a72fe0ddbec7d69ae913940dbb168b055817e3c08aa5fc0ec83eee70",
+          "phash": "0011111000011000000010000000110000011100000111000111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02097047_3429.jpg",
+          "sha256": "9bb18737d2d7ea933b21b69462ffb80f87f8bfdc42e28321a2b6d7e18cdb9da3",
+          "phash": "1111111111100111111001111110011111010000110000000100000000001000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02087394_9564.jpg",
+          "sha256": "8956489be0d35d6bad2a6e0a46a2e66151f85ee967e0268a8fe6b4fc924bca3a",
+          "phash": "0110000001100000010000000000000000011111000111110111110101111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02087394_330.jpg",
+          "sha256": "3d6b91e59cbe11d64e5edcd55743fc65f15cb860036aefb7b6246aced1ea6a48",
+          "phash": "1100001011000110100001100100001011110000111100001111100011111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02087394_8742.jpg",
+          "sha256": "5cc793a25495649dea2d2f8ea61ff5e395e40d3a597528ff3aecd8d355d09765",
+          "phash": "0100000001111100011101000111011001100010011110100111000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02087394_7480.jpg",
+          "sha256": "8e1ceadddfc0be155fbe88d0a57943fb69141b21cff56ac1b1858efd2d103874",
+          "phash": "0000000000111000101110001111000011100000110011001110011010111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02087394_3139.jpg",
+          "sha256": "e660072f15c80a807e710935ce6811f21dc4905521b0efb47c77ec079afd8893",
+          "phash": "1100000111110011111011110000101100011011000000110100001111011111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02087394_681.jpg",
+          "sha256": "9cedfa86062983d21abaeae3583fac57c671886bc3e6573750e7dc312a89d2e2",
+          "phash": "0000000000000000000000100000011111001111111111111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02087394_11442.jpg",
+          "sha256": "925921a0a9a45b5c9b3069de1491f5c671b06334224b61126b52825df31e64d5",
+          "phash": "0000000010000000111110011101001111000011111011110011111100000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02087394_10238.jpg",
+          "sha256": "a536c753f9363b2f3aae829bbe8f95ab9f0902d3af5badb7ee4a1e1fab7fb1aa",
+          "phash": "1111111111100111111001111111000110010000000000000000000000000001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02110185_13282.jpg",
+          "sha256": "cc20fd91cd6b8c5f32ddb76d78eb42834ebe860bac96410f009cf331f4fc764a",
+          "phash": "0000011100000001001100000111100001111000111110001111001011111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02110185_632.jpg",
+          "sha256": "6ed23f17aad2281ca4a235cf1e40b7084192503e9f718cbca0cb84c97dd30b80",
+          "phash": "1111111110011111100010111000100011001000110110011111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02110185_10898.jpg",
+          "sha256": "15bf2513e13094bcd855348795d0d7da4348653853894b717786b979f6d7159c",
+          "phash": "0001110111111011011100000110010001000000111111011111111100000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02110185_14283.jpg",
+          "sha256": "accbd950e2e73ad6bb12383bb95dded2b4a7c648d8675a8debcbb1f3b22c1952",
+          "phash": "0011101100010110001111000111110001110011000100010001001100010111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02110185_14650.jpg",
+          "sha256": "f6ec2e11318cbfb20d25ff5f561bae22996cc8a37fe4f558c2ea0c30fe01f512",
+          "phash": "0011000100110110001111111110011101100111010011100000101000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02110185_2701.jpg",
+          "sha256": "435eac424273cbdac638030069162c00724638d7fa1f3451e093932bd509c441",
+          "phash": "1100011110110111011100111100110011001100111110001111100011010001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02110185_1748.jpg",
+          "sha256": "f2295adace32da6dda34f9f4a3721971619ab97d1e2205e3c1c8f27215801d68",
+          "phash": "0000000000000000001100000011000000110111110011111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02110185_13187.jpg",
+          "sha256": "d41fb0676ddf0863b5562782ed3467f424537ac9f0b1bec62ab07dc43a8e115b",
+          "phash": "1111111111111111111001111110011111100000000000000000000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02102318_8961.jpg",
+          "sha256": "79dc35d3d78e532bf1531327587f788429d29c781b0b41e67823dab26161ac1a",
+          "phash": "1111111111110000111100011111000011110000111100001110000010000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02102318_20.jpg",
+          "sha256": "abf22d7a3542415cba17f1cfc298586419cadee26b285b6db43c9d8d0187f818",
+          "phash": "1111100011111000111110001111110011111000110000000000010000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02102318_3700.jpg",
+          "sha256": "8a757735f40c1cfc56a9f776615e711ef57c68c85818719d82c85bd77b8ddafa",
+          "phash": "0011111101111111011001111100011100110011110110110001000000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02102318_5855.jpg",
+          "sha256": "42ce835f7c75c445a34c75ca3a7b6e82c76e0d7fce063898c2c5d0c70beb95c5",
+          "phash": "0001110000111110011111111111111111111111000101000001100000000000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02102318_7190.jpg",
+          "sha256": "34da375ecc964012561763c709bc71098ddb57085a51e3b3be51359df838679a",
+          "phash": "1111111101100011100000011100000101100001111000011000000100100011",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02102318_4130.jpg",
+          "sha256": "9a8cf5a86eebb97817bfc15e1e6ce4bf5088280a5cae617708e42db5ebcc12f2",
+          "phash": "0010010000001111000001110010011110000111100111111111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02102318_11704.jpg",
+          "sha256": "b3c1022f96d03fc1d274f2ae0aa0bb8ed82a21cef0002b1b526480d6ea11927c",
+          "phash": "0111100001111000011111000111011101000111000001110010001100000001",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02102318_9536.jpg",
+          "sha256": "6775338a4c39498d39bfd41bd5a7a3f9e14547760d7b253253f1f485064c5e0a",
+          "phash": "1100000011000000100001111010001110000011100110110011111100111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106662_8870.jpg",
+          "sha256": "919eb2376e6eea5cdd7ecafa9197f1165f1c32ae821377f280d6a5819fdcecb8",
+          "phash": "1111111111101111111000111000001100000011000000111101000101001000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106662_18268.jpg",
+          "sha256": "eb1978358f2b82732d4d407980c1056bdeb5fd9974ace6d91b2ba36e64ad354b",
+          "phash": "1100000110000001100000011000000111000011110000011110000011110000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106662_20036.jpg",
+          "sha256": "2635bf32487b2ad69177e224a043e4345f2b0c6f2893aea7a2115410e76fdd72",
+          "phash": "1011111110110111100001111100001111001000110000001110000011110000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106662_4201.jpg",
+          "sha256": "acb26755f05d8a6d5c279d28cf8623630b61b9208857b45770759686976234eb",
+          "phash": "1111111011111111111100111110001110000011100000001111111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106662_19641.jpg",
+          "sha256": "80e91890385d7d274a5ba29aecddadf5d4a365e2240e9731ea0c47e77eb9c15d",
+          "phash": "0000010000010111111000111000000100000011000010101111111011111110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106662_1094.jpg",
+          "sha256": "8c128ba966c141408b80594652d67263e722bfbd7428d0e756b8be70fd87a99d",
+          "phash": "0001011000110110110001101001101000001111000111100011111000000110",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106662_3815.jpg",
+          "sha256": "9a0346073d921359e1b9d430366f083fc1972525396b633a55ec2cc9c55d9309",
+          "phash": "0000000011011111011111101111110011011100000001010000000000100100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02106662_16342.jpg",
+          "sha256": "63b831849ad4a146148a1692a625a1380d98e101122efb3949af0412697ce59f",
+          "phash": "0000000000000000000001010000011111111111111111111100111101111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02086240_7349.jpg",
+          "sha256": "c9b08faefeaeafd1909de73c4ed7ce15d0e4ab60a595f33a61f37d1466e9f3e2",
+          "phash": "1001011000001110000011100101111100001111000011110000011100000111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02086240_9750.jpg",
+          "sha256": "7a8d156aca3b4f6582db33dbd3ffcf7330eb1cd9f9775f88b17546245e01491e",
+          "phash": "0000000000000000000110000001100000011000001110000011100011111100",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02086240_9429.jpg",
+          "sha256": "3ce334479336208733bc487f126a402e442754ebd3922be8fca829c7cb0a4133",
+          "phash": "0000101100011100000110000011010000111100001111000011000100100111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02086240_5443.jpg",
+          "sha256": "382239064a855f3d27f44b3383fd7322340f8933abda03d06ffe985c14c34e4f",
+          "phash": "0000000000000000000111000111110001111100011111101111111111101111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02086240_8108.jpg",
+          "sha256": "98fcfa3d9f4e4f72cfd262c19fcba07a909b10033cd58fcc0dc7bc02d6b4acd7",
+          "phash": "0000000000000010001000110011001100110111001111110011111100111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02086240_12342.jpg",
+          "sha256": "560d26c7dc17746afafb5f0e0e09ddf5239e86a38185154ff77494419f22e281",
+          "phash": "0000010000011110000111100011111000111100001111000011111101111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02086240_7207.jpg",
+          "sha256": "7a8eb195f248912f35a661601ed0a259bf0ea2f2d6e2b723b7b06e31098aa193",
+          "phash": "0011000111111111001111110001001000010110100001000001000000011000",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        },
+        {
+          "path": "data/eval/dogceo/_distractors/n02086240_6849.jpg",
+          "sha256": "d5ed1ab7eda713e00ec1b3e53440762138213a2a3e496435f0fff87971968da6",
+          "phash": "0111001100010000000000000001111001111100001111000011111111111111",
+          "species": "dog",
+          "breed": "",
+          "pet_id": "",
+          "source": "dogceo_distractor"
+        }
+      ]
+    },
+    "attributes": {
+      "source": "attributes",
+      "license": "unspecified",
+      "allowed_use": "evaluation only",
+      "n": 0,
+      "files": []
+    },
+    "negatives": {
+      "source": "generated in freeze_eval.py (line drawings, not photographs)",
+      "license": "generated for this repo",
+      "allowed_use": "evaluation only",
+      "n": 10,
+      "files": [
+        {
+          "path": "data/eval/negatives/car_0.jpg",
+          "sha256": "ed153a0a126ed12567a19b906528c045de62e8c10cbf74396e585f4da132cd3e",
+          "phash": "1111111111111111111111111000000100111100100000001000000111111111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:car"
+        },
+        {
+          "path": "data/eval/negatives/car_1.jpg",
+          "sha256": "ed153a0a126ed12567a19b906528c045de62e8c10cbf74396e585f4da132cd3e",
+          "phash": "1111111111111111111111111000000100111100100000001000000111111111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:car"
+        },
+        {
+          "path": "data/eval/negatives/person_0.jpg",
+          "sha256": "0bc18fd9cbebc1352747760eebb02e3404c436c73b2ab554649199944b18f68e",
+          "phash": "1111111111100111111001111110011111000011111001111110011111100111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:person"
+        },
+        {
+          "path": "data/eval/negatives/person_1.jpg",
+          "sha256": "0bc18fd9cbebc1352747760eebb02e3404c436c73b2ab554649199944b18f68e",
+          "phash": "1111111111100111111001111110011111000011111001111110011111100111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:person"
+        },
+        {
+          "path": "data/eval/negatives/furniture_0.jpg",
+          "sha256": "10a1dac272946c5fa9f4308684da60f3448c07e9d0651858f36ec4a5f870aadb",
+          "phash": "1111111111111111100000011011110110000001100000011011110111111111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:furniture"
+        },
+        {
+          "path": "data/eval/negatives/furniture_1.jpg",
+          "sha256": "10a1dac272946c5fa9f4308684da60f3448c07e9d0651858f36ec4a5f870aadb",
+          "phash": "1111111111111111100000011011110110000001100000011011110111111111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:furniture"
+        },
+        {
+          "path": "data/eval/negatives/toy_0.jpg",
+          "sha256": "07e997e30f0ac0182fa15a56a7f81ce642e5f70135255503b74ad720292a5bd2",
+          "phash": "1111111111111111111001111100001111000011111001111111111111111111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:toy"
+        },
+        {
+          "path": "data/eval/negatives/toy_1.jpg",
+          "sha256": "07e997e30f0ac0182fa15a56a7f81ce642e5f70135255503b74ad720292a5bd2",
+          "phash": "1111111111111111111001111100001111000011111001111111111111111111",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:toy"
+        },
+        {
+          "path": "data/eval/negatives/drawing_0.jpg",
+          "sha256": "5437ec1c5643d8b3fb384ca607a7a3d04bb71434a19344f3aa2f290c6f4968f2",
+          "phash": "1111111111100111111111111000000110000001110110111100001111000011",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:drawing"
+        },
+        {
+          "path": "data/eval/negatives/drawing_1.jpg",
+          "sha256": "5437ec1c5643d8b3fb384ca607a7a3d04bb71434a19344f3aa2f290c6f4968f2",
+          "phash": "1111111111100111111111111000000110000001110110111100001111000011",
+          "species": "",
+          "breed": "",
+          "pet_id": "",
+          "source": "synthetic_negative:drawing"
+        }
+      ]
+    }
+  }
+}

@@ -200,6 +200,7 @@ export default function VisionLab({ files, profile, busy, onFiles, searched, com
   useEffect(() => setTraceOpen(null), [profile]);
 
   const plan = useMemo(() => (profile ? buildPlan(profile, files.length || 1, searched) : null), [profile, files.length, searched]);
+  const noAnimal = !!profile?.quality.no_animal;
   const streaming = !!plan && !busy;
   const clock = useClock(streaming, profile, plan?.end ?? 0);
   const t = skipped === profile && profile ? MAX_T : clock;

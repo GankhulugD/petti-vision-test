@@ -29,9 +29,13 @@ def main():
                     f"Content-Type: image/jpeg\r\n\r\n").encode() + Path(p).read_bytes() + f"\r\n--{bd}--\r\n".encode()
             req = urllib.request.Request(a.server.rstrip("/") + "/analyze", data=body,
                                          headers={"Content-Type": f"multipart/form-data; boundary={bd}"})
+            import time
+
+            t0 = time.perf_counter()
             d = json.loads(urllib.request.urlopen(req, timeout=60).read())
+            ms = round((time.perf_counter() - t0) * 1000)
             b = d.get("breed") or {}
-            print(json.dumps({"file": Path(p).name, "server": True, "level": b.get("level"),
+            print(json.dumps({"file": Path(p).name, "server": True, "ms": ms, "level": b.get("level"),
                               "top": [(t["key"], round(t["confidence"], 3)) for t in b.get("top", [])[:4]]}, ensure_ascii=False), flush=True)
         return
     from petti_vision import Config, PettiVision

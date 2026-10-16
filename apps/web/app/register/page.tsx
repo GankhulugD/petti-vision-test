@@ -77,8 +77,8 @@ export default function RegisterPage() {
     return (
       <div className="space-y-6">
         <div className="card">
-          <h1 className="text-2xl font-bold">Бүртгэл амжилттай ✓</h1>
-          <p className="mt-1 text-stone-600">
+          <h1 className="text-3xl font-semibold tracking-tight">Бүртгэл амжилттай ✓</h1>
+          <p className="mt-1 text-zinc-600">
             {done.pet.name || "Таны амьтан"} — ангилал: <code>{done.pet.category}</code>
           </p>
           <div className="mt-4 flex gap-2">
@@ -88,7 +88,7 @@ export default function RegisterPage() {
         </div>
         {done.matches && (
           <section>
-            <h2 className="mb-3 text-xl font-bold">Олдсон амьтдын мэдээллээс тохирох магадлалтай</h2>
+            <h2 className="mb-3 text-xl font-semibold">Олдсон амьтдын мэдээллээс тохирох магадлалтай</h2>
             <MatchList results={done.matches} />
           </section>
         )}
@@ -113,7 +113,7 @@ export default function RegisterPage() {
             type="button"
             key={o.key}
             onClick={() => setLabels({ ...labels!, [k]: on ? labels![k].filter((x) => x !== o.key) : [...labels![k], o.key] })}
-            className={`chip cursor-pointer ${on ? "bg-brand-600 text-white" : ""}`}
+            className={`chip cursor-pointer transition ${on ? "border-zinc-900 bg-zinc-900 text-white" : "hover:border-zinc-400"}`}
           >
             {o.mn}
           </button>
@@ -125,8 +125,8 @@ export default function RegisterPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Тэжээвэр амьтан бүртгүүлэх</h1>
-        <p className="mt-1 text-stone-600">
+        <h1 className="text-3xl font-semibold tracking-tight">Тэжээвэр амьтан бүртгүүлэх</h1>
+        <p className="mt-1 text-zinc-600">
           Амьтныхаа {MIN}+ зургийг өөр өөр өнцгөөс оруулна уу. Систем автоматаар ангилж, та зөвшөөрөх/засах боломжтой. Таны баталсан мэдээлэл модел
           цааш сурахад ашиглагдана.
         </p>
@@ -170,7 +170,7 @@ export default function RegisterPage() {
           <button className="btn w-full" disabled={!profile || busy !== ""} onClick={save}>
             {busy === "save" ? "Хадгалж байна…" : "Бүртгэх"}
           </button>
-          {err && <p className="text-sm text-red-700">{err}</p>}
+          {err && <p className="text-sm text-zinc-600">{err}</p>}
         </section>
       </div>
     </div>

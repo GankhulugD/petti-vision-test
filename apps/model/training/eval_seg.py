@@ -48,9 +48,13 @@ def _iou(pred: np.ndarray, tri: np.ndarray) -> float:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--backend", choices=("dino", "yolo"), required=True)
+    ap.add_argument("--backend", choices=("dino", "dino2", "yolo"), required=True)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--set", choices=("oxford", "coco"), default="oxford",
+                    help="coco = COCO val2017 dog/cat photos with real masks (cluttered scenes, eval only)")
     args = ap.parse_args()
+    if args.set == "coco":
+        return coco_eval(args)
 
     import os
 
@@ -109,6 +113,52 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2))
     print(json.dumps(report, indent=2), flush=True)
+
+
+def coco_eval(args):
+    """Union-of-animals mask IoU, recall and box IoU on COCO val2017 dog/cat images."""
+    from petti_vision import Config, PettiVision
+
+    coco = ROOT / "data" / "public" / "coco"
+    meta = json.loads((coco / "coco_pets.json").read_text())["val"]
+    if args.limit:
+        meta = meta[: args.limit]
+    det = PettiVision(Config(detector_backend=args.backend)).detector
+    rows = []
+    for r in meta:
+        img = Image.open(coco / "images" / r["file"]).convert("RGB")
+        gt = np.asarray(Image.open(coco / "masks" / (Path(r["file"]).stem + ".png")))
+        t0 = time.perf_counter()
+        found = det.detect([img])[0]
+        ms = (time.perf_counter() - t0) * 1000
+        pred = np.zeros(gt.shape, bool)
+        for d in found:
+            m = d.mask(img.size)
+            if m is None:  # box-only detector
+                x1, y1, x2, y2 = (int(v) for v in d.box)
+                m = np.zeros(gt.shape, bool)
+                m[y1:y2, x1:x2] = True
+            pred |= m
+        valid = gt != 255
+        g = (gt == 1) & valid
+        inter, union = (pred & g & valid).sum(), ((pred | g) & valid).sum()
+        frac = float(g.mean())
+        rows.append({"hit": bool(found) and inter > 0, "iou": float(inter / union) if union else 0.0, "small": frac < 0.05, "ms": ms, "n_pred": len(found)})
+    small = [r for r in rows if r["small"]]
+    ms = sorted(r["ms"] for r in rows)
+    rep = {
+        "set": "coco_val2017", "backend": args.backend, "n": len(rows),
+        "recall": round(float(np.mean([r["hit"] for r in rows])), 3),
+        "mask_iou": round(float(np.mean([r["iou"] for r in rows])), 3),
+        "iou>=0.5": round(float(np.mean([r["iou"] >= 0.5 for r in rows])), 3),
+        "small_n": len(small),
+        "small_recall": round(float(np.mean([r["hit"] for r in small])), 3) if small else None,
+        "small_iou": round(float(np.mean([r["iou"] for r in small])), 3) if small else None,
+        "latency_p50_ms": round(ms[len(ms) // 2], 1),
+    }
+    out = ROOT / "artifacts" / "reports" / f"seg_coco_{args.backend}.json"
+    out.write_text(json.dumps(rep, indent=2))
+    print(json.dumps(rep, indent=2), flush=True)
 
 
 if __name__ == "__main__":

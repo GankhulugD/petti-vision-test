@@ -34,7 +34,7 @@ MAX_BYTES = 15 * 1024 * 1024
 
 cfg = Config()
 state: dict = {}
-MODEL_VERSION = "0.4.0"  # bump when inference behaviour changes
+MODEL_VERSION = "0.5.0"  # bump when inference behaviour changes
 
 
 def _code_hash() -> str:
@@ -90,9 +90,9 @@ def _read(files: list[UploadFile]) -> list[bytes]:
     return out
 
 
-def _analyze(raw: list[bytes]):
+def _analyze(raw: list[bytes], explain: bool = False):
     try:
-        return state["vision"].analyze(raw)
+        return state["vision"].analyze(raw, explain=explain)
     except Exception as exc:  # unreadable image etc.
         log.exception("analyze failed")
         raise HTTPException(422, f"Зургийг уншиж чадсангүй: {exc}") from exc
@@ -106,7 +106,7 @@ def health():
     return {
         "status": "ok",
         "models": {
-            "detector": cfg.detector_weights,
+            "detector": getattr(v.detector, "name", cfg.detector_weights),
             "reid": cfg.reid_model,
             "vlm": cfg.vlm_model,
             "trained_heads": {k: t.get("val_acc") for k, t in heads.tasks.items()} if heads else None,
@@ -141,7 +141,53 @@ def taxonomy():
 @app.post("/analyze")
 def analyze(images: list[UploadFile] = File(...)):
     """1..N photos of one animal → full profile (species, breed, size, age, colours, marks, text)."""
-    return _analyze(_read(images)).to_json()
+    return _analyze(_read(images), explain=True).to_json()
+
+
+@app.post("/feedback")
+def feedback(
+    images: list[UploadFile] = File(...),
+    corrections: str = Form(...),  # JSON: {"species": "dog", "breed": "cocker_spaniel", "marks": [...], "wrong": ["marks"]}
+    consent: bool = Form(False),
+):
+    """A user says the answer was wrong. Corrections are always logged (no photo);
+    the photos are kept for training ONLY with explicit consent."""
+    import hashlib
+
+    try:
+        corr = json.loads(corrections)
+        assert isinstance(corr, dict)
+    except Exception as exc:
+        raise HTTPException(400, f"corrections must be a JSON object: {exc}") from exc
+    allowed = {"species", "breed", "size", "age", "colors", "pattern", "coat", "marks", "wrong", "note"}
+    corr = {k: v for k, v in corr.items() if k in allowed}
+    raw = _read(images)
+    fb = cfg.data_dir / "feedback"
+    (fb / "images").mkdir(parents=True, exist_ok=True)
+    hashes = []
+    for b in raw:
+        h = hashlib.sha1(b).hexdigest()
+        hashes.append(h)
+        if consent:
+            (fb / "images" / f"{h}.jpg").write_bytes(b)
+    rec = {"t": time.time(), "consent": bool(consent), "images": hashes, "corrections": corr,
+           "model_version": MODEL_VERSION}
+    with open(fb / "feedback.jsonl", "a") as f:
+        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    return {"ok": True, "stored_photos": bool(consent)}
+
+
+@app.delete("/feedback/{sha1}")
+def feedback_delete(sha1: str):
+    """Right to be forgotten: remove a consented photo from the training pool."""
+    import re
+
+    if not re.fullmatch(r"[0-9a-f]{40}", sha1):
+        raise HTTPException(400, "bad id")
+    p = cfg.data_dir / "feedback" / "images" / f"{sha1}.jpg"
+    existed = p.exists()
+    p.unlink(missing_ok=True)
+    return {"deleted": existed}
 
 
 @app.post("/pets")
@@ -253,7 +299,7 @@ def search(
     owners), "found" (owner searching reports) or "lost,home" (whole registry).
     """
     t0 = time.perf_counter()
-    profile = _analyze(_read(images))
+    profile = _analyze(_read(images), explain=True)
     reg: Registry = state["registry"]
     pools = [s.strip() for s in statuses.split(",") if s.strip() in STATUSES]
     cands = [p for s in pools for p in reg.list(status=s)]
@@ -271,6 +317,7 @@ def search(
 # the result. Enabled with PETTI_DEV=1, accepted only from localhost.
 # --------------------------------------------------------------------------- #
 if DEV:
+    import re
     import subprocess
     import sys
     import uuid
@@ -294,8 +341,9 @@ if DEV:
     @app.post("/dev/jobs")
     def dev_start(body: JobIn, request: Request):
         _local(request)
-        if body.script not in SCRIPTS:
-            raise HTTPException(400, f"script must be one of {sorted(SCRIPTS)}")
+        here_t = os.path.join(os.path.dirname(os.path.abspath(__file__)), "training")
+        if not re.fullmatch(r"[a-z0-9_]+", body.script) or not os.path.exists(os.path.join(here_t, f"{body.script}.py")):
+            raise HTTPException(400, f"unknown training script: {body.script}")
         JOB_DIR.mkdir(parents=True, exist_ok=True)
         jid = uuid.uuid4().hex[:8]
         log_path = JOB_DIR / f"{jid}.log"
@@ -343,11 +391,28 @@ if DEV:
         except (OSError, ValueError) as exc:
             raise HTTPException(404, f"not running: {exc}") from exc
 
+    class ReloadIn(BaseModel):
+        overrides: dict[str, str] = {}  # Config field → value, e.g. {"detector_backend": "yolo"}
+
     @app.post("/dev/reload")
-    def dev_reload(request: Request):
-        """Reload heads / calibration / re-ID projection without restarting."""
+    def dev_reload(request: Request, body: ReloadIn | None = None):
+        """Reload heads / calibration / re-ID projection without restarting.
+        Optional Config overrides let A/B runs switch e.g. the detector."""
         _local(request)
-        v = PettiVision(cfg)
+        import dataclasses
+
+        c = cfg
+        if body and body.overrides:
+            fields = {f.name: f.type for f in dataclasses.fields(Config)}
+            bad = [k for k in body.overrides if k not in fields]
+            if bad:
+                raise HTTPException(400, f"unknown config fields: {bad}")
+            cast = {}
+            for k, v in body.overrides.items():
+                cur = getattr(cfg, k)
+                cast[k] = type(cur)(v) if not isinstance(cur, bool) else v in ("1", "true", "True")
+            c = dataclasses.replace(cfg, **cast)
+        v = PettiVision(c)
         state["vision"] = v
         state["matcher"] = Matcher(cfg)
         return health()

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ImagePicker from "@/components/ImagePicker";
 import MatchList from "@/components/MatchList";
-import ProfileView from "@/components/ProfileView";
+import VisionLab from "@/components/VisionLab";
 import { api, type MatchResult, type Profile } from "@/lib/api";
 
 const POOLS = [
@@ -14,6 +14,7 @@ const POOLS = [
 
 export default function SearchPage() {
   const [files, setFiles] = useState<File[]>([]);
+  const [ranFiles, setRanFiles] = useState<File[]>([]);
   const [pool, setPool] = useState("lost");
   const [res, setRes] = useState<{ query: Profile; searched: number; results: MatchResult[] } | null>(null);
   const [busy, setBusy] = useState(false);
@@ -25,6 +26,8 @@ export default function SearchPage() {
     setBusy(true);
     setErr("");
     setReported(false);
+    setRanFiles(files);
+    setRes(null);
     try {
       setRes(await api.search(files, pool, 10));
     } catch (e) {
@@ -47,12 +50,15 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Зургаар хайх</h1>
-        <p className="mt-1 text-stone-600">Гудамжинд таарсан амьтны зургийг дарж оруулбал алга болсон бүртгэлүүдээс хамгийн төстэйг нь эрэмбэлж гаргана.</p>
-      </div>
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
+    <div className="space-y-10">
+      <header className="max-w-2xl">
+        <p className="eyebrow">Lost &amp; Found</p>
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Зургаар хайх</h1>
+        <p className="mt-3 text-[15px] leading-7 text-zinc-500">
+          Таарсан амьтны зургийг оруулбал бүртгэлтэй амьтдаас хамгийн төстэйг нь төрх болон шинжээр нь эрэмбэлж гаргана.
+        </p>
+      </header>
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-12">
         <section className="space-y-4">
           <div className="card space-y-4">
             <ImagePicker files={files} onChange={setFiles} max={6} />
@@ -64,21 +70,13 @@ export default function SearchPage() {
             <button className="btn w-full" disabled={!files.length || busy} onClick={run}>
               {busy ? "Хайж байна…" : "Хайх"}
             </button>
-            {err && <p className="text-sm text-red-700">{err}</p>}
+            {err && <p className="text-sm text-zinc-600">{err}</p>}
           </div>
-          {res && (
-            <div className="card">
-              <h2 className="mb-2 font-semibold">Таны зургийн шинжилгээ</h2>
-              <ProfileView p={res.query} compact />
-              <p className="mt-3 text-xs text-stone-500">
-                {res.searched} бүртгэлээс хайв · {res.query.timing_ms?.total} ms
-              </p>
-            </div>
-          )}
+          {(busy || res) && <VisionLab files={ranFiles} profile={res?.query ?? null} busy={busy && !res} searched={res?.searched} compact />}
           {res && pool === "lost" && (
             <div className="card space-y-3">
-              <h2 className="font-semibold">Эзэн нь олдохгүй байна уу?</h2>
-              <p className="text-sm text-stone-600">«Олдсон» гэж мэдэгдвэл шинээр алга болсон гэж бүртгэгдэх амьтадтай автоматаар тулгагдана.</p>
+              <h2 className="text-sm font-semibold">Эзэн нь олдохгүй байна уу?</h2>
+              <p className="text-sm text-zinc-500">«Олдсон» гэж мэдэгдвэл шинээр алга болсон гэж бүртгэгдэх амьтадтай автоматаар тулгагдана.</p>
               <input className="input" placeholder="Таны утас" value={report.contact} onChange={(e) => setReport({ ...report, contact: e.target.value })} />
               <input className="input" placeholder="Хаана олсон бэ?" value={report.location} onChange={(e) => setReport({ ...report, location: e.target.value })} />
               <button className="btn-ghost w-full" disabled={busy || reported} onClick={reportFound}>
@@ -90,11 +88,16 @@ export default function SearchPage() {
         <section>
           {res ? (
             <>
-              <h2 className="mb-3 text-xl font-bold">Боломжит амьтад</h2>
+              <div className="mb-4 flex items-baseline justify-between">
+                <h2 className="text-lg font-semibold tracking-tight">Боломжит амьтад</h2>
+                <span className="eyebrow">{res.searched} бүртгэлээс</span>
+              </div>
               <MatchList results={res.results} />
             </>
           ) : (
-            <div className="card text-stone-500">Хайлтын үр дүн энд гарна.</div>
+            <div className="grid min-h-48 place-items-center rounded-2xl border border-dashed border-zinc-200 text-sm text-zinc-400">
+              {busy ? <span className="shimmer font-medium">Бүртгэлүүдтэй тулгаж байна</span> : "Хайлтын үр дүн энд гарна"}
+            </div>
           )}
         </section>
       </div>

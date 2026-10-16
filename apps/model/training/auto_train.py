@@ -89,11 +89,15 @@ def build_rows(datasets: list[str], max_per_class: int, max_unmapped: int, seed:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--datasets", default="oxford,dogceo", help="oxford, dogceo (fast Stanford Dogs mirror), stanford (750 MB tar)")
+    ap.add_argument("--datasets", default="oxford",
+                    help="oxford (CC BY-SA, default: shippable); dogceo / stanford are ImageNet photos → non-commercial, experiments only")
     ap.add_argument("--max-per-class", type=int, default=150)
     ap.add_argument("--max-unmapped", type=int, default=600)
     ap.add_argument("--epochs", type=int, default=60)
     ap.add_argument("--skip-download", action="store_true")
+    ap.add_argument("--tag", default="", help="save as artifacts/heads_<tag>.npz/json and keep the served heads untouched")
+    ap.add_argument("--extra", type=Path, action="append", default=[],
+                    help="extra manifest CSV(s), e.g. data/manifests/feedback.csv (owner/user-confirmed labels)")
     ap.add_argument("--exclude", type=Path, default=ROOT / "data" / "eval" / "bench_exclude.txt",
                     help="file names (one per line) that must never be trained on")
     a = ap.parse_args()
@@ -103,23 +107,44 @@ def main():
         P._download = lambda url, dest: None
     exclude = set(a.exclude.read_text().split()) if a.exclude and a.exclude.exists() else None
     rows = build_rows(a.datasets.split(","), a.max_per_class, a.max_unmapped, exclude=exclude)
+    if a.extra:
+        from common import read_manifest
+
+        extra = [r for r in read_manifest(a.extra) if Path(r["path"]).exists() and (r["species"] or r["breed"])]
+        if exclude:
+            extra = [r for r in extra if Path(r["path"]).name not in exclude]
+        print(f"[data] +{len(extra)} rows from {', '.join(map(str, a.extra))}", flush=True)
+        rows += extra
     manifest = ROOT / "data" / "manifests" / "public_auto.csv"
     write_manifest(manifest, rows)
 
+    import shutil
+
     import train_heads
 
+    art = Path(train_heads.ART)
+    backup = {}
+    if a.tag:
+        for f in ("heads.npz", "heads.json"):
+            if (art / f).exists():
+                backup[f] = (art / f).read_bytes()
     sys.argv = ["train_heads.py", "--manifest", str(manifest), "--epochs", str(a.epochs), "--tasks", "species,breed"]
     train_heads.main()
 
-    art = Path(train_heads.ART)
     meta = json.loads((art / "heads.json").read_text())["tasks"]
+    if a.tag:
+        for f in ("heads.npz", "heads.json"):
+            shutil.copy2(art / f, art / f.replace("heads", f"heads_{a.tag}"))
+            if f in backup:
+                (art / f).write_bytes(backup[f])
+        print(f"[tag] saved heads_{a.tag}.npz/json; served heads restored", flush=True)
     report = {
         "images": len(rows),
         "minutes": round((time.time() - t0) / 60, 1),
         "tasks": {t: {k: m.get(k) for k in ("n_train", "n_val", "zs_val_acc", "val_acc", "fused_val_acc", "alpha", "temperature")}
                   for t, m in meta.items()},
     }
-    (art / "auto_train_report.json").write_text(json.dumps(report, indent=2))
+    (art / (f"auto_train_report_{a.tag}.json" if a.tag else "auto_train_report.json")).write_text(json.dumps(report, indent=2))
     print("\n=== REPORT ===", flush=True)
     for t, m in report["tasks"].items():
         print(f"{t:8s} zero-shot={m['zs_val_acc']}  head={m['val_acc']}  fused={m['fused_val_acc']}  (train {m['n_train']}, val {m['n_val']})", flush=True)

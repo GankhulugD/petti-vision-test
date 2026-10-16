@@ -1,0 +1,24 @@
+{
+  "images": 3068,
+  "minutes": 4.3,
+  "tasks": {
+    "species": {
+      "n_train": 2618,
+      "n_val": 450,
+      "zs_val_acc": 0.9978,
+      "val_acc": 1.0,
+      "fused_val_acc": 1.0,
+      "alpha": 0.1,
+      "temperature": 1.0
+    },
+    "breed": {
+      "n_train": 2101,
+      "n_val": 367,
+      "zs_val_acc": 0.861,
+      "val_acc": 0.9728,
+      "fused_val_acc": 0.9728,
+      "alpha": 0.4,
+      "temperature": 1.0
+    }
+  }
+}

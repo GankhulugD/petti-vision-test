@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS photos (
     reid BLOB NOT NULL,
     vlm BLOB NOT NULL
 );
+CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT);
 CREATE INDEX IF NOT EXISTS idx_photos_pet ON photos(pet_id);
 """
 
@@ -172,9 +173,14 @@ class Registry:
 
         dims = vision.enc.encode_images([Image.new("RGB", (64, 64))], tta=False)
         rd, vd = dims["reid"].shape[1], dims["vlm"].shape[1]
+        # crops (detector), backbone or pooling changed → every stored vector is stale
+        sig = getattr(vision, "embedding_signature", "")
+        with self.lock:
+            row = self.db.execute("SELECT value FROM meta WHERE key='embedding_signature'").fetchone()
+        force = bool(sig) and (row is None or row[0] != sig)
         n = 0
         for pet in list(self.pets.values()):
-            if pet.reid.shape[-1] == rd and pet.vlm.shape[-1] == vd:
+            if not force and pet.reid.shape[-1] == rd and pet.vlm.shape[-1] == vd:
                 continue
             paths = [self.images_dir / p for p in pet.photo_paths]
             if not paths or not all(p.exists() for p in paths):
@@ -188,6 +194,10 @@ class Registry:
                 self.db.commit()
                 pet.reid, pet.vlm = prof.reid.astype(np.float32), prof.vlm.astype(np.float32)
             n += 1
+        if sig:
+            with self.lock:
+                self.db.execute("INSERT OR REPLACE INTO meta(key, value) VALUES ('embedding_signature', ?)", (sig,))
+                self.db.commit()
         return n
 
     def delete(self, pid: str):

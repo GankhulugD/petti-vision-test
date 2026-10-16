@@ -3,7 +3,6 @@
 torch
 torchvision
 transformers>=4.56
-ultralytics>=8.4.0
 numpy>=1.26
 pillow>=10.4
 pillow-heif>=0.18

@@ -133,14 +133,27 @@ class PettiVision:
         # zero-shot breed softmax is over-confident; T fitted on a labelled set
         # (training/calibrate.py writes artifacts/calibration.json)
         self.breed_temperature = 1.5
+        self.breed_display_T, self.breed_levels, self.breed_unsure = 1.0, (0.6, 0.35), 0.3
         self._gate_pos = None
         self._gate_neg = None
         cal = self.cfg.artifacts_dir / "calibration.json"
         if cal.exists():
             import json
 
-            self.breed_temperature = float(json.loads(cal.read_text()).get("breed_temperature", 1.5))
+            c = json.loads(cal.read_text())
+            self.breed_temperature = float(c.get("breed_temperature", 1.5))
+            # display calibration fitted on held-out labelled photos (training/fit_breed_calibration.py)
+            self.breed_display_T = float(c.get("breed_display_temperature", 1.0))
+            self.breed_levels = tuple(c.get("breed_levels", (0.6, 0.35)))
+            self.breed_unsure = float(c.get("breed_unsure", 0.3))
         self._breeds = {sp: T.breeds_for(sp) for sp in ("dog", "cat")}
+        # per-mark thresholds measured on ordinary photos (training/calibrate_marks.py)
+        self.mark_thresholds: dict[str, float] = {}
+        mc = self.cfg.artifacts_dir / "marks_calibration.json"
+        if mc.exists():
+            import json
+
+            self.mark_thresholds = {k: float(v["threshold"]) for k, v in json.loads(mc.read_text()).items()}
 
     # ------------------------------------------------------------------ #
     def warmup(self):
@@ -379,6 +392,18 @@ class PettiVision:
         if decide_no_animal(fg, animal, other, det is not None):
             apply_no_animal(data)
 
+    @property
+    def embedding_signature(self) -> str:
+        """Everything that changes stored identity/appearance vectors (not the runtime:
+        ONNX and PyTorch produce the same numbers)."""
+        det = getattr(self.detector, "name", "")
+        head = ""
+        if det == "dinov2-small-seg2" and self.cfg.seg_head2_path.exists():
+            import hashlib
+
+            head = hashlib.md5(self.cfg.seg_head2_path.read_bytes()).hexdigest()[:8]
+        return f"{det}:{head}|{self.cfg.reid_model}|{self.cfg.reid_pool}|{self.cfg.vlm_model}|tta={int(self.cfg.tta)}|proj={int(self.cfg.reid_proj_path.exists())}"
+
     # ------------------------------------------------------------------ #
     def _explain(self, imgs, dets, chosen, emb, photos, data) -> dict:
         """What the UI needs to show *how* the result was reached, for the most
@@ -481,6 +506,9 @@ class PettiVision:
             if sel:
                 breed_p = _norm(np.average(np.stack([s[0] for s in sel]), axis=0, weights=[s[1] for s in sel]))
         if breed_p is not None:
+            if self.breed_display_T != 1.0:
+                lg = np.log(np.clip(breed_p, 1e-9, 1)) / self.breed_display_T
+                breed_p = _norm(np.exp(lg - lg.max()))
             breeds = T.breeds_for(species)
             order = np.argsort(-breed_p)[:5]
             top = [_label_dict(breeds[i], breed_p[i]) for i in order]
@@ -488,12 +516,19 @@ class PettiVision:
             first_is_mixed = breeds[order[0]].key in T.MIXED_KEYS
             # thresholds from the calibration set (T=1.5): top-1 ≥0.6 → ~93% correct,
             # 0.35-0.6 → top-1 71% / top-3 92% (show alternatives), <0.35 → unsure
-            mixed = bool(first_is_mixed or p1 < 0.6 or (p1 - p2) < 0.15)
-            looks_like = [t for t in top if t["key"] not in ("mixed_dog",) and t["confidence"] >= 0.05][:3 if mixed else 1] or top[:1]
+            # < 0.3: the photo does not show enough (back view, far away) — say "unsure"
+            # instead of calling the dog a mix; 0.3–0.6 or a close second: resembles A/B/C
+            hi, mid = self.breed_levels
+            uncertain = bool(p1 < self.breed_unsure and not first_is_mixed)
+            # "mixed" only when the model says so or two breeds are nearly tied —
+            # a medium-confidence single breed is shown as "probably X", not as a mix
+            mixed = bool(not uncertain and (first_is_mixed or ((p1 - p2) < 0.15 and p2 >= 0.2)))
+            looks_like = [t for t in top if t["key"] not in ("mixed_dog",) and t["confidence"] >= 0.05][:3 if (mixed or uncertain or p1 < hi) else 1] or top[:1]
             data["breed"] = {
                 "top": top,
                 "is_mixed": mixed,
-                "level": confidence_level(p1, (0.6, 0.35)),
+                "uncertain": uncertain,
+                "level": confidence_level(p1, self.breed_levels),
                 "looks_like": looks_like,
                 "probs": {b.key: round(float(p), 4) for b, p in zip(breeds, breed_p)},
             }
@@ -523,8 +558,13 @@ class PettiVision:
             # max-pooling across views matters: a scar is visible from one side only
             mean = sum(v * wi for v, wi in vals) / sum(wi for _, wi in vals)
             mark_p[k] = 0.5 * mean + 0.5 * max(v for v, _ in vals)
+            if k in OCCLUSION_MARKS:
+                # "three legs" / "one eye" fire whenever a leg or an eye is simply hidden
+                # (back view, lying down). Assert them only when ≥2 photos agree.
+                vs = sorted((v for v, _ in vals), reverse=True)
+                mark_p[k] = vs[1] if len(vs) >= 2 else min(vs[0], 0.5)
         data["marks"] = sorted(
-            [_label_dict(T.MARK_BY_KEY[k], v) for k, v in mark_p.items() if v >= T.MARK_BY_KEY[k].threshold],
+            [_label_dict(T.MARK_BY_KEY[k], v) for k, v in mark_p.items() if v >= self.mark_thresholds.get(k, T.MARK_BY_KEY[k].threshold)],
             key=lambda d: -d["confidence"],
         )[:4]  # never flood the UI: the 4 most certain marks
         data["mark_probs"] = {k: round(float(v), 4) for k, v in mark_p.items()}
@@ -547,6 +587,9 @@ class PettiVision:
 
 
 # --------------------------------------------------------------------------- #
+OCCLUSION_MARKS = {"three_legs", "one_eye"}
+
+
 def describe(d: dict) -> tuple[str, str]:
     mn, en = [], []
     mn.append(f"Төрөл: {d['species']['mn']} ({d['species']['confidence']:.0%})")
@@ -555,9 +598,16 @@ def describe(d: dict) -> tuple[str, str]:
     if b:
         ll = ", ".join(f"{x['mn']} {x['confidence']:.0%}" for x in b["looks_like"])
         lle = ", ".join(f"{x['en']} {x['confidence']:.0%}" for x in b["looks_like"])
-        if b["is_mixed"]:
+        if b.get("uncertain"):
+            mn.append(f"Үүлдэр: энэ зургаар тодорхойгүй (хамгийн төстэй нь {ll}) — нүүр нь харагдах зураг нэмнэ үү")
+            en.append(f"Breed: unclear from this photo (closest: {lle}) — add a photo showing the face")
+        elif b["is_mixed"]:
             mn.append(f"Үүлдэр: эрлийз байж магадгүй — {ll}-тэй төстэй")
             en.append(f"Breed: likely mixed — resembles {lle}")
+        elif b.get("level") == "medium" and len(b["looks_like"]) > 1:
+            first, rest = b["looks_like"][0], b["looks_like"][1:]
+            mn.append(f"Үүлдэр: {first['mn']} байх магадлалтай ({first['confidence']:.0%}); бусад: " + ", ".join(f"{x['mn']} {x['confidence']:.0%}" for x in rest))
+            en.append(f"Breed: probably {first['en']} ({first['confidence']:.0%}); also: " + ", ".join(f"{x['en']} {x['confidence']:.0%}" for x in rest))
         else:
             mn.append(f"Үүлдэр: {ll}")
             en.append(f"Breed: {lle}")

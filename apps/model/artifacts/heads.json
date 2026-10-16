@@ -12,17 +12,17 @@
         "other"
       ],
       "multi_label": false,
-      "val_acc": 0.9983,
+      "val_acc": 1.0,
       "seen": [
         "dog",
         "cat"
       ],
-      "n_train": 6472,
-      "n_val": 1174,
-      "alpha": 0.4,
+      "n_train": 2618,
+      "n_val": 450,
+      "alpha": 0.1,
       "temperature": 1.0,
-      "zs_val_acc": 0.9923,
-      "fused_val_acc": 0.9983
+      "zs_val_acc": 0.9978,
+      "fused_val_acc": 1.0
     },
     "breed": {
       "labels": [
@@ -100,45 +100,20 @@
         "egyptian_mau"
       ],
       "multi_label": false,
-      "val_acc": 0.9622,
+      "val_acc": 0.9728,
       "seen": [
-        "tibetan_mastiff",
-        "german_shepherd",
-        "belgian_malinois",
-        "siberian_husky",
-        "alaskan_malamute",
         "samoyed",
-        "golden_retriever",
-        "labrador_retriever",
-        "rottweiler",
-        "doberman",
         "boxer",
-        "great_dane",
         "saint_bernard",
-        "bernese_mountain",
         "shiba_inu",
-        "chow_chow",
-        "border_collie",
-        "shetland_sheepdog",
-        "welsh_corgi",
         "beagle",
         "cocker_spaniel",
         "pit_bull",
-        "french_bulldog",
         "pug",
-        "miniature_schnauzer",
         "pomeranian",
-        "spitz",
-        "toy_poodle",
-        "maltese",
-        "shih_tzu",
-        "pekingese",
         "yorkshire_terrier",
         "chihuahua",
         "miniature_pinscher",
-        "papillon",
-        "cavalier_king_charles",
-        "weimaraner",
         "british_shorthair",
         "persian",
         "siamese",
@@ -152,13 +127,13 @@
         "bombay",
         "egyptian_mau"
       ],
-      "n_train": 5962,
-      "n_val": 1084,
-      "alpha": 0.5,
+      "n_train": 2101,
+      "n_val": 367,
+      "alpha": 0.4,
       "temperature": 1.0,
-      "zs_val_acc": 0.8967,
-      "fused_val_acc": 0.9622
+      "zs_val_acc": 0.861,
+      "fused_val_acc": 0.9728
     }
   },
-  "trained_at": 1792069701.876611
+  "trained_at": 1792090989.9116852
 }

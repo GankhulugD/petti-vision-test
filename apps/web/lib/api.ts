@@ -20,7 +20,7 @@ export type Explain = {
 export type Profile = {
   species: Labeled;
   species_probs: Dist;
-  breed: { top: Labeled[]; is_mixed: boolean; level?: Level; looks_like: Labeled[]; probs: Dist } | null;
+  breed: { top: Labeled[]; is_mixed: boolean; uncertain?: boolean; level?: Level; looks_like: Labeled[]; probs: Dist } | null;
   size: Labeled & { probs: Dist };
   age: Labeled & { probs: Dist };
   pattern: Labeled & { probs: Dist };
@@ -111,6 +111,11 @@ export const api = {
     call<{ query: Profile; searched: number; results: MatchResult[] }>("/search", {
       method: "POST",
       body: await form(files, { statuses, top_k: String(top_k) }),
+    }),
+  feedback: async (files: File[], corrections: Record<string, unknown>, consent: boolean) =>
+    call<{ ok: boolean; stored_photos: boolean }>("/feedback", {
+      method: "POST",
+      body: await form(files, { corrections: JSON.stringify(corrections), consent: consent ? "true" : "false" }),
     }),
   createPet: async (files: File[], fields: Record<string, string | undefined>) =>
     call<{ pet: Pet; matches?: MatchResult[] }>("/pets", { method: "POST", body: await form(files, fields) }),

@@ -118,6 +118,9 @@ def test_api_end_to_end(tmp_path, monkeypatch):
         body = r.json()
         assert body["results"][0]["pet"]["name"] == "Бантан"
         assert "match" in body["query"]["timing_ms"]
+        ex = body["query"]["explain"]  # the UI's "how it works" payload
+        assert len(ex["fingerprint"]) == 48 and ex["image"]["w"] == 320
+        assert "explain" not in body["results"][0]["pet"]  # never stored with registrations
         pid = body["results"][0]["pet"]["id"]
         assert client.patch(f"/pets/{pid}/status", json={"status": "reunited"}).status_code == 200
         assert client.get("/pets?status=lost").json() == []
@@ -173,3 +176,48 @@ def test_stale_embeddings_are_refreshed(cfg):
     assert Matcher(cfg).search(q, reg.list(status="lost")) == []  # skipped, no crash
     assert reg.reembed_stale(v) == 1
     assert Matcher(cfg).search(q, reg.list(status="lost"))[0].pet.name == "old"
+
+
+def test_explain_payload(cfg):
+    import json
+
+    from petti_vision import PettiVision
+
+    v = PettiVision(cfg)
+    d = v.analyze([make_animal(i) for i in range(3)], explain=True).to_json()
+    ex = d["explain"]
+    assert 0 <= ex["photo_index"] < 3
+    assert ex["attention"] is None or len(ex["attention"]["values"]) == ex["attention"]["grid"] ** 2
+    assert max(abs(x) for x in ex["fingerprint"]) <= 1.0 + 1e-6
+    json.dumps(d)  # serialisable
+    assert "explain" not in v.analyze([make_animal(1)]).to_json()
+
+
+def test_feedback_consent(tmp_path, monkeypatch):
+    monkeypatch.setenv("PETTI_DATA_DIR", str(tmp_path / "d"))
+    monkeypatch.setenv("PETTI_ARTIFACTS_DIR", str(tmp_path / "a"))
+    import importlib
+    import json
+
+    import petti_vision.config as c
+
+    importlib.reload(c)
+    import server
+
+    importlib.reload(server)
+    from fastapi.testclient import TestClient
+
+    with TestClient(server.app) as client:
+        img = [("images", ("a.jpg", make_animal(3), "image/jpeg"))]
+        r = client.post("/feedback", files=img, data={"corrections": json.dumps({"breed": "pug", "evil": 1}), "consent": "false"})
+        assert r.status_code == 200 and r.json()["stored_photos"] is False
+        fb = server.cfg.data_dir / "feedback"
+        before = set((fb / "images").iterdir())
+        assert set((fb / "images").iterdir()) == before
+        rec = json.loads((fb / "feedback.jsonl").read_text().splitlines()[-1])
+        assert rec["corrections"] == {"breed": "pug"}
+        r = client.post("/feedback", files=img, data={"corrections": "{}", "consent": "true"})
+        sha = json.loads((fb / "feedback.jsonl").read_text().splitlines()[-1])["images"][0]
+        assert (fb / "images" / f"{sha}.jpg").exists()
+        assert client.delete(f"/feedback/{sha}").json()["deleted"] is True
+        assert client.post("/feedback", files=img, data={"corrections": "[1]"}).status_code == 400

@@ -58,7 +58,24 @@ def get(doc: dict, path: str):
     return cur
 
 
+def sample_n(doc: dict, path: str) -> int | None:
+    """Look for an 'n' (or 'queries') next to the metric or one level up."""
+    parts = path.split(".")
+    for depth in (len(parts) - 1, len(parts) - 2):
+        if depth < 1:
+            continue
+        node = get(doc, ".".join(parts[:depth]))
+        if isinstance(node, dict):
+            for key in ("n", "queries"):
+                if isinstance(node.get(key), int) and node[key] > 0:
+                    return node[key]
+    return None
+
+
 def compare(baseline: dict, candidate: dict, latency_factor: float = LATENCY_FACTOR) -> list[str]:
+    """A drop fails when it exceeds the fixed tolerance AND two standard errors of
+    the measurement: with 54 breed images one photo is already 1.9 points, so a
+    fixed 1-point rule would flag pure noise."""
     failures: list[str] = []
     for path, tol in {**HIGHER, **LOWER}.items():
         b, c = get(baseline, path), get(candidate, path)
@@ -69,8 +86,13 @@ def compare(baseline: dict, candidate: dict, latency_factor: float = LATENCY_FAC
             continue
         higher = path in HIGHER
         drop = (b - c) if higher else (c - b)
-        if drop > tol + 1e-9:
-            failures.append(f"{path}: {b} → {c} (allowed {tol})")
+        n = sample_n(candidate, path) or sample_n(baseline, path)
+        allowed = tol
+        if n and 0.0 <= b <= 1.0:
+            p = min(max(b, 0.02), 0.98)
+            allowed = max(tol, 2 * (p * (1 - p) / n) ** 0.5)
+        if drop > allowed + 1e-9:
+            failures.append(f"{path}: {b} → {c} (allowed {allowed:.3f}{f', n={n}' if n else ''})")
     for path in LATENCY:
         b, c = get(baseline, path), get(candidate, path)
         if b is None or c is None or b <= 0:
@@ -85,6 +107,8 @@ def main():
     ap.add_argument("candidate", nargs="?", type=Path)
     ap.add_argument("--candidate", dest="candidate_opt", type=Path)
     ap.add_argument("--baseline", type=Path, default=None)
+    ap.add_argument("--waive", action="append", default=[], metavar="METRIC=REASON",
+                    help="accept a known regression explicitly; the waiver is written into the candidate report")
     args = ap.parse_args()
     cand_path = args.candidate_opt or args.candidate
     if cand_path is None:
@@ -93,6 +117,14 @@ def main():
     baseline = json.loads(base_path.read_text())
     candidate = json.loads(cand_path.read_text())
     failures = compare(baseline, candidate)
+    waivers = dict(w.split("=", 1) for w in args.waive if "=" in w)
+    waived = [f for f in failures if f.split(":")[0] in waivers]
+    failures = [f for f in failures if f.split(":")[0] not in waivers]
+    if waived:
+        candidate.setdefault("gate_waivers", {}).update({f.split(":")[0]: {"result": f, "reason": waivers[f.split(":")[0]]} for f in waived})
+        cand_path.write_text(json.dumps(candidate, indent=2))
+        for f in waived:
+            print(" ~ waived:", f, "—", waivers[f.split(":")[0]], flush=True)
     if failures:
         print(f"GATE FAIL ({len(failures)})", flush=True)
         for line in failures:

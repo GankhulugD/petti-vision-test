@@ -1,64 +1,85 @@
-# Petti Vision model card
+# Petti Vision model card (v0.5)
 
 ## Intended use
 
-Match a photo of a lost dog or cat to pets an owner has registered, and describe species, breed mix, size, age, color, and marks. The UI copy is Mongolian. This is an assistive lookup, not a determination of ownership.
+Match a photo of a lost dog or cat to registered pets, and describe species, breed (or the breeds a mix resembles), size, age, colors and distinctive marks. UI copy is Mongolian. Assistive lookup only — not proof of ownership.
 
-## What runs today
+## What runs
 
-Detector: a small conv head on frozen DINOv2-small patch tokens at 224 px (`artifacts/seg_head.npz`, Apache-2.0 backbone). It finds a pet region and does not decide dog versus cat. Species comes from SigLIP. YOLO26n-seg (AGPL-3.0) loads only when `PETTI_DETECTOR_BACKEND=yolo`. Identity: frozen DINOv2-small CLS on the crop. Attributes: SigLIP2-base zero-shot fused with `artifacts/heads.npz`. If the foreground is small and SigLIP prefers car/person/furniture/toy prompts, the answer is the Mongolian sentence "Энэ зурагт нохой эсвэл муур харагдахгүй байна" and `quality.no_animal` is set. Two or more instances add `quality.multi_animal` and a warning.
+| Stage | Model | License | Notes |
+|---|---|---|---|
+| Find the animal | DINOv2-small patch tokens (frozen) + our conv head `seg_head2.npz` | Apache-2.0 + ours | Aspect ratio kept, long side 448 px. Real outlines (polygons), sub-patch masks. Trained on Oxford-IIIT Pet trimaps + license-filtered COCO dog/cat masks. |
+| Identity | DINOv2-small CLS on the crop | Apache-2.0 | Used by the matcher. Learned projection (`train_reid.py`) is gated and activates only when it beats the raw embedding. |
+| Attributes | SigLIP2-base zero-shot + our heads `heads.npz` | Apache-2.0 + ours | Heads trained on Oxford trainval only (no ImageNet/Stanford photos). Breed confidences calibrated (`calibration.json`). |
+| Runtime | PyTorch (dev) or ONNX Runtime (`PETTI_RUNTIME=onnx`, torch-free) | MIT (ORT) | ONNX export verified identical to PyTorch (cosine 1.000). |
 
-## Metrics
+YOLO (AGPL-3.0) is no longer in production requirements; it remains available only through `requirements-dev.txt` for A/B comparisons.
 
-The regression gate reads `apps/model/artifacts/reports/baseline.json`, produced by:
+## Metrics (2026-10-16, Apple M2 / MPS unless noted)
 
-```bash
-cd apps/model && python3 training/eval_all.py --version v0.4 --write-baseline
-```
+### Finding the animal
 
-Measured on the frozen identity set (168 owner photos, 46 dogs, 104 ImageNet distractors) on Apple MPS, 2026-10-15. This is not the browser bench (that image set is not on disk, only its filenames are).
+| Set | Metric | YOLO26n-seg | Segmenter v1 (224², Oxford only) | **Segmenter v2 (shipped)** |
+|---|---|---|---|---|
+| COCO val2017 dog/cat (349 cluttered photos, real masks) | recall | 0.868 | 0.805 | **0.946** |
+| | mask IoU | 0.742 | 0.563 | **0.762** |
+| | IoU ≥ 0.5 | 0.837 | 0.719 | **0.905** |
+| | small animals (<5% of image, n=103): recall / IoU | 0.680 / 0.551 | 0.369 / 0.194 | **0.825 / 0.557** |
+| Owner phone photos (371, reference = BSD Mask R-CNN teacher) | box hit@0.5 / hit@0.7 | 0.938 / 0.898 | 0.968 / 0.868 | **0.981 / 0.906** |
+| | missed animals | 17 | 0 | **0** |
+| Oxford-IIIT Pet test (800) | recall / mask IoU | — | 1.0 / 0.938* | **1.0 / 0.987** |
+| No-animal photos + drawings (22) | false positives | 0 | 0 | **0** |
+| Detect time p50 | | 32 ms | 29 ms | 45–60 ms |
 
-| Metric | Measured | Notes |
+\* v1's Oxford IoU was measured on the 16×16 grid.
+
+### Breeds — frozen Oxford-IIIT Pet **test** split (never trained on), 40 photos per breed
+
+| | n | top-1 | top-3 | ECE raw → calibrated | "High confidence" answers correct |
+|---|---|---|---|---|---|
+| Dogs (25 breeds) | 520 | **94.8%** | 99.8% | 0.140 → **0.016** | 97.5% (484) |
+| Cats (12 breeds) | 480 | **85.6%** | 94.2% | 0.189 → **0.047** | 93.2% (411) |
+
+Calibration (display temperature 0.53, levels high ≥ 0.67, medium ≥ 0.50, "unsure" < 0.49) was cross-fitted: on held-out halves ECE was 0.022 and 0.037 and "high" was 94–95% correct. Dog breeds outside Oxford's 25 rely on zero-shot; on 54 owner photos of such breeds top-1 is 85.2% (the ImageNet-trained variant: 87.0%).
+
+### Whole system — frozen owner-photo set (`eval_all.py`, gate vs v0.4 baseline)
+
+| Metric | v0.4 (YOLO) | **v0.5** |
 |---|---|---|
-| Species, dogs | 100% (n=168) | No cat photos in this set |
-| Breed top-1 / top-3, dogs | 81.5% / 100% (n=54) | Non-mix folder slugs only. Browser bench 92.9% is a different set |
-| Breed, cats | not measured | No labeled cat eval images frozen |
-| Size exact / ±1 | 71.2% / 88.5% | Adult breed prior, not a measured weight |
-| Age, color, marks | not measured | No labels on the frozen photos |
-| ECE species / breed / size | 0.001 / 0.222 / 0.105 | Breed confidence is over-sure |
-| Re-ID R@1 / R@5 / mAP | 0.893 / 0.976 / 0.829 | Leave-one-out cosine, 168 queries |
-| Look-alike false match | 3.0% | Top hit is a distractor |
-| Detection recall | 96.4% | Mask IoU has no ground truth here |
-| No-animal false positive | 0% (n=10) | Line drawings only, not photos of cars or people |
-| High-confidence breed | 93.9% (n=33) | Below the 95% bar |
-| Server latency p50 / p95 | 120 ms / 331 ms | MPS, not the 2 vCPU host |
+| Species, dogs (168) | 1.000 | 0.994 |
+| Breed dog top-1 / top-3 (54) | 0.815 / 1.0 | 0.852 / 1.0 |
+| Size exact / ±1 | 0.712 / 0.885 | 0.750 / 0.923 |
+| Breed ECE | 0.222 | 0.092 |
+| Re-ID R@1 / R@5 / mAP (168 queries) | 0.893 / 0.976 / 0.829 | 0.881 / 0.988 / 0.821 |
+| Look-alike false match | 3.0% | 3.0% |
+| Pipeline latency p50 / p95 (MPS) | 120 / 331 ms | 141 / 183 ms |
 
-The DINOv2 segmenter (`artifacts/reports/v0.5-seg.json`, same identity set, MPS) compared with that baseline and with YOLO on the official Oxford-IIIT Pet test split (3669 images, not used to train the head):
+`gate.py` passes with one written waiver: p50 latency +21 ms for the new segmenter.
 
-| Metric | YOLO / v0.4 | DINOv2 segmenter |
-|---|---|---|
-| Oxford test mask IoU | 0.945 (200 images) | 0.938 (full test) |
-| Oxford detection recall, all / small | 0.985 / 1.0 (200 images, 8 small) | 1.0 / 1.0 (3669 images, 233 small) |
-| Detect time p50 | 25 ms | 17 ms |
-| Identity-set species, dogs | 1.000 | 0.994 |
-| Breed top-1, dogs | 0.815 | 0.907 |
-| Size exact | 0.712 | 0.808 |
-| Re-ID R@1 / false match | 0.893 / 0.030 | 0.887 / 0.048 |
-| Size ECE | 0.105 | 0.121 |
-| Pipeline p50 | 120 ms | 115 ms |
-| No-animal false positive | 0 on 10 drawings | 0 on those drawings plus 12 Wikimedia photos |
+### Marks
 
-`training/gate.py` still compares against `baseline.json` (the YOLO run). It fails this candidate on size ECE (0.105 → 0.121) and look-alike false-match rate (0.030 → 0.048). The baseline file was not replaced.
+Calibrated on 709 ordinary photos (`marks_calibration.json`): every mark fires on ≤4.4% of ordinary photos; rare marks (one eye, three legs, scar, heterochromia, clipped ear) on ≤0.3%. "Three legs" and "one eye" are only asserted when at least two photos agree — a hidden leg or eye (back view, lying down) no longer becomes a distinctive mark.
+
+### ONNX runtime
+
+fp32 ONNX matches PyTorch exactly (cosine 1.000 for identity, SigLIP and segmenter tokens). Dynamic INT8 was rejected by the export gate: SigLIP drifts to cosine 0.59–0.69 and DINOv2 to 0.990. On the M2 the ONNX CPU path is slower than PyTorch+Accelerate (324 vs 142 ms/image with test-time augmentation). Its value is a torch-free, smaller production image (`requirements-runtime.txt`). Measure on the target x86 host before switching.
 
 ## Limitations
 
-- Oxford "small" pets (foreground under 8% of the image, 233 test photos) were all detected. The identity-set small slice is still only 12 photos.
-- Photographic no-animal coverage is 12 Wikimedia images (people, furniture, toys) plus 10 drawings. There is no held-out photo of a car; one CC0 car was used in training.
-- Several animals in one photo produce a warning. The description is still the largest animal.
-- Look-alike false matches rose from 3.0% to 4.8% because the crop changed. Size ECE rose from 0.105 to 0.121 even though size accuracy rose.
-- Size labels on the identity set are the adult breed prior, so a puppy of a large breed is scored against the adult bin.
-- High-confidence breed predictions are not yet shown to be ≥95% correct.
+- Touching animals can merge into one region; the description then covers both (a multi-animal warning is shown).
+- Dogs in clothes or blankets: the mask follows the visible animal, so the crop may exclude covered body parts.
+- Cats are weaker than dogs (85.6% top-1); breeds outside Oxford's 37 rely on zero-shot.
+- Re-ID has only 46 test identities. Fine-tuning is wired (`train_reid.py`, gated) and needs registrations with consent.
+- Calibration and level thresholds were fitted on the Oxford test photos (cross-fitted numbers above are the honest ones). Refit after every head retrain (`retrain.py` does this).
 
-## Versions
+## Operating it
 
-`/health` reports the running models. Changing the identity embedding requires `Registry.reembed_stale` (Phase 2). This card does not change API shapes.
+```bash
+cd apps/model
+python3 training/eval_seg.py --backend dino2 --set coco      # detector on cluttered scenes
+python3 training/eval_breeds.py                              # breeds, frozen Oxford test
+python3 training/eval_all.py --version v0.5 && python3 training/gate.py artifacts/reports/v0.5.json
+python3 training/retrain.py                                  # data flywheel: feedback → train → eval → gate → keep or roll back
+python3 training/retrain.py --rollback
+python3 training/export_onnx.py && PETTI_RUNTIME=onnx python3 server.py
+```

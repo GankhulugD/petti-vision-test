@@ -1,0 +1,28 @@
+{
+  "n": 40,
+  "reid_cos_min": 1.0,
+  "reid_cos_mean": 1.0,
+  "vlm_cos_min": 0.99999,
+  "vlm_cos_mean": 1.0,
+  "seg_tokens_cos_mean": 1.0,
+  "prep_maxdiff_siglip": 0.0078,
+  "prep_maxdiff_dino": 0.0175,
+  "siglip_fp32_cos_vs_torch_same_input": 1.0,
+  "siglip_int8_cos_vs_torch_same_input": 1.0,
+  "ms_per_image_torch_cpu": 141.8,
+  "ms_per_image_onnx": 324.3,
+  "sizes_mb": {
+    "dinov2_core.onnx": 86.3,
+    "dinov2_core_fp32.onnx": 86.3,
+    "dinov2_core_int8_all.onnx": 22.3,
+    "dinov2_core_int8_matmul.onnx": 22.9,
+    "siglip_vision.onnx": 371.8,
+    "siglip_vision_fp32.onnx": 371.8,
+    "siglip_vision_int8_all.onnx": 99.5,
+    "siglip_vision_int8_matmul.onnx": 115.8
+  },
+  "chosen": {
+    "dinov2_core": "fp32",
+    "siglip_vision": "fp32"
+  }
+}

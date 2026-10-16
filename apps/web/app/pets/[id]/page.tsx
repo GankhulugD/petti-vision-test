@@ -31,15 +31,15 @@ export default function PetPage({ params }: { params: Promise<{ id: string }> })
     if (r.matches) setMatches(r.matches);
   };
 
-  if (err) return <p className="text-red-700">{err}</p>;
-  if (!pet) return <p className="text-stone-500">Ачаалж байна…</p>;
+  if (err) return <p className="text-zinc-600">{err}</p>;
+  if (!pet) return <p className="text-zinc-500">Ачаалж байна…</p>;
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold">{pet.name || pet.profile.species.mn}</h1>
-          <p className="text-stone-600">
+          <h1 className="text-3xl font-semibold tracking-tight">{pet.name || pet.profile.species.mn}</h1>
+          <p className="text-zinc-600">
             {STATUS_MN[pet.status]}
             {pet.location ? ` · ${pet.location}` : ""}
             {pet.contact ? ` · ☎ ${pet.contact}` : ""}
@@ -54,7 +54,7 @@ export default function PetPage({ params }: { params: Promise<{ id: string }> })
       </div>
       <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
         {pet.photos.map((src) => (
-          <div key={src} className="aspect-square overflow-hidden rounded-xl bg-stone-100">
+          <div key={src} className="aspect-square overflow-hidden rounded-xl bg-zinc-100">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={src} alt="" className="h-full w-full object-cover" />
           </div>
@@ -65,7 +65,7 @@ export default function PetPage({ params }: { params: Promise<{ id: string }> })
           <ProfileView p={pet.profile} />
         </section>
         <section>
-          <h2 className="mb-3 text-xl font-bold">
+          <h2 className="mb-3 text-xl font-semibold">
             {pet.status === "found" ? "Алга болсон бүртгэлээс тохирох магадлалтай" : "Олдсон мэдээллээс тохирох магадлалтай"}
           </h2>
           {matches && <MatchList results={matches} />}

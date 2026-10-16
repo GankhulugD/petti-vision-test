@@ -6,6 +6,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { Level, Profile } from "@/lib/api";
+import Feedback from "@/components/Feedback";
 import { SWATCH } from "@/components/ProfileView";
 import { CH, easeOut, prog, useClock } from "@/lib/stream";
 
@@ -78,14 +79,19 @@ function buildPlan(p: Profile, nFiles: number, searched?: number) {
   const noAnimal = p.quality.no_animal;
   const eyebrow = noAnimal ? "Амьтан илрээгүй" : `${p.species.mn} · ${pct(p.species.confidence)}`;
   a += eyebrow.length * CH + 60;
-  const title = noAnimal ? "Зурган дээр нохой, муур алга" : (p.breed?.top[0]?.mn ?? p.species.mn);
-  const titleConf = noAnimal ? -1 : (p.breed?.top[0]?.confidence ?? p.species.confidence);
+  const unsure = !!p.breed?.uncertain;
+  const title = noAnimal ? "Зурган дээр нохой, муур алга" : unsure ? p.species.mn : (p.breed?.top[0]?.mn ?? p.species.mn);
+  const titleConf = noAnimal ? -1 : unsure ? p.species.confidence : (p.breed?.top[0]?.confidence ?? p.species.confidence);
   const titleAt = a;
   a += title.length * 16 + 80;
   const sub = p.breed
-    ? p.breed.is_mixed
+    ? unsure
+      ? `Үүлдэр энэ зургаар тодорхойгүй · төстэй: ${p.breed.looks_like.slice(0, 3).map((b) => `${b.mn} ${pct(b.confidence)}`).join(", ")} · нүүр нь харагдах зураг нэмнэ үү`
+      : p.breed.is_mixed
       ? `Эрлийз байж магадгүй · ${p.breed.looks_like.slice(0, 3).map((b) => `${b.mn} ${pct(b.confidence)}`).join(" · ")}`
-      : `Үүлдэр · ${LEVEL_MN[p.breed.level ?? "medium"]}`
+      : p.breed.level === "medium" && p.breed.looks_like.length > 1
+        ? `Үүлдэр · магадгүй · бусад: ${p.breed.looks_like.slice(1, 3).map((b) => `${b.mn} ${pct(b.confidence)}`).join(", ")}`
+        : `Үүлдэр · ${LEVEL_MN[p.breed.level ?? "medium"]}`
     : "";
   const subAt = a;
   a += sub.length * CH + 80;
@@ -514,6 +520,8 @@ export default function VisionLab({ files, profile, busy, onFiles, searched, com
       <p className="text-[15px] leading-7 text-zinc-700" style={{ opacity: t >= plan.descAt ? 1 : 0 }}>
         <Streamed text={profile.description_mn} t={t} at={plan.descAt} />
       </p>
+
+      {done && onFiles && !profile.quality.no_animal && <Feedback files={files} profile={profile} />}
 
       {done && profile.quality.warnings.length > 0 && (
         <ul className="fade-in space-y-1.5 rounded-xl border border-zinc-200 bg-white p-3 text-sm text-zinc-600">

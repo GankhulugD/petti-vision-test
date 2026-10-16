@@ -396,6 +396,7 @@ def main():
     ap.add_argument("--negatives", type=Path, default=EVAL / "negatives.csv")
     ap.add_argument("--limit", type=int, default=0, help="max images per manifest (0 = all)")
     ap.add_argument("--write-baseline", action="store_true")
+    ap.add_argument("--heads", default="", help="evaluate artifacts/<this>.npz instead of the served heads")
     args = ap.parse_args()
     limit = args.limit or None
 
@@ -403,6 +404,10 @@ def main():
 
     cfg = Config()
     vision = PettiVision(cfg)
+    if args.heads:
+        from petti_vision.heads import load_heads
+
+        vision.heads = load_heads(cfg.artifacts_dir / f"{args.heads}.npz")
     attr_rows = read_manifest([args.attributes]) if args.attributes.exists() else []
     id_rows = read_manifest([args.identity]) if args.identity.exists() else []
     dis_rows = read_manifest([args.distractors]) if args.distractors.exists() else []
@@ -411,7 +416,8 @@ def main():
     # breed is inferred from the pet_id slug, and those photos are not the Oxford train set.
     meta = {
         "device": cfg.device if hasattr(cfg, "device") else None,
-        "detector": cfg.detector_weights,
+        "detector": getattr(vision.detector, "name", cfg.detector_weights),
+        "heads": args.heads or "heads",
         "reid_model": cfg.reid_model,
         "vlm_model": cfg.vlm_model,
         "fake": cfg.fake_models,

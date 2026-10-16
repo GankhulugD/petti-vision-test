@@ -15,6 +15,17 @@ def test_components_find_two_blobs():
     assert len(set(lab.ravel()) - {0}) == 2
 
 
+def test_fragments_of_one_animal_merge_and_distant_ones_stay():
+    close = np.zeros((16, 16), dtype=np.float32)
+    close[2:5, 2:5] = 0.9
+    close[6:9, 6:9] = 0.9
+    assert len(instances_from_prob(close, (160, 160), min_frac=0.01)) == 1
+    far = np.zeros((16, 16), dtype=np.float32)
+    far[0:4, 0:4] = 0.9
+    far[12:16, 12:16] = 0.9
+    assert len(instances_from_prob(far, (160, 160), min_frac=0.01)) == 2
+
+
 def test_instances_skip_specks_and_keep_a_blob():
     prob = np.zeros((16, 16), dtype=np.float32)
     prob[2:10, 3:12] = 0.9

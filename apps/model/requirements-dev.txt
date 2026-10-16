@@ -1,0 +1,4 @@
+-r requirements.txt
+# AGPL-3.0: only for A/B comparisons (PETTI_DETECTOR_BACKEND=yolo). Never install in production images.
+ultralytics>=8.4.0
+onnx>=1.16

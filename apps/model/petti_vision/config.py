@@ -19,6 +19,8 @@ class Config:
     # Detector. "auto" uses the DINOv2 segmenter when seg_head.npz exists.
     # "yolo" is dev-only: Ultralytics YOLO26n-seg is AGPL-3.0 and must not ship.
     detector_backend: str = _env("PETTI_DETECTOR_BACKEND", "auto")
+    # "torch" (transformers, dev/training) or "onnx" (INT8 ONNX Runtime, no torch: production)
+    runtime: str = _env("PETTI_RUNTIME", "torch")
     detector_weights: str = _env("PETTI_DETECTOR", "yolo26n-seg.pt")
     detector_conf: float = float(_env("PETTI_DETECTOR_CONF", "0.25"))
     detector_imgsz: int = int(_env("PETTI_DETECTOR_IMGSZ", "640"))
@@ -78,6 +80,10 @@ class Config:
     @property
     def seg_head_path(self) -> Path:
         return self.artifacts_dir / "seg_head.npz"
+
+    @property
+    def seg_head2_path(self) -> Path:
+        return self.artifacts_dir / "seg_head2.npz"
 
     @property
     def reid_proj_path(self) -> Path:

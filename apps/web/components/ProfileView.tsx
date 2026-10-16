@@ -62,6 +62,7 @@ export default function ProfileView({ p, compact = false }: { p: Profile; compac
             <div className="space-y-1.5">
               <div className="flex flex-wrap gap-1.5">
                 <LevelChip level={p.breed.level} />
+                {p.breed.uncertain && <span className="chip">Энэ зургаар тодорхойгүй — нүүр харагдах зураг нэмнэ үү</span>}
                 {p.breed.is_mixed && <span className="chip">Эрлийз эсвэл дараахаас аль нэг нь</span>}
               </div>
               {p.breed.top.slice(0, compact ? 3 : 5).map((b) => (

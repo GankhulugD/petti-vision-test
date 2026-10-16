@@ -1,0 +1,12 @@
+{
+  "set": "coco_val2017",
+  "backend": "yolo",
+  "n": 349,
+  "recall": 0.868,
+  "mask_iou": 0.742,
+  "iou>=0.5": 0.837,
+  "small_n": 103,
+  "small_recall": 0.68,
+  "small_iou": 0.551,
+  "latency_p50_ms": 32.0
+}

@@ -1,0 +1,154 @@
+{
+  "version": "v0.5-seg3",
+  "meta": {
+    "device": "mps",
+    "detector": "yolo26n-seg.pt",
+    "reid_model": "facebook/dinov2-small",
+    "vlm_model": "google/siglip2-base-patch16-224",
+    "fake": false,
+    "attributes_manifest": "identity photos (breed from folder slug)",
+    "notes": [
+      "Re-ID is leave-one-out cosine on DINOv2, not the production matcher score.",
+      "Size on identity photos uses the adult breed prior when the CSV has no size cell (same as bench.js).",
+      "No-animal images are line drawings, so a 0% false-positive rate does not cover photos of cars or people.",
+      "Mask IoU is unset until a trimap/COCO mask manifest is frozen.",
+      "Color and marks stay unset until a labeled manifest exists."
+    ]
+  },
+  "species": {
+    "dog": {
+      "n": 168,
+      "accuracy": 0.994,
+      "ece": 0.008
+    },
+    "cat": {
+      "n": 0,
+      "accuracy": null,
+      "ece": null
+    },
+    "ece": 0.008
+  },
+  "breed": {
+    "dog": {
+      "n": 54,
+      "top1": 0.907,
+      "top3": 1.0,
+      "ece": 0.205,
+      "high_n": 34,
+      "high_accuracy": 1.0
+    },
+    "cat": {
+      "n": 0,
+      "top1": null,
+      "top3": null,
+      "ece": null,
+      "high_n": 0,
+      "high_accuracy": null
+    },
+    "ece": 0.205
+  },
+  "size": {
+    "n": 52,
+    "accuracy": 0.788,
+    "within1": 0.904,
+    "ece": 0.124,
+    "label_source": [
+      "adult_breed_prior"
+    ]
+  },
+  "age": {
+    "n": 0,
+    "accuracy": null,
+    "ece": null,
+    "within1": null
+  },
+  "color": {
+    "n": 0,
+    "f1": null
+  },
+  "marks": {
+    "n": 0,
+    "f1": null
+  },
+  "species_ece_note": "per-species ECE is under species.*.ece; breed ECE under breed.*.ece",
+  "reid": {
+    "queries": 168,
+    "gallery": 272,
+    "R@1": 0.887,
+    "R@5": 0.994,
+    "mAP": 0.837,
+    "false_match_rate": 0.048
+  },
+  "detection": {
+    "n": 168,
+    "recall": 1.0,
+    "mask_iou": null,
+    "small_box_n": 8,
+    "note": "mask_iou needs a frozen mask set (Oxford trimaps are not in data/eval yet)"
+  },
+  "negative": {
+    "n": 10,
+    "missing": 0,
+    "false_positive_rate": 0.0,
+    "by_source": {
+      "synthetic_negative:car": {
+        "n": 2,
+        "false_positive_rate": 0.0
+      },
+      "synthetic_negative:person": {
+        "n": 2,
+        "false_positive_rate": 0.0
+      },
+      "synthetic_negative:furniture": {
+        "n": 2,
+        "false_positive_rate": 0.0
+      },
+      "synthetic_negative:toy": {
+        "n": 2,
+        "false_positive_rate": 0.0
+      },
+      "synthetic_negative:drawing": {
+        "n": 2,
+        "false_positive_rate": 0.0
+      }
+    }
+  },
+  "slices": {
+    "small_box": {
+      "n": 8,
+      "dog_top1": 0.333,
+      "detected": 1.0
+    },
+    "dark": null,
+    "blurry": null,
+    "multi_animal": {
+      "n": 1,
+      "dog_top1": null,
+      "detected": 1.0
+    },
+    "mixed_breed": {
+      "n": 114,
+      "dog_top1": null,
+      "detected": 1.0
+    }
+  },
+  "latency": {
+    "n": 282,
+    "p50_ms": 115.2,
+    "p95_ms": 153.9,
+    "device": "mps"
+  },
+  "confidence": {
+    "high": {
+      "n": 34,
+      "accuracy": 1.0
+    }
+  },
+  "coverage": {
+    "attributes_n": 168,
+    "attributes_missing": 0,
+    "identity_n": 272,
+    "identity_missing": 0,
+    "negatives_n": 10
+  }
+}

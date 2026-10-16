@@ -90,12 +90,23 @@ def _row(path: Path, species: str, breed: str | None, source: str, pet_id: str =
             "source": source + ("_weak" if size else "")}
 
 
-def oxford() -> list[dict]:
+def oxford_test_names() -> set[str]:
+    """The official Oxford-IIIT Pet test split: frozen for evaluation, never trained on."""
+    f = DATA / "oxford" / "annotations" / "test.txt"
+    return set(f.read_text().split()[0::4]) if f.exists() else set()
+
+
+def oxford(include_test: bool = False) -> list[dict]:
     tar = DATA / "oxford_images.tar.gz"
     _download(OXFORD_URL, tar)
     _extract(tar, DATA / "oxford")
+    test = set() if include_test else oxford_test_names()
+    if not include_test and not test:
+        print("[oxford] WARNING: annotations/test.txt missing — cannot hold out the test split", flush=True)
     rows = []
     for p in sorted((DATA / "oxford" / "images").glob("*.jpg")):
+        if p.stem in test:
+            continue
         name = p.stem.rsplit("_", 1)[0]
         species = "cat" if name[0].isupper() else "dog"
         rows.append(_row(p, species, OXFORD_MAP.get(name.lower()), "oxford"))

@@ -126,7 +126,16 @@ def extract_features(rows: list[dict], cache: Path, batch: int = 32) -> dict[str
 
     Cached by manifest content hash, so re-running training is instant.
     """
-    sig = hashlib.md5("\n".join(r["path"] for r in rows).encode()).hexdigest()[:10]
+    from petti_vision import Config as _C
+
+    _c = _C()
+    det = _c.detector_backend
+    for name in ("seg_head2.npz", "seg_head.npz"):
+        if (_c.artifacts_dir / name).exists():
+            det += f":{name}:{int((_c.artifacts_dir / name).stat().st_mtime)}"
+    # crops depend on the detector → it is part of the cache key
+    sig = hashlib.md5(("\n".join(r["path"] for r in rows) + "|" + det).encode()).hexdigest()[:10]
+    cache = cache.with_name(f"{cache.stem}_{sig}{cache.suffix}")  # one file per manifest+detector
     if cache.exists():
         d = dict(np.load(cache, allow_pickle=False))
         if str(d.get("sig")) == sig:

@@ -126,3 +126,21 @@ python3 training/evaluate.py --manifest data/manifests/registry.csv --limit 300
 3. Бүртгэлийн identity-үүдээр re-ID сургах (хэдэн зуун амьтнаас эхлэн мэдэгдэхүйц өснө)
 4. evaluate.py-аар weight/calibration тааруулах
 5. Цаашид: backbone-ийн сүүлийн давхаргуудыг LoRA-аар fine-tune хийх (GPU шаардлагатай)
+
+## v0.5 workflow (M2-friendly, license-clean)
+
+| Step | Command | Time on M2 |
+|---|---|---|
+| COCO dog/cat masks (commercial-OK licenses only) | `python3 training/fetch_coco.py --max-train 2000 --neg 500` | ~15 min download |
+| Train the segmenter v2 head | `python3 training/train_seg2.py --source coco --epochs 6` | ~25 min |
+| Detector on cluttered scenes / Oxford | `python3 training/eval_seg.py --backend dino2 --set coco` · `--set oxford` | 3 min each |
+| Owner photos vs offline teacher (BSD Mask R-CNN) | `python3 training/probe_hard.py --backends dino2,dino` | 10 min first run (teacher cached after) |
+| Attribute heads (Oxford trainval only) | `python3 training/auto_train.py --tag clean` → `promote_heads.py --tag clean` | 5 min |
+| Breed eval on frozen Oxford test | `python3 training/eval_breeds.py` | 8 min |
+| Breed confidence calibration | `python3 training/fit_breed_calibration.py` | seconds |
+| Mark thresholds on ordinary photos | `python3 training/calibrate_marks.py` | 5 min |
+| Whole-system eval + gate | `python3 training/eval_all.py --version vX && python3 training/gate.py artifacts/reports/vX.json [--waive metric=reason]` | 4 min |
+| Monthly flywheel (registrations + consented feedback) | `python3 training/retrain.py` / `--rollback` | ~20 min |
+| Torch-free runtime | `python3 training/export_onnx.py` then `PETTI_RUNTIME=onnx` | 4 min |
+
+Everything can also be started from the running dev server: `POST /dev/jobs {"script": "<name>", "args": [...]}`.

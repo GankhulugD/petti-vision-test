@@ -13,6 +13,11 @@ apps/model/data/**
 !apps/model/data/eval/negatives/
 !apps/model/data/eval/negatives/**
 apps/model/artifacts/cache/
+apps/model/artifacts/versions/
+apps/model/artifacts/onnx/
+apps/model/artifacts/*.pt
+# trained on ImageNet-derived photos (non-commercial) – local experiments only
+apps/model/artifacts/heads_full.*
 apps/model/*.pt
 apps/model/yolo*.pt
 *.onnx

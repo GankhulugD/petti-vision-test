@@ -135,24 +135,41 @@ def load_head(path: Path) -> dict:
     return {k: z[k] for k in z.files}
 
 
+def _close(mask: np.ndarray, radius: int = 1) -> np.ndarray:
+    """Fill one-cell gaps so a single animal is not split into body and head."""
+    padded = np.pad(mask, radius)
+    h, w = mask.shape
+    out = np.zeros_like(mask)
+    for dy in range(2 * radius + 1):
+        for dx in range(2 * radius + 1):
+            out |= padded[dy : dy + h, dx : dx + w]
+    return out
+
+
 def instances_from_prob(prob: np.ndarray, size: tuple[int, int], thr: float = 0.5, min_frac: float = 0.008) -> list[Detection]:
-    """prob is GRID×GRID. size is (width, height) of the original image."""
-    labels = label_components(prob >= thr)
+    """prob is GRID×GRID. size is (width, height) of the original image.
+
+    Connectivity uses a 1-cell closing, so a thin gap does not become a second
+    animal. A leftover piece smaller than about a third of the main animal is
+    dropped instead of being described on its own.
+    """
+    binary = prob >= thr
+    labels = label_components(_close(binary, 1))
     g = prob.shape[0]
     w, h = size
     dets = []
     for lab in range(1, int(labels.max()) + 1):
-        sel = labels == lab
-        frac = float(sel.mean())
-        if frac < min_frac:
+        region = labels == lab
+        sel = region & binary
+        if float(sel.mean()) < min_frac or not sel.any():
             continue
+        # box the real foreground; the closed map only groups the pieces
         ys, xs = np.nonzero(sel)
-        # map the 32-grid box onto the original image (the net saw a stretch to 448)
         x1 = float(xs.min()) / g * w
         x2 = float(xs.max() + 1) / g * w
         y1 = float(ys.min()) / g * h
         y2 = float(ys.max() + 1) / g * h
-        conf = float(prob[sel].mean())
+        conf = float(prob[sel].mean()) if sel.any() else 0.0
         dets.append(Detection(
             box=(x1, y1, x2, y2),
             species="pet",
@@ -160,6 +177,9 @@ def instances_from_prob(prob: np.ndarray, size: tuple[int, int], thr: float = 0.
             polygon=[(x1, y1), (x2, y1), (x2, y2), (x1, y2)],
             mask_small=sel,
         ))
+    if dets:
+        biggest = max(d.area() for d in dets)
+        dets = [d for d in dets if d.area() >= 0.35 * biggest]
     dets.sort(key=lambda d: d.confidence * (d.area() ** 0.5), reverse=True)
     return dets
 
@@ -204,3 +224,126 @@ class DinoSegmenter:
             prob = foreground_prob(tokens[i], self.head)
             out.append(instances_from_prob(prob, im.size, thr=self.thr))
         return out
+
+
+# =========================================================================== #
+# v2: aspect-preserving input, deeper head, sub-patch masks and real outlines
+# =========================================================================== #
+PATCH = 14
+UPS = 4  # mask resolution = 4 × patch grid
+
+
+def input_size(w: int, h: int, long_side: int) -> tuple[int, int]:
+    """Keep the aspect ratio; both sides a multiple of 14, at least 4 patches."""
+    s = long_side / max(w, h)
+    tw = max(4 * PATCH, int(round(w * s / PATCH)) * PATCH)
+    th = max(4 * PATCH, int(round(h * s / PATCH)) * PATCH)
+    return tw, th
+
+
+def head_forward(tokens: np.ndarray, gh: int, gw: int, head: dict) -> np.ndarray:
+    """Generic numpy conv stack stored as l{i}_w (Cout,Cin,k,k), l{i}_b. ReLU between layers."""
+    x = tokens.reshape(gh, gw, -1).astype(np.float32)
+    n = int(head["n_layers"])
+    for i in range(n):
+        w, b = head[f"l{i}_w"].astype(np.float32), head[f"l{i}_b"].astype(np.float32)
+        if w.shape[2] == 1:
+            x = x @ w[:, :, 0, 0].T + b
+        else:
+            x = _conv3x3(x, w, b)
+        if i < n - 1:
+            x = np.maximum(x, 0)
+    return x[..., 0]
+
+
+def _upsample(prob: np.ndarray, out_hw: tuple[int, int]) -> np.ndarray:
+    im = Image.fromarray(prob.astype(np.float32), mode="F").resize((out_hw[1], out_hw[0]), Image.BILINEAR)
+    return np.asarray(im, dtype=np.float32)
+
+
+def trace_outline(mask: np.ndarray, max_points: int = 90) -> list[tuple[int, int]]:
+    """Outer boundary of the largest blob (Moore neighbour tracing), as (x, y) points."""
+    h, w = mask.shape
+    if not mask.any():
+        return []
+    m = np.pad(mask, 1)
+    ys, xs = np.nonzero(m)
+    start = (int(ys[0]), int(xs[0]))  # top-most, then left-most foreground pixel
+    nbrs = [(-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)]
+    pts = [start]
+    cur, back = start, 6  # we "came from" the west
+    for _ in range(4 * (h + w) * 8):
+        found = False
+        for k in range(8):
+            d = (back + 1 + k) % 8
+            ny, nx = cur[0] + nbrs[d][0], cur[1] + nbrs[d][1]
+            if m[ny, nx]:
+                back = (d + 4) % 8
+                cur = (ny, nx)
+                found = True
+                break
+        if not found or cur == start:
+            break
+        pts.append(cur)
+    step = max(1, -(-len(pts) // max_points))
+    return [(x - 1, y - 1) for y, x in pts[::step]]
+
+
+def instances_v2(prob: np.ndarray, size: tuple[int, int], thr: float, min_frac: float = 0.004) -> list[Detection]:
+    """prob: (gh, gw) grid probability. Components on the grid, masks/boxes/outlines at 4×."""
+    gh, gw = prob.shape
+    w, h = size
+    binary = prob >= thr
+    labels = label_components(_close(binary, 1))
+    fine = _upsample(prob, (gh * UPS, gw * UPS))
+    sx, sy = w / (gw * UPS), h / (gh * UPS)
+    dets = []
+    for lab in range(1, int(labels.max()) + 1):
+        region = labels == lab
+        if float((region & binary).mean()) < min_frac:
+            continue
+        # this component's area at fine resolution (dilate by one cell for the edges)
+        grow = np.asarray(Image.fromarray((_close(region, 1) * 255).astype(np.uint8)).resize((gw * UPS, gh * UPS), Image.NEAREST)) > 0
+        mk = grow & (fine >= thr)
+        if not mk.any():
+            continue
+        ys, xs = np.nonzero(mk)
+        box = (float(xs.min()) * sx, float(ys.min()) * sy, float(xs.max() + 1) * sx, float(ys.max() + 1) * sy)
+        poly = [(x * sx, y * sy) for x, y in trace_outline(mk)]
+        dets.append(Detection(box=box, species="pet", confidence=float(fine[mk].mean()), polygon=poly or None, mask_small=mk))
+    if dets:
+        biggest = max(d.area() for d in dets)
+        dets = [d for d in dets if d.area() >= 0.15 * biggest]
+    dets.sort(key=lambda d: d.confidence * (d.area() ** 0.5), reverse=True)
+    return dets
+
+
+class DinoSegmenterV2:
+    """Frozen DINOv2-small patch tokens (aspect kept, long side 448) → small conv head."""
+
+    name = "dinov2-small-seg2"
+
+    def __init__(self, cfg, encoders, path: Path | None = None):
+        self.cfg = cfg
+        self.enc = encoders
+        path = path or cfg.seg_head2_path
+        if not path.exists():
+            raise FileNotFoundError(f"segmentation head not found: {path}")
+        self.head = load_head(path)
+        self.thr = float(self.head.get("threshold", np.array(0.5)))
+        self.long_side = int(self.head.get("long_side", np.array(448)))
+        log.info("segmenter v2: %s threshold %.2f long side %d", path.name, self.thr, self.long_side)
+
+    def _tokens(self, im: Image.Image) -> tuple[np.ndarray, int, int]:
+        tw, th = input_size(im.width, im.height, self.long_side)
+        arr = np.asarray(im.convert("RGB").resize((tw, th), Image.BICUBIC), dtype=np.float32) / 255.0
+        pixel = ((arr - MEAN) / STD).transpose(2, 0, 1)[None]
+        hs = self.enc.dino_hidden(pixel)  # torch or ONNX, same numbers
+        return hs[0, 1:], th // PATCH, tw // PATCH
+
+    def probs(self, im: Image.Image) -> np.ndarray:
+        tok, gh, gw = self._tokens(im)
+        return 1 / (1 + np.exp(-head_forward(tok, gh, gw, self.head)))
+
+    def detect(self, images: list[Image.Image]) -> list[list[Detection]]:
+        return [instances_v2(self.probs(im), im.size, self.thr) for im in images]

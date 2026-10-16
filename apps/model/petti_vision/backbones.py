@@ -293,6 +293,17 @@ class HFEncoders:
         C = crop.get("height", S) if getattr(self.reid_proc, "do_center_crop", False) else S
         return {"reid": reid, "vlm": l2n(vlm), "attn": attn, "attn_frac": C / S}
 
+    def dino_hidden(self, pixel: np.ndarray) -> np.ndarray:
+        """pixel (B,3,H,W) normalised → DINOv2 last hidden state (B, 1+N, C), registers dropped."""
+        torch = self.torch
+        x = torch.from_numpy(np.ascontiguousarray(pixel, dtype=np.float32)).to(self.device, dtype=self.dtype)
+        with torch.inference_mode():
+            hs = self.reid(pixel_values=x).last_hidden_state
+        n_reg = int(getattr(self.reid.config, "num_register_tokens", 0) or 0)
+        if n_reg:
+            hs = torch.cat([hs[:, :1], hs[:, 1 + n_reg :]], 1)
+        return hs.float().cpu().numpy()
+
     def encode_texts(self, texts: list[str]) -> np.ndarray:
         torch = self.torch
         out = []
@@ -353,12 +364,26 @@ def build(cfg: Config):
     if cfg.fake_models:
         return FakeDetector(), FakeEncoders()
     backend = cfg.detector_backend
+    if cfg.runtime == "onnx":
+        from .onnx_runtime import OnnxEncoders
+        from .segmenter import DinoSegmenterV2
+
+        enc = OnnxEncoders(cfg)
+        if backend not in ("auto", "dino2"):
+            log.warning("runtime=onnx supports only the dino2 segmenter; ignoring detector_backend=%s", backend)
+        return DinoSegmenterV2(cfg, enc), enc
     if backend == "auto":
-        backend = "dino" if cfg.seg_head_path.exists() else "yolo"
+        # v2 (aspect-preserving, trained on cluttered COCO scenes) beats both v1 and YOLO
+        # on COCO val2017: recall 0.95 vs 0.81/0.87, small-animal recall 0.83 vs 0.37/0.68
+        backend = "dino2" if cfg.seg_head2_path.exists() else ("dino" if cfg.seg_head_path.exists() else "yolo")
     if backend == "yolo":
         log.warning("YOLO detector is AGPL-3.0 and dev-only (PETTI_DETECTOR_BACKEND=yolo)")
         return YoloDetector(cfg), HFEncoders(cfg)
     enc = HFEncoders(cfg)
+    if backend == "dino2":
+        from .segmenter import DinoSegmenterV2
+
+        return DinoSegmenterV2(cfg, enc), enc
     from .segmenter import DinoSegmenter
 
     return DinoSegmenter(cfg, enc), enc

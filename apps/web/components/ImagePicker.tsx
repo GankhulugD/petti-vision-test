@@ -44,11 +44,11 @@ export default function ImagePicker({ files, onChange, min = 1, max = 12, hints 
         }}
         onClick={() => input.current?.click()}
         className={`flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-4 py-8 text-center transition ${
-          drag ? "border-brand-500 bg-brand-50" : "border-stone-300 bg-white hover:border-brand-500"
+          drag ? "border-zinc-900 bg-zinc-50" : "border-zinc-200 bg-white hover:border-zinc-400"
         }`}
       >
         <p className="font-semibold">Зураг чирж оруулах эсвэл дарж сонгох</p>
-        <p className="mt-1 text-sm text-stone-500">
+        <p className="mt-1 text-sm text-zinc-500">
           {min > 1 ? `Дор хаяж ${min} зураг, өөр өөр өнцгөөс` : "1 ба түүнээс дээш зураг"} · JPG/PNG/HEIC
         </p>
         <input ref={input} type="file" accept="image/*" multiple capture={undefined} className="hidden" onChange={(e) => add(e.target.files)} />
@@ -57,7 +57,7 @@ export default function ImagePicker({ files, onChange, min = 1, max = 12, hints 
       {hints && (
         <div className="mt-3 flex flex-wrap gap-2">
           {ANGLES.map((a, i) => (
-            <span key={a} className={`chip ${i < files.length ? "bg-green-100 text-green-800" : ""}`}>
+            <span key={a} className={`chip ${i < files.length ? "border-zinc-900 text-zinc-900" : "text-zinc-400"}`}>
               {i < files.length ? "✓" : i + 1}. {a}
             </span>
           ))}
@@ -67,7 +67,7 @@ export default function ImagePicker({ files, onChange, min = 1, max = 12, hints 
       {files.length > 0 && (
         <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-6">
           {urls.map((u, i) => (
-            <div key={u} className="group relative aspect-square overflow-hidden rounded-xl bg-stone-100">
+            <div key={u} className="group relative aspect-square overflow-hidden rounded-xl bg-zinc-100">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={u} alt="" className="h-full w-full object-cover" />
               <button
@@ -83,7 +83,7 @@ export default function ImagePicker({ files, onChange, min = 1, max = 12, hints 
         </div>
       )}
       {min > 1 && (
-        <p className={`mt-2 text-sm ${files.length >= min ? "text-green-700" : "text-stone-500"}`}>
+        <p className={`mt-2 text-sm ${files.length >= min ? "text-zinc-900" : "text-zinc-500"}`}>
           {files.length}/{min} зураг {files.length >= min ? "— бэлэн" : ""}
         </p>
       )}

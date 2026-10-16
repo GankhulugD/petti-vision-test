@@ -1,0 +1,173 @@
+{
+  "collar": {
+    "threshold": 0.6,
+    "default": 0.6,
+    "n": 873,
+    "fired_before": 0.0263,
+    "fired_after": 0.0263,
+    "q50": 0.0482,
+    "q99": 0.7244
+  },
+  "harness": {
+    "threshold": 0.65,
+    "default": 0.65,
+    "n": 873,
+    "fired_before": 0.0241,
+    "fired_after": 0.0241,
+    "q50": 0.0157,
+    "q99": 0.9013
+  },
+  "clothes": {
+    "threshold": 0.9,
+    "default": 0.9,
+    "n": 873,
+    "fired_before": 0.0126,
+    "fired_after": 0.0126,
+    "q50": 0.0133,
+    "q99": 0.9319
+  },
+  "ear_tip": {
+    "threshold": 0.85,
+    "default": 0.85,
+    "n": 873,
+    "fired_before": 0.0,
+    "fired_after": 0.0,
+    "q50": 0.097,
+    "q99": 0.6672
+  },
+  "heterochromia": {
+    "threshold": 0.8,
+    "default": 0.8,
+    "n": 873,
+    "fired_before": 0.0034,
+    "fired_after": 0.0034,
+    "q50": 0.0069,
+    "q99": 0.4279
+  },
+  "blue_eyes": {
+    "threshold": 0.75,
+    "default": 0.75,
+    "n": 873,
+    "fired_before": 0.0069,
+    "fired_after": 0.0069,
+    "q50": 0.0079,
+    "q99": 0.6242
+  },
+  "one_eye": {
+    "threshold": 0.95,
+    "default": 0.95,
+    "n": 873,
+    "fired_before": 0.0,
+    "fired_after": 0.0,
+    "q50": 0.0888,
+    "q99": 0.6286
+  },
+  "short_tail": {
+    "threshold": 1.01,
+    "default": 1.01,
+    "n": 873,
+    "fired_before": 0.0,
+    "fired_after": 0.0,
+    "q50": 0.352,
+    "q99": 0.9474
+  },
+  "three_legs": {
+    "threshold": 0.9,
+    "default": 0.9,
+    "n": 873,
+    "fired_before": 0.0023,
+    "fired_after": 0.0023,
+    "q50": 0.0325,
+    "q99": 0.7359
+  },
+  "scar": {
+    "threshold": 0.85,
+    "default": 0.85,
+    "n": 873,
+    "fired_before": 0.0011,
+    "fired_after": 0.0011,
+    "q50": 0.043,
+    "q99": 0.4213
+  },
+  "white_chest": {
+    "threshold": 0.8,
+    "default": 0.8,
+    "n": 873,
+    "fired_before": 0.0126,
+    "fired_after": 0.0126,
+    "q50": 0.1253,
+    "q99": 0.8386
+  },
+  "white_paws": {
+    "threshold": 0.7,
+    "default": 0.7,
+    "n": 873,
+    "fired_before": 0.0069,
+    "fired_after": 0.0069,
+    "q50": 0.0778,
+    "q99": 0.6499
+  },
+  "face_mask": {
+    "threshold": 0.7,
+    "default": 0.7,
+    "n": 873,
+    "fired_before": 0.0034,
+    "fired_after": 0.0034,
+    "q50": 0.043,
+    "q99": 0.586
+  },
+  "eye_patch": {
+    "threshold": 0.85,
+    "default": 0.85,
+    "n": 873,
+    "fired_before": 0.0034,
+    "fired_after": 0.0034,
+    "q50": 0.035,
+    "q99": 0.6921
+  },
+  "blaze": {
+    "threshold": 0.85,
+    "default": 0.85,
+    "n": 873,
+    "fired_before": 0.008,
+    "fired_after": 0.008,
+    "q50": 0.0748,
+    "q99": 0.8295
+  },
+  "floppy_ears": {
+    "threshold": 0.7,
+    "default": 0.7,
+    "n": 873,
+    "fired_before": 0.008,
+    "fired_after": 0.008,
+    "q50": 0.0448,
+    "q99": 0.6719
+  },
+  "folded_ears": {
+    "threshold": 0.9,
+    "default": 0.9,
+    "n": 164,
+    "fired_before": 0.0,
+    "fired_after": 0.0,
+    "q50": 0.138,
+    "q99": 0.7889
+  },
+  "curled_tail": {
+    "threshold": 0.9,
+    "default": 0.9,
+    "n": 709,
+    "fired_before": 0.0056,
+    "fired_after": 0.0056,
+    "q50": 0.0573,
+    "q99": 0.8697
+  },
+  "four_eyes": {
+    "threshold": 0.6,
+    "default": 0.6,
+    "n": 709,
+    "fired_before": 0.0437,
+    "fired_after": 0.0437,
+    "q50": 0.0592,
+    "q99": 0.883
+  }
+}

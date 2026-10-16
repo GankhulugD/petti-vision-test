@@ -2,7 +2,6 @@
 torch>=2.4
 torchvision>=0.19
 transformers>=4.56      # SigLIP2 + DINOv2 (DINOv3 needs >=4.56)
-ultralytics>=8.4.0      # dev only: PETTI_DETECTOR_BACKEND=yolo (AGPL). Default segmenter does not import it.
 numpy>=1.26
 pillow>=10.4
 pillow-heif>=0.18     # iPhone HEIC photos
@@ -12,6 +11,7 @@ python-multipart>=0.0.17
 sentencepiece>=0.2      # SigLIP tokenizer
 protobuf>=4.25
 # --- training ---
+# (offline teacher for evaluation uses torchvision Mask R-CNN, BSD-3)
 tqdm>=4.66
 # --- tests ---
 pytest>=8

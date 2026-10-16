@@ -34,7 +34,7 @@ MAX_BYTES = 15 * 1024 * 1024
 
 cfg = Config()
 state: dict = {}
-MODEL_VERSION = "0.5.0"  # bump when inference behaviour changes
+MODEL_VERSION = "0.5.2"  # bump when inference behaviour changes
 
 
 def _code_hash() -> str:

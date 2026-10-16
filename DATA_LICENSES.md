@@ -19,6 +19,8 @@ Weights that ship must be Apache-2.0, MIT, or BSD. A dataset without a commercia
 | dog.ceo owner-named phone photos (`data/eval/dogceo/`, identity set) | Uploaded by owners; no commercial grant found | Evaluation only. |
 | Synthetic negatives (`data/eval/negatives/`) | Generated in `training/freeze_eval.py` | Evaluation only. Line drawings, not photographs. |
 | Wikimedia scene photos (`data/public/scenes/train`, `data/eval/negatives_photo`) | Per file in `negatives_photo_licenses.json`: CC0, public domain, CC BY, CC BY-SA. NC licenses were skipped | Train split may influence `seg_head.npz`. Eval split is evaluation only. |
+| Wikimedia Commons breed photos (`data/commons/`, `fetch_commons_breeds.py`) | Per file in `data/commons/attribution.json`: CC0, public domain, CC BY, CC BY-SA (author, license, page URL kept) | Training of `heads.npz` (70% by photo series) and evaluation (`data/eval/commons_test.csv`, 30%, never trained on). CC BY/BY-SA require attribution: ship `attribution.json` with the weights. |
+| Facebook groups / social posts | Owned by each poster; platform terms forbid automated collection | **Not used.** Only through the group admin's agreement and each poster's consent (e.g. the app's consent box). |
 | Owner registrations in `data/` (live registry) | User photos | Not in git. Training use requires explicit consent (Phase 2). Deletion on request (Phase 5). |
 
 Frozen eval contract: `apps/model/data/eval/manifest.json` (sha256 + perceptual hash). Filename exclude list: `apps/model/data/eval/bench_exclude.txt`.

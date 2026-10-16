@@ -1,3 +1,4 @@
+import { ConfidenceBadge } from "@/components/Confidence";
 import type { Level, Profile } from "@/lib/api";
 
 function Bar({ value }: { value: number }) {
@@ -8,16 +9,9 @@ function Bar({ value }: { value: number }) {
   );
 }
 
-const LEVEL: Record<Level, [string, string]> = {
-  high: ["Итгэлтэй", "border-zinc-900 text-zinc-900"],
-  medium: ["Магадгүй", "text-zinc-600"],
-  low: ["Тодорхойгүй", "border-dashed text-zinc-400"],
-};
-
 function LevelChip({ level }: { level?: Level }) {
   if (!level) return null;
-  const [txt, cls] = LEVEL[level];
-  return <span className={`chip ${cls}`}>{txt}</span>;
+  return <ConfidenceBadge level={level} />;
 }
 
 function Row({ label, value, conf, sub, level }: { label: string; value: string; conf?: number; sub?: string; level?: Level }) {

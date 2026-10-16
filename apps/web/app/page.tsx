@@ -37,7 +37,7 @@ export default function AnalyzePage() {
   return (
     <div className="space-y-10">
       <header className="max-w-2xl">
-        <p className="eyebrow">Petti Vision · v0.5</p>
+        <p className="eyebrow">Petti Vision · v0.5.2</p>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Амьтныг зургаар нь таних</h1>
         <p className="mt-3 text-[15px] leading-7 text-zinc-500">
           Зураг оруулахад модель амьтныг олж, үүлдэр, нас, хэмжээ, өнгө зүс, онцгой шинжийг тодорхойлно. Ингэхдээ юу хийж байгааг шууд харуулна.

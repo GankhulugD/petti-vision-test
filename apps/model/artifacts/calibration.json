@@ -31,9 +31,9 @@
   "breed_temperature": 1.5,
   "notes": "reid_*/attr_beta: training/evaluate.py on 46 owner-photo dogs + 104 look-alikes (beta 2-5 is a plateau, 3 chosen). breed_temperature: fitted on 124 benchmark photos.",
   "display_offset": 5.0,
-  "breed_display_temperature": 0.532,
+  "breed_display_temperature": 0.549,
   "breed_levels": [
-    0.67,
+    0.53,
     0.5
   ],
   "breed_unsure": 0.49

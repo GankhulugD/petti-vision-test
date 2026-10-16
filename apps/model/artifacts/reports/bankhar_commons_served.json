@@ -1,0 +1,5690 @@
+{
+ "summary": {
+  "bankhar": {
+   "n": 12,
+   "top1": 1.0,
+   "top3": 1.0,
+   "mean_p_cal": 0.944,
+   "wrong_top1": {}
+  },
+  "lookalikes": {
+   "n": 421,
+   "called_bankhar_top1": 0.1,
+   "mean_p_cal": 0.102,
+   "own_breed_top1": 0.708
+  },
+  "per_lookalike": {
+   "alaskan_malamute": {
+    "n": 70,
+    "called_bankhar": 0.043,
+    "correct": 0.786,
+    "mean_p_bankhar_cal": 0.029
+   },
+   "caucasian_shepherd": {
+    "n": 13,
+    "called_bankhar": 0.308,
+    "correct": 0.385,
+    "mean_p_bankhar_cal": 0.33
+   },
+   "central_asian_shepherd": {
+    "n": 14,
+    "called_bankhar": 0.0,
+    "correct": 0.571,
+    "mean_p_bankhar_cal": 0.066
+   },
+   "chow_chow": {
+    "n": 25,
+    "called_bankhar": 0.0,
+    "correct": 1.0,
+    "mean_p_bankhar_cal": 0.01
+   },
+   "east_european_shepherd": {
+    "n": 9,
+    "called_bankhar": 0.0,
+    "correct": 0.667,
+    "mean_p_bankhar_cal": 0.011
+   },
+   "german_shepherd": {
+    "n": 46,
+    "called_bankhar": 0.0,
+    "correct": 0.717,
+    "mean_p_bankhar_cal": 0.014
+   },
+   "leonberger": {
+    "n": 25,
+    "called_bankhar": 0.0,
+    "correct": 1.0,
+    "mean_p_bankhar_cal": 0.022
+   },
+   "newfoundland": {
+    "n": 25,
+    "called_bankhar": 0.04,
+    "correct": 0.92,
+    "mean_p_bankhar_cal": 0.06
+   },
+   "samoyed": {
+    "n": 55,
+    "called_bankhar": 0.018,
+    "correct": 0.836,
+    "mean_p_bankhar_cal": 0.012
+   },
+   "siberian_husky": {
+    "n": 69,
+    "called_bankhar": 0.0,
+    "correct": 0.623,
+    "mean_p_bankhar_cal": 0.016
+   },
+   "spitz": {
+    "n": 25,
+    "called_bankhar": 0.04,
+    "correct": 0.8,
+    "mean_p_bankhar_cal": 0.041
+   },
+   "tibetan_mastiff": {
+    "n": 45,
+    "called_bankhar": 0.711,
+    "correct": 0.2,
+    "mean_p_bankhar_cal": 0.665
+   }
+  }
+ },
+ "rows": [
+  {
+   "file": "data/commons/bankhar/05df285ce492c46e.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "leonberger"
+   ],
+   "p_bankhar": 0.8038,
+   "p_bankhar_cal": 0.9619
+  },
+  {
+   "file": "data/commons/bankhar/137c1b04f2f38722.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "pekingese"
+   ],
+   "p_bankhar": 0.6273,
+   "p_bankhar_cal": 0.9712
+  },
+  {
+   "file": "data/commons/bankhar/2c5e21720feeaba6.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "newfoundland",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.5768,
+   "p_bankhar_cal": 0.7837
+  },
+  {
+   "file": "data/commons/bankhar/2cf882119fe82d74.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "caucasian_shepherd",
+    "newfoundland"
+   ],
+   "p_bankhar": 0.8643,
+   "p_bankhar_cal": 0.9926
+  },
+  {
+   "file": "data/commons/bankhar/34580f64b847ec1a.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "central_asian_shepherd"
+   ],
+   "p_bankhar": 0.9115,
+   "p_bankhar_cal": 0.9947
+  },
+  {
+   "file": "data/commons/bankhar/6fa7830a6755c3fa.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "east_european_shepherd",
+    "german_shepherd"
+   ],
+   "p_bankhar": 0.8676,
+   "p_bankhar_cal": 0.9907
+  },
+  {
+   "file": "data/commons/bankhar/832541645a821d37.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "leonberger"
+   ],
+   "p_bankhar": 0.6916,
+   "p_bankhar_cal": 0.8929
+  },
+  {
+   "file": "data/commons/bankhar/98c6eb2d34b49513.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "bernese_mountain"
+   ],
+   "p_bankhar": 0.7914,
+   "p_bankhar_cal": 0.9666
+  },
+  {
+   "file": "data/commons/bankhar/9f5a4c1c32ed981f.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "australian_shepherd",
+    "bernese_mountain"
+   ],
+   "p_bankhar": 0.4839,
+   "p_bankhar_cal": 0.8681
+  },
+  {
+   "file": "data/commons/bankhar/cf9051e164b5c052.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.7891,
+   "p_bankhar_cal": 0.9665
+  },
+  {
+   "file": "data/commons/bankhar/e2acaf0e13e1c180.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "caucasian_shepherd",
+    "newfoundland"
+   ],
+   "p_bankhar": 0.7815,
+   "p_bankhar_cal": 0.9733
+  },
+  {
+   "file": "data/commons/bankhar/feca164bba08f98a.jpg",
+   "truth": "bankhar",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.7986,
+   "p_bankhar_cal": 0.9609
+  },
+  {
+   "file": "data/commons/siberian_husky/0064575c71ca22e7.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0035,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/03e3943f28be8f24.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0251,
+   "p_bankhar_cal": 0.0025
+  },
+  {
+   "file": "data/commons/siberian_husky/03f78411d54f96ca.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0028,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/04ff6c439ec6e316.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0086,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/siberian_husky/0614af2594aac21d.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.018,
+   "p_bankhar_cal": 0.0013
+  },
+  {
+   "file": "data/commons/siberian_husky/0a44d5066a7db63b.jpg",
+   "truth": "siberian_husky",
+   "species": "other",
+   "top1": null,
+   "top3": [],
+   "p_bankhar": 0.0,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/0a53e0dce89e467a.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0035,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/0ab7b65024d284ca.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0024,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/0c05e953c410f21b.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "mixed_dog",
+    "east_european_shepherd"
+   ],
+   "p_bankhar": 0.0527,
+   "p_bankhar_cal": 0.0294
+  },
+  {
+   "file": "data/commons/siberian_husky/0d8364fcac3ed7bc.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0011,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/0e367e9de617f1eb.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0007,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/0e5e1ca43089c4fa.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0088,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/commons/siberian_husky/118a0cb3a912b463.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "mixed_dog",
+    "east_european_shepherd"
+   ],
+   "p_bankhar": 0.0327,
+   "p_bankhar_cal": 0.0062
+  },
+  {
+   "file": "data/commons/siberian_husky/13f9f5a2ceabda0f.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0019,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/160cd51b18c22a0a.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0241,
+   "p_bankhar_cal": 0.0022
+  },
+  {
+   "file": "data/commons/siberian_husky/162db8348770e2ab.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0091,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/commons/siberian_husky/171b0d4e69dd0dd2.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0155,
+   "p_bankhar_cal": 0.002
+  },
+  {
+   "file": "data/commons/siberian_husky/171e18f18612ad6a.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0064,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/siberian_husky/1a42e1a3c42ae9fa.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "samoyed"
+   ],
+   "p_bankhar": 0.0036,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/siberian_husky/1e9be8251e702731.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0016,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/1f152272424a1114.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0052,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/siberian_husky/2132dee1be5ff41b.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0074,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/siberian_husky/2155f3940914f0e4.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.004,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/siberian_husky/220ec195505f51af.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0308,
+   "p_bankhar_cal": 0.003
+  },
+  {
+   "file": "data/commons/siberian_husky/225ece0de50718eb.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0052,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/siberian_husky/2786d6daca288ff1.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "mixed_dog",
+    "akita"
+   ],
+   "p_bankhar": 0.0271,
+   "p_bankhar_cal": 0.0049
+  },
+  {
+   "file": "data/commons/siberian_husky/2a1dcd014e447514.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0183,
+   "p_bankhar_cal": 0.0012
+  },
+  {
+   "file": "data/commons/siberian_husky/2a6b67fd54dc5381.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "shiba_inu"
+   ],
+   "p_bankhar": 0.0044,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/siberian_husky/2d58309b57d75b8a.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0075,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/siberian_husky/2de97a647d4a020a.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.002,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/33bbaf55d5b85ecd.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "shiba_inu"
+   ],
+   "p_bankhar": 0.0016,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/35b459d5b6e95f95.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "labrador_retriever",
+   "top3": [
+    "labrador_retriever",
+    "golden_retriever",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0076,
+   "p_bankhar_cal": 0.0006
+  },
+  {
+   "file": "data/commons/siberian_husky/35bc397d38d2a146.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0736,
+   "p_bankhar_cal": 0.0678
+  },
+  {
+   "file": "data/commons/siberian_husky/3605c430bc03785f.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0655,
+   "p_bankhar_cal": 0.0204
+  },
+  {
+   "file": "data/commons/siberian_husky/365a5104c010809b.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0112,
+   "p_bankhar_cal": 0.0006
+  },
+  {
+   "file": "data/commons/siberian_husky/36e3454e83ed7603.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0019,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/39c9cc4ad6a9e81f.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0132,
+   "p_bankhar_cal": 0.0006
+  },
+  {
+   "file": "data/commons/siberian_husky/3d0de2f57bac4284.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0067,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/siberian_husky/3f2860faf72ffa11.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0405,
+   "p_bankhar_cal": 0.0077
+  },
+  {
+   "file": "data/commons/siberian_husky/3f39e076b47e9dce.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "bankhar",
+    "siberian_husky"
+   ],
+   "p_bankhar": 0.3075,
+   "p_bankhar_cal": 0.3982
+  },
+  {
+   "file": "data/commons/siberian_husky/3f7f354b07f43652.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "bankhar",
+    "siberian_husky"
+   ],
+   "p_bankhar": 0.2798,
+   "p_bankhar_cal": 0.3767
+  },
+  {
+   "file": "data/commons/siberian_husky/403dabcd9773e0b6.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0022,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/siberian_husky/4110d03f01c05f71.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "mixed_dog",
+   "top3": [
+    "mixed_dog",
+    "bankhar",
+    "welsh_corgi"
+   ],
+   "p_bankhar": 0.1169,
+   "p_bankhar_cal": 0.1416
+  },
+  {
+   "file": "data/commons/siberian_husky/4231b2ddbb6654e9.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": null,
+   "top3": [],
+   "p_bankhar": 0.0,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/alaskan_malamute/0a5c49e512e3cf9a.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.027,
+   "p_bankhar_cal": 0.0027
+  },
+  {
+   "file": "data/commons/alaskan_malamute/107d4f23a1a1b53b.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0125,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/commons/alaskan_malamute/10e2106e4f4fb041.jpg",
+   "truth": "alaskan_malamute",
+   "species": "other",
+   "top1": null,
+   "top3": [],
+   "p_bankhar": 0.0,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/alaskan_malamute/121aea42039491c8.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.003,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/alaskan_malamute/1c97ef46a8837660.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0156,
+   "p_bankhar_cal": 0.0008
+  },
+  {
+   "file": "data/commons/alaskan_malamute/1cb029e80b7aab1a.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0155,
+   "p_bankhar_cal": 0.0012
+  },
+  {
+   "file": "data/commons/alaskan_malamute/273a252f9c3ff91e.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.031,
+   "p_bankhar_cal": 0.0023
+  },
+  {
+   "file": "data/commons/alaskan_malamute/2ede89db98bf68ea.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0448,
+   "p_bankhar_cal": 0.0074
+  },
+  {
+   "file": "data/commons/alaskan_malamute/31f715841b4ce8f8.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "east_european_shepherd",
+    "akita"
+   ],
+   "p_bankhar": 0.2283,
+   "p_bankhar_cal": 0.6069
+  },
+  {
+   "file": "data/commons/alaskan_malamute/3b0b63b9ec34b654.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0268,
+   "p_bankhar_cal": 0.0016
+  },
+  {
+   "file": "data/commons/alaskan_malamute/3d2177f8c31b4a44.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0085,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/alaskan_malamute/3f76a23dc5fe92b7.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0184,
+   "p_bankhar_cal": 0.0007
+  },
+  {
+   "file": "data/commons/alaskan_malamute/46080b9945dd9029.jpg",
+   "truth": "alaskan_malamute",
+   "species": "other",
+   "top1": null,
+   "top3": [],
+   "p_bankhar": 0.0,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/alaskan_malamute/46fb3b1a3d0d05ec.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0538,
+   "p_bankhar_cal": 0.0147
+  },
+  {
+   "file": "data/commons/alaskan_malamute/47415ed89a361656.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0157,
+   "p_bankhar_cal": 0.0014
+  },
+  {
+   "file": "data/commons/alaskan_malamute/53c4440aa31e3344.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0136,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/commons/alaskan_malamute/6bfff93b1cd53182.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.042,
+   "p_bankhar_cal": 0.004
+  },
+  {
+   "file": "data/commons/alaskan_malamute/71ee8a9d04b3d9ee.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0357,
+   "p_bankhar_cal": 0.0088
+  },
+  {
+   "file": "data/commons/alaskan_malamute/74c84de441d8361f.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0238,
+   "p_bankhar_cal": 0.0016
+  },
+  {
+   "file": "data/commons/alaskan_malamute/8e91621051cec79d.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0067,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/alaskan_malamute/90224fbaf3907e22.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0118,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/commons/alaskan_malamute/97f3d3fa13d44626.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0033,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/alaskan_malamute/99a0d65213841321.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0125,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/commons/alaskan_malamute/a1d8e29e669678eb.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "shiba_inu",
+   "top3": [
+    "shiba_inu",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0076,
+   "p_bankhar_cal": 0.0008
+  },
+  {
+   "file": "data/commons/alaskan_malamute/a27b82ca82333ed1.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "bankhar",
+    "akita"
+   ],
+   "p_bankhar": 0.1267,
+   "p_bankhar_cal": 0.0597
+  },
+  {
+   "file": "data/commons/alaskan_malamute/a45e316211e4ab2a.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0174,
+   "p_bankhar_cal": 0.0007
+  },
+  {
+   "file": "data/commons/alaskan_malamute/a5c64c5e048add35.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0221,
+   "p_bankhar_cal": 0.0019
+  },
+  {
+   "file": "data/commons/alaskan_malamute/aba68c55ef7ad751.jpg",
+   "truth": "alaskan_malamute",
+   "species": "other",
+   "top1": null,
+   "top3": [],
+   "p_bankhar": 0.0,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/alaskan_malamute/acff2fa874e8db46.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0238,
+   "p_bankhar_cal": 0.0015
+  },
+  {
+   "file": "data/commons/alaskan_malamute/b0c5bbbdd5940c50.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.011,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/commons/alaskan_malamute/b2259ca980655b4e.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0148,
+   "p_bankhar_cal": 0.0007
+  },
+  {
+   "file": "data/commons/alaskan_malamute/b662f9fe2ee268c4.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0493,
+   "p_bankhar_cal": 0.0054
+  },
+  {
+   "file": "data/commons/alaskan_malamute/bd782abd0e57ea80.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0133,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/commons/alaskan_malamute/c29c0ff7a190eb36.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0043,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/alaskan_malamute/cc3e74a912fd1759.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0112,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/commons/alaskan_malamute/cdd1dad1ff7a229f.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "saint_bernard",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.2539,
+   "p_bankhar_cal": 0.5882
+  },
+  {
+   "file": "data/commons/alaskan_malamute/d69abd65cfde0371.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0102,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/alaskan_malamute/d8f48b591f7b4bbe.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.031,
+   "p_bankhar_cal": 0.0028
+  },
+  {
+   "file": "data/commons/alaskan_malamute/dabfdd5b4eefc4fc.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0038,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/alaskan_malamute/dc4bac338e86e21e.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0132,
+   "p_bankhar_cal": 0.0006
+  },
+  {
+   "file": "data/commons/alaskan_malamute/e52f443d8996bee7.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "border_collie",
+    "akita"
+   ],
+   "p_bankhar": 0.03,
+   "p_bankhar_cal": 0.0107
+  },
+  {
+   "file": "data/commons/alaskan_malamute/f2586aad08e6489a.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "alaskan_malamute",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.4169,
+   "p_bankhar_cal": 0.7033
+  },
+  {
+   "file": "data/commons/alaskan_malamute/f4619658df4458c2.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0211,
+   "p_bankhar_cal": 0.0028
+  },
+  {
+   "file": "data/commons/alaskan_malamute/f5031860a035dafe.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0085,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/alaskan_malamute/f5cfb84e39eacd8d.jpg",
+   "truth": "alaskan_malamute",
+   "species": "other",
+   "top1": null,
+   "top3": [],
+   "p_bankhar": 0.0,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/samoyed/03da8fe952000b1e.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0117,
+   "p_bankhar_cal": 0.0012
+  },
+  {
+   "file": "data/commons/samoyed/07e2af637ad8937c.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "chow_chow",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0345,
+   "p_bankhar_cal": 0.0039
+  },
+  {
+   "file": "data/commons/samoyed/093fee391015d385.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.003,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/samoyed/0bb8f5366c7174f4.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "akita",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0122,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/commons/samoyed/0ca780e3684c8fe9.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "alaskan_malamute",
+    "spitz"
+   ],
+   "p_bankhar": 0.0056,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/samoyed/0dd70e8fd7df5545.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "great_pyrenees",
+    "siberian_husky"
+   ],
+   "p_bankhar": 0.0089,
+   "p_bankhar_cal": 0.0024
+  },
+  {
+   "file": "data/commons/samoyed/1d1af283538b55de.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0047,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/samoyed/24be02667c88c590.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "alaskan_malamute"
+   ],
+   "p_bankhar": 0.0436,
+   "p_bankhar_cal": 0.0073
+  },
+  {
+   "file": "data/commons/samoyed/371d86405309af92.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0019,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/samoyed/3bc4e9bccb0e3932.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0218,
+   "p_bankhar_cal": 0.0019
+  },
+  {
+   "file": "data/commons/samoyed/4d3fa577bb37bc43.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0036,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/samoyed/51e374e344620660.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "pomeranian"
+   ],
+   "p_bankhar": 0.0018,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/samoyed/62efe9445fdb686f.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "chow_chow",
+    "akita"
+   ],
+   "p_bankhar": 0.0043,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/samoyed/6308ca7f74cc7f71.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "great_pyrenees",
+   "top3": [
+    "great_pyrenees",
+    "samoyed",
+    "central_asian_shepherd"
+   ],
+   "p_bankhar": 0.044,
+   "p_bankhar_cal": 0.0062
+  },
+  {
+   "file": "data/commons/samoyed/65936418865ebc8d.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0556,
+   "p_bankhar_cal": 0.0206
+  },
+  {
+   "file": "data/commons/samoyed/6c964d41bb40b1b7.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "chow_chow",
+    "spitz"
+   ],
+   "p_bankhar": 0.0196,
+   "p_bankhar_cal": 0.0016
+  },
+  {
+   "file": "data/commons/samoyed/6df6a2414ea84b9c.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "tibetan_mastiff",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0734,
+   "p_bankhar_cal": 0.0125
+  },
+  {
+   "file": "data/commons/samoyed/77819f2f6c6f75f5.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "alaskan_malamute"
+   ],
+   "p_bankhar": 0.0048,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/samoyed/7fbce058874f3bcd.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0089,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/samoyed/841e8415b98d0e3e.jpg",
+   "truth": "samoyed",
+   "species": "other",
+   "top1": null,
+   "top3": [],
+   "p_bankhar": 0.0,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/samoyed/8f6b9a39cb7fccba.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0208,
+   "p_bankhar_cal": 0.0016
+  },
+  {
+   "file": "data/commons/samoyed/92579af2f1226638.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0135,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/commons/samoyed/a86228fe5f7107ac.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0023,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/samoyed/b9c2df153de76e65.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0028,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/samoyed/bee83c60a4eab40c.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "samoyed",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.272,
+   "p_bankhar_cal": 0.4566
+  },
+  {
+   "file": "data/commons/samoyed/d6761473b8c79aa0.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "akita"
+   ],
+   "p_bankhar": 0.0384,
+   "p_bankhar_cal": 0.0062
+  },
+  {
+   "file": "data/commons/samoyed/d6ef12f95bcc10f2.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "alaskan_malamute"
+   ],
+   "p_bankhar": 0.0545,
+   "p_bankhar_cal": 0.0115
+  },
+  {
+   "file": "data/commons/samoyed/d7885c834a91fbf3.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0055,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/samoyed/e8247c916092f8a3.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "akita",
+    "alaskan_malamute"
+   ],
+   "p_bankhar": 0.0035,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/samoyed/ea77c71d768fcde8.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0078,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/commons/german_shepherd/034c74b1e1efde00.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0111,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/commons/german_shepherd/0829e13b27ddde86.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.026,
+   "p_bankhar_cal": 0.0028
+  },
+  {
+   "file": "data/commons/german_shepherd/0adadd3e47ee2866.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "beagle",
+   "top3": [
+    "beagle",
+    "doberman",
+    "great_dane"
+   ],
+   "p_bankhar": 0.0039,
+   "p_bankhar_cal": 0.0007
+  },
+  {
+   "file": "data/commons/german_shepherd/0b6c13ad07ff9877.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "belgian_malinois",
+   "top3": [
+    "belgian_malinois",
+    "german_shepherd",
+    "east_european_shepherd"
+   ],
+   "p_bankhar": 0.0216,
+   "p_bankhar_cal": 0.0028
+  },
+  {
+   "file": "data/commons/german_shepherd/0ba17eaeab4a1719.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "spitz"
+   ],
+   "p_bankhar": 0.0082,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/german_shepherd/0ee29f540976930c.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0277,
+   "p_bankhar_cal": 0.0037
+  },
+  {
+   "file": "data/commons/german_shepherd/107ee04cfdd56b37.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0046,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/german_shepherd/11189c5d3d0532f7.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.1773,
+   "p_bankhar_cal": 0.1809
+  },
+  {
+   "file": "data/commons/german_shepherd/13f7b49f5ceb9958.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0039,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/german_shepherd/16ac1095f3884591.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0062,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/german_shepherd/17bf9d799c04c462.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0048,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/german_shepherd/18c0529e6f06bded.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0766,
+   "p_bankhar_cal": 0.0241
+  },
+  {
+   "file": "data/commons/german_shepherd/1b51f558aceba80c.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "border_collie"
+   ],
+   "p_bankhar": 0.2704,
+   "p_bankhar_cal": 0.3643
+  },
+  {
+   "file": "data/commons/german_shepherd/1b82fab88fdb13a0.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0386,
+   "p_bankhar_cal": 0.006
+  },
+  {
+   "file": "data/commons/german_shepherd/1d9a4233ef8e30e5.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.015,
+   "p_bankhar_cal": 0.0009
+  },
+  {
+   "file": "data/commons/german_shepherd/1ffc5db60692b9ce.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0049,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/commons/german_shepherd/2314fea4586622f9.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0077,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/commons/german_shepherd/23a1e5b1d8083ca0.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0017,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/german_shepherd/243649fb1e50bdb8.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0136,
+   "p_bankhar_cal": 0.0007
+  },
+  {
+   "file": "data/commons/german_shepherd/2a9bd02514538272.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0073,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/commons/german_shepherd/2c30d22ed794b11c.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0192,
+   "p_bankhar_cal": 0.0014
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/032315a98c7bd86f.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "central_asian_shepherd"
+   ],
+   "p_bankhar": 0.8489,
+   "p_bankhar_cal": 0.9897
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/03bef6f67b7ca4e7.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "newfoundland"
+   ],
+   "p_bankhar": 0.4401,
+   "p_bankhar_cal": 0.536
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/130224f2d1250321.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "tibetan_mastiff",
+   "top3": [
+    "tibetan_mastiff",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.3812,
+   "p_bankhar_cal": 0.4414
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/15cdd78b9ca07ca7.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "leonberger"
+   ],
+   "p_bankhar": 0.5547,
+   "p_bankhar_cal": 0.6923
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/5ae971515a1f34f6.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "newfoundland"
+   ],
+   "p_bankhar": 0.7299,
+   "p_bankhar_cal": 0.9109
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/5b4c02e89017e0b4.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "newfoundland"
+   ],
+   "p_bankhar": 0.7989,
+   "p_bankhar_cal": 0.9805
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/63e42c3f4e2740b4.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.4549,
+   "p_bankhar_cal": 0.6979
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/66064e5c00fee345.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "mixed_dog",
+    "australian_shepherd"
+   ],
+   "p_bankhar": 0.7783,
+   "p_bankhar_cal": 0.987
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/87f0a8bfc820cd40.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.6308,
+   "p_bankhar_cal": 0.8374
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/8ece9d6fb871985d.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.6602,
+   "p_bankhar_cal": 0.8943
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/902348d951fcbaae.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "leonberger"
+   ],
+   "p_bankhar": 0.5885,
+   "p_bankhar_cal": 0.699
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/aff5ce8aa9b948f4.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "bernese_mountain"
+   ],
+   "p_bankhar": 0.7241,
+   "p_bankhar_cal": 0.8965
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/b952266122f2f624.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "tibetan_mastiff",
+   "top3": [
+    "tibetan_mastiff",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.3644,
+   "p_bankhar_cal": 0.4332
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/bad5034818dd2d55.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.1436,
+   "p_bankhar_cal": 0.083
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/c8b6167098f92811.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.8263,
+   "p_bankhar_cal": 0.9757
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/cbacd404b023d66d.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "bernese_mountain"
+   ],
+   "p_bankhar": 0.7576,
+   "p_bankhar_cal": 0.9724
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/cc7031579ac8f6d9.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.8185,
+   "p_bankhar_cal": 0.9686
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/d1bcd7a72525be35.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "bernese_mountain"
+   ],
+   "p_bankhar": 0.4776,
+   "p_bankhar_cal": 0.7078
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/de8217050807d605.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.6254,
+   "p_bankhar_cal": 0.8088
+  },
+  {
+   "file": "data/commons/tibetan_mastiff/f27f8b9bec7d112d.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "leonberger",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.2859,
+   "p_bankhar_cal": 0.5202
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/07a3a286de92c622.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "other",
+   "top1": null,
+   "top3": [],
+   "p_bankhar": 0.0,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/118dcc9cd74b4f0f.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "bankhar",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.1781,
+   "p_bankhar_cal": 0.0668
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/3506a087198dc1ad.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "saint_bernard",
+   "top3": [
+    "saint_bernard",
+    "central_asian_shepherd",
+    "akita"
+   ],
+   "p_bankhar": 0.0223,
+   "p_bankhar_cal": 0.0026
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/36d6fe0e256da9bb.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "bankhar",
+    "akita"
+   ],
+   "p_bankhar": 0.018,
+   "p_bankhar_cal": 0.0006
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/518faffd0c6a1a32.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "caucasian_shepherd",
+   "top3": [
+    "caucasian_shepherd",
+    "central_asian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0988,
+   "p_bankhar_cal": 0.0489
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/844394402acaa8d9.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "bankhar",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.1413,
+   "p_bankhar_cal": 0.0397
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/866a27999beec441.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.1402,
+   "p_bankhar_cal": 0.0402
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/95f3c08b890b7383.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "caucasian_shepherd",
+    "akita"
+   ],
+   "p_bankhar": 0.155,
+   "p_bankhar_cal": 0.1014
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/98602704f5b5ac0e.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "saint_bernard",
+    "border_collie"
+   ],
+   "p_bankhar": 0.0746,
+   "p_bankhar_cal": 0.0363
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/99cf83e629a7e28b.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "caucasian_shepherd",
+   "top3": [
+    "caucasian_shepherd",
+    "bankhar",
+    "central_asian_shepherd"
+   ],
+   "p_bankhar": 0.1882,
+   "p_bankhar_cal": 0.2476
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/a2cc08e1e3100596.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "bankhar",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.1608,
+   "p_bankhar_cal": 0.053
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/bfdfc93c5e02e928.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "great_pyrenees",
+   "top3": [
+    "great_pyrenees",
+    "golden_retriever",
+    "central_asian_shepherd"
+   ],
+   "p_bankhar": 0.0119,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/cc15ef68613f4969.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.3409,
+   "p_bankhar_cal": 0.2919
+  },
+  {
+   "file": "data/commons/central_asian_shepherd/dc9f84c58bc13de8.jpg",
+   "truth": "central_asian_shepherd",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "border_collie",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0077,
+   "p_bankhar_cal": 0.0009
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/02539f69d89f6057.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "caucasian_shepherd",
+   "top3": [
+    "caucasian_shepherd",
+    "bankhar",
+    "central_asian_shepherd"
+   ],
+   "p_bankhar": 0.2789,
+   "p_bankhar_cal": 0.2359
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/10820a132818c13f.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "saint_bernard",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.0173,
+   "p_bankhar_cal": 0.0007
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/409df5ca5ffe5dae.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "caucasian_shepherd",
+    "akita"
+   ],
+   "p_bankhar": 0.1611,
+   "p_bankhar_cal": 0.2659
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/4dcdbbb6fab2e348.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "caucasian_shepherd",
+   "top3": [
+    "caucasian_shepherd",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.1279,
+   "p_bankhar_cal": 0.0347
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/558ff28da16787ae.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "caucasian_shepherd",
+    "central_asian_shepherd"
+   ],
+   "p_bankhar": 0.4069,
+   "p_bankhar_cal": 0.4975
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/6de9ee3825643a52.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "caucasian_shepherd",
+    "akita"
+   ],
+   "p_bankhar": 0.1067,
+   "p_bankhar_cal": 0.0636
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/7c8b8b6bd8268390.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "caucasian_shepherd",
+   "top3": [
+    "caucasian_shepherd",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.3466,
+   "p_bankhar_cal": 0.3969
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/8641139627de779b.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "caucasian_shepherd",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.5596,
+   "p_bankhar_cal": 0.7706
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/995f7b657ca652bf.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "central_asian_shepherd",
+   "top3": [
+    "central_asian_shepherd",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.2668,
+   "p_bankhar_cal": 0.2705
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/bd800c691287093d.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "caucasian_shepherd",
+   "top3": [
+    "caucasian_shepherd",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.3853,
+   "p_bankhar_cal": 0.4282
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/c5c34cf1d9599445.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "caucasian_shepherd",
+   "top3": [
+    "caucasian_shepherd",
+    "bankhar",
+    "central_asian_shepherd"
+   ],
+   "p_bankhar": 0.3256,
+   "p_bankhar_cal": 0.3191
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/da25fc7f9f8f288b.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.1033,
+   "p_bankhar_cal": 0.025
+  },
+  {
+   "file": "data/commons/caucasian_shepherd/de106cb78417d2cc.jpg",
+   "truth": "caucasian_shepherd",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "central_asian_shepherd",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.8401,
+   "p_bankhar_cal": 0.9846
+  },
+  {
+   "file": "data/commons/east_european_shepherd/1dcb409c13a57ebe.jpg",
+   "truth": "east_european_shepherd",
+   "species": "dog",
+   "top1": "great_dane",
+   "top3": [
+    "great_dane",
+    "east_european_shepherd",
+    "labrador_retriever"
+   ],
+   "p_bankhar": 0.0642,
+   "p_bankhar_cal": 0.0538
+  },
+  {
+   "file": "data/commons/east_european_shepherd/3abdf5ab0b37410b.jpg",
+   "truth": "east_european_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0138,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/commons/east_european_shepherd/65e804e49f0f628c.jpg",
+   "truth": "east_european_shepherd",
+   "species": "dog",
+   "top1": "doberman",
+   "top3": [
+    "doberman",
+    "belgian_malinois",
+    "miniature_pinscher"
+   ],
+   "p_bankhar": 0.0359,
+   "p_bankhar_cal": 0.0098
+  },
+  {
+   "file": "data/commons/east_european_shepherd/678f23f373b39e3d.jpg",
+   "truth": "east_european_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0325,
+   "p_bankhar_cal": 0.003
+  },
+  {
+   "file": "data/commons/east_european_shepherd/835ba83dd9ba71d3.jpg",
+   "truth": "east_european_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0445,
+   "p_bankhar_cal": 0.0066
+  },
+  {
+   "file": "data/commons/east_european_shepherd/a98b374a6ae24a45.jpg",
+   "truth": "east_european_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0148,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/commons/east_european_shepherd/bc3840b706e824d4.jpg",
+   "truth": "east_european_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0183,
+   "p_bankhar_cal": 0.0008
+  },
+  {
+   "file": "data/commons/east_european_shepherd/d6c6562e71b3e37a.jpg",
+   "truth": "east_european_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "belgian_malinois",
+    "german_shepherd"
+   ],
+   "p_bankhar": 0.0613,
+   "p_bankhar_cal": 0.0211
+  },
+  {
+   "file": "data/commons/east_european_shepherd/eb6fcae1cf986aee.jpg",
+   "truth": "east_european_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0225,
+   "p_bankhar_cal": 0.0013
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_10025.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0029,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_10768.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0046,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_11052.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0028,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_11658.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0154,
+   "p_bankhar_cal": 0.0008
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_11887.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.012,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_12294.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0036,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_12514.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0084,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_13075.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0126,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_13541.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0023,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_14141.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0224,
+   "p_bankhar_cal": 0.0012
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_14425.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0071,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_14782.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "border_collie"
+   ],
+   "p_bankhar": 0.0042,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_15416.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.007,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_16029.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0055,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_16713.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "east_european_shepherd"
+   ],
+   "p_bankhar": 0.0139,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_17138.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0266,
+   "p_bankhar_cal": 0.0013
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_17533.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "akita",
+    "shiba_inu"
+   ],
+   "p_bankhar": 0.0085,
+   "p_bankhar_cal": 0.0006
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_17962.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0064,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_1880.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0438,
+   "p_bankhar_cal": 0.0041
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_2481.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0048,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_4302.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.011,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_5727.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0296,
+   "p_bankhar_cal": 0.002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_6174.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0016,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_6508.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0061,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/alaskan_malamute/n02110063_7630.jpg",
+   "truth": "alaskan_malamute",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0017,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/modi2.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "spitz",
+    "akita"
+   ],
+   "p_bankhar": 0.0506,
+   "p_bankhar_cal": 0.0072
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_10605.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "shar_pei"
+   ],
+   "p_bankhar": 0.0503,
+   "p_bankhar_cal": 0.0046
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_112.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "tibetan_mastiff",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0818,
+   "p_bankhar_cal": 0.0151
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_11732.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0658,
+   "p_bankhar_cal": 0.0096
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_12594.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "shar_pei"
+   ],
+   "p_bankhar": 0.0299,
+   "p_bankhar_cal": 0.0016
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_13232.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "shar_pei"
+   ],
+   "p_bankhar": 0.0595,
+   "p_bankhar_cal": 0.0061
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_1401.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "shar_pei",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0937,
+   "p_bankhar_cal": 0.0231
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_15770.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "samoyed",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0244,
+   "p_bankhar_cal": 0.0013
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_16270.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.133,
+   "p_bankhar_cal": 0.0369
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_16815.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0972,
+   "p_bankhar_cal": 0.0167
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_17733.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.1197,
+   "p_bankhar_cal": 0.028
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_2058.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "spitz",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0161,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_2319.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0418,
+   "p_bankhar_cal": 0.0033
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_2739.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0742,
+   "p_bankhar_cal": 0.0098
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_2850.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "spitz"
+   ],
+   "p_bankhar": 0.0265,
+   "p_bankhar_cal": 0.0013
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_347.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "shar_pei",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0263,
+   "p_bankhar_cal": 0.0014
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_4760.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0463,
+   "p_bankhar_cal": 0.0037
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_528.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.098,
+   "p_bankhar_cal": 0.0185
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_6016.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0399,
+   "p_bankhar_cal": 0.0029
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_6350.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "spitz"
+   ],
+   "p_bankhar": 0.0402,
+   "p_bankhar_cal": 0.0031
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_6898.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "spitz",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0471,
+   "p_bankhar_cal": 0.0053
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_7594.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.1435,
+   "p_bankhar_cal": 0.0407
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_7991.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0706,
+   "p_bankhar_cal": 0.0088
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_8492.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "shar_pei"
+   ],
+   "p_bankhar": 0.0548,
+   "p_bankhar_cal": 0.0056
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/chow_chow/n02112137_8983.jpg",
+   "truth": "chow_chow",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0573,
+   "p_bankhar_cal": 0.0059
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/bagira_site.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "belgian_malinois",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0218,
+   "p_bankhar_cal": 0.0026
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/img_20200801_005834_050.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0074,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_104.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.004,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_1094.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.032,
+   "p_bankhar_cal": 0.0033
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_13178.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0099,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_14247.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "belgian_malinois",
+    "east_european_shepherd"
+   ],
+   "p_bankhar": 0.0058,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_15398.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.011,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_16014.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0187,
+   "p_bankhar_cal": 0.001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_1637.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0095,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_17449.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0076,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_18405.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.02,
+   "p_bankhar_cal": 0.0014
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_19791.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "spitz"
+   ],
+   "p_bankhar": 0.0036,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_21094.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0067,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_22730.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0102,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_23996.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.013,
+   "p_bankhar_cal": 0.0006
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_24786.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.012,
+   "p_bankhar_cal": 0.0007
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_2631.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0027,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_2740.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0081,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_3260.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0028,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_4021.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "spitz"
+   ],
+   "p_bankhar": 0.0103,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_466.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0311,
+   "p_bankhar_cal": 0.0041
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_620.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0107,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_695.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0093,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_7238.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "east_european_shepherd",
+   "top3": [
+    "east_european_shepherd",
+    "german_shepherd",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0265,
+   "p_bankhar_cal": 0.0025
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/german_shepherd/n02106662_8246.jpg",
+   "truth": "german_shepherd",
+   "species": "dog",
+   "top1": "german_shepherd",
+   "top3": [
+    "german_shepherd",
+    "east_european_shepherd",
+    "spitz"
+   ],
+   "p_bankhar": 0.0356,
+   "p_bankhar_cal": 0.0124
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_1042.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0476,
+   "p_bankhar_cal": 0.0075
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_1184.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.0784,
+   "p_bankhar_cal": 0.012
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_1380.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0207,
+   "p_bankhar_cal": 0.0008
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_1480.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.1062,
+   "p_bankhar_cal": 0.0413
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_164.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0187,
+   "p_bankhar_cal": 0.0007
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_1724.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "belgian_malinois"
+   ],
+   "p_bankhar": 0.0924,
+   "p_bankhar_cal": 0.0268
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_1832.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.2163,
+   "p_bankhar_cal": 0.1978
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_2047.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0796,
+   "p_bankhar_cal": 0.0186
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_2119.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "tibetan_mastiff",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0445,
+   "p_bankhar_cal": 0.0044
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_2330.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0403,
+   "p_bankhar_cal": 0.0031
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_2384.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.0435,
+   "p_bankhar_cal": 0.0035
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_2554.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "saint_bernard"
+   ],
+   "p_bankhar": 0.0397,
+   "p_bankhar_cal": 0.0038
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_2739.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.1408,
+   "p_bankhar_cal": 0.0682
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_2949.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "saint_bernard"
+   ],
+   "p_bankhar": 0.0117,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_3028.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.0486,
+   "p_bankhar_cal": 0.0045
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_3359.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0516,
+   "p_bankhar_cal": 0.0062
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_3498.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "saint_bernard"
+   ],
+   "p_bankhar": 0.0935,
+   "p_bankhar_cal": 0.0209
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_3675.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "tibetan_mastiff",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0472,
+   "p_bankhar_cal": 0.0048
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_3917.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "saint_bernard"
+   ],
+   "p_bankhar": 0.0225,
+   "p_bankhar_cal": 0.0012
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_4246.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0858,
+   "p_bankhar_cal": 0.0171
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_4435.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.1647,
+   "p_bankhar_cal": 0.0717
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_454.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0774,
+   "p_bankhar_cal": 0.0159
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_4725.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "saint_bernard"
+   ],
+   "p_bankhar": 0.0101,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_4801.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0583,
+   "p_bankhar_cal": 0.007
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/leonberger/n02111129_5144.jpg",
+   "truth": "leonberger",
+   "species": "dog",
+   "top1": "leonberger",
+   "top3": [
+    "leonberger",
+    "caucasian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0075,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_10160.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.1179,
+   "p_bankhar_cal": 0.0277
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_10578.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "newfoundland",
+    "saint_bernard"
+   ],
+   "p_bankhar": 0.2146,
+   "p_bankhar_cal": 0.3303
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_1193.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0716,
+   "p_bankhar_cal": 0.0094
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_1298.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.1117,
+   "p_bankhar_cal": 0.0241
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_13728.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.042,
+   "p_bankhar_cal": 0.0031
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_1470.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.072,
+   "p_bankhar_cal": 0.0122
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_1818.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0465,
+   "p_bankhar_cal": 0.0038
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_2272.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0384,
+   "p_bankhar_cal": 0.0028
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_2524.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.0315,
+   "p_bankhar_cal": 0.0018
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_2769.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.1283,
+   "p_bankhar_cal": 0.0327
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_2885.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "toy_poodle",
+    "cocker_spaniel"
+   ],
+   "p_bankhar": 0.0921,
+   "p_bankhar_cal": 0.054
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_3206.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "chow_chow",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0548,
+   "p_bankhar_cal": 0.0106
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_3456.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "tibetan_mastiff",
+    "leonberger"
+   ],
+   "p_bankhar": 0.0692,
+   "p_bankhar_cal": 0.0154
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_3653.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.2425,
+   "p_bankhar_cal": 0.165
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_392.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.0393,
+   "p_bankhar_cal": 0.0029
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_4263.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "labrador_retriever",
+   "top3": [
+    "labrador_retriever",
+    "newfoundland",
+    "miniature_schnauzer"
+   ],
+   "p_bankhar": 0.0303,
+   "p_bankhar_cal": 0.0091
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_4710.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "cocker_spaniel"
+   ],
+   "p_bankhar": 0.0384,
+   "p_bankhar_cal": 0.003
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_5145.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "tibetan_mastiff",
+    "bankhar"
+   ],
+   "p_bankhar": 0.177,
+   "p_bankhar_cal": 0.148
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_5369.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.3719,
+   "p_bankhar_cal": 0.4367
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_5845.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.0741,
+   "p_bankhar_cal": 0.01
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_6096.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.1615,
+   "p_bankhar_cal": 0.0763
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_6402.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "tibetan_mastiff",
+    "bankhar"
+   ],
+   "p_bankhar": 0.1558,
+   "p_bankhar_cal": 0.1
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_6773.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "cocker_spaniel",
+    "labrador_retriever"
+   ],
+   "p_bankhar": 0.0499,
+   "p_bankhar_cal": 0.0102
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_7010.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.0291,
+   "p_bankhar_cal": 0.0017
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/newfoundland/n02111277_7395.jpg",
+   "truth": "newfoundland",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.0758,
+   "p_bankhar_cal": 0.0114
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_1.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "australian_shepherd",
+   "top3": [
+    "australian_shepherd",
+    "samoyed",
+    "shetland_sheepdog"
+   ],
+   "p_bankhar": 0.0536,
+   "p_bankhar_cal": 0.0347
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_10734.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "great_pyrenees",
+   "top3": [
+    "great_pyrenees",
+    "central_asian_shepherd",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0268,
+   "p_bankhar_cal": 0.0016
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_12037.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0107,
+   "p_bankhar_cal": 0.0004
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_12811.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "akita",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.1015,
+   "p_bankhar_cal": 0.0787
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_13657.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "spitz"
+   ],
+   "p_bankhar": 0.0037,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_1438.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "great_pyrenees",
+   "top3": [
+    "great_pyrenees",
+    "samoyed",
+    "alaskan_malamute"
+   ],
+   "p_bankhar": 0.0261,
+   "p_bankhar_cal": 0.0026
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_15020.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0014,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_16283.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0031,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_1714.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "pomeranian"
+   ],
+   "p_bankhar": 0.0005,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_1772.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "pomeranian"
+   ],
+   "p_bankhar": 0.0014,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_1968.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "alaskan_malamute",
+    "spitz"
+   ],
+   "p_bankhar": 0.0048,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_2030.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0026,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_2425.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "alaskan_malamute"
+   ],
+   "p_bankhar": 0.0146,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_2789.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "shetland_sheepdog",
+   "top3": [
+    "shetland_sheepdog",
+    "spitz",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0286,
+   "p_bankhar_cal": 0.0063
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_3345.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0141,
+   "p_bankhar_cal": 0.0006
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_3499.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0087,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_4027.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0166,
+   "p_bankhar_cal": 0.0009
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_4381.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0021,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_475.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "spitz"
+   ],
+   "p_bankhar": 0.0018,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_5121.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "spitz"
+   ],
+   "p_bankhar": 0.0138,
+   "p_bankhar_cal": 0.0008
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_5532.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0067,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_5786.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0049,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_6076.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "spitz",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0018,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_6425.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "chow_chow",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.0051,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/samoyed/n02111889_6622.jpg",
+   "truth": "samoyed",
+   "species": "dog",
+   "top1": "samoyed",
+   "top3": [
+    "samoyed",
+    "great_pyrenees",
+    "spitz"
+   ],
+   "p_bankhar": 0.0029,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/20180901_150234.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "shiba_inu"
+   ],
+   "p_bankhar": 0.0025,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/blue-vpr-nov1.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.008,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_10116.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0015,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_10844.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0037,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_11114.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0044,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_11580.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0377,
+   "p_bankhar_cal": 0.0077
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_11783.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0021,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_12656.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0013,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_13197.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0075,
+   "p_bankhar_cal": 0.0002
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_13855.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0026,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_1446.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0027,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_1469.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0204,
+   "p_bankhar_cal": 0.0016
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_1532.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0201,
+   "p_bankhar_cal": 0.0019
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_2368.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0054,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_2701.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0219,
+   "p_bankhar_cal": 0.0016
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_3406.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.002,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_4133.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0024,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_5030.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.0103,
+   "p_bankhar_cal": 0.0005
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_5622.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0003,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_6105.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0015,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_6775.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "mixed_dog"
+   ],
+   "p_bankhar": 0.0023,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_712.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "akita"
+   ],
+   "p_bankhar": 0.002,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_7594.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "akita",
+    "alaskan_malamute"
+   ],
+   "p_bankhar": 0.0044,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_8162.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "siberian_husky",
+   "top3": [
+    "siberian_husky",
+    "alaskan_malamute",
+    "akita"
+   ],
+   "p_bankhar": 0.0019,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/siberian_husky/n02110185_8748.jpg",
+   "truth": "siberian_husky",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "siberian_husky",
+    "welsh_corgi"
+   ],
+   "p_bankhar": 0.0518,
+   "p_bankhar_cal": 0.0241
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_10023.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "shetland_sheepdog",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0451,
+   "p_bankhar_cal": 0.0116
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_10177.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0104,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_10338.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "chow_chow",
+    "samoyed"
+   ],
+   "p_bankhar": 0.0177,
+   "p_bankhar_cal": 0.0015
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_1572.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "samoyed",
+    "akita"
+   ],
+   "p_bankhar": 0.0098,
+   "p_bankhar_cal": 0.0006
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_223.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0481,
+   "p_bankhar_cal": 0.0086
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_3314.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "shetland_sheepdog"
+   ],
+   "p_bankhar": 0.0039,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_4117.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "spitz",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.4179,
+   "p_bankhar_cal": 0.7369
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_4806.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "shetland_sheepdog"
+   ],
+   "p_bankhar": 0.0091,
+   "p_bankhar_cal": 0.0003
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_6693.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "chow_chow",
+    "pomeranian"
+   ],
+   "p_bankhar": 0.0268,
+   "p_bankhar_cal": 0.004
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_6928.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "chow_chow",
+    "samoyed"
+   ],
+   "p_bankhar": 0.048,
+   "p_bankhar_cal": 0.0148
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_7037.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "spitz",
+    "samoyed"
+   ],
+   "p_bankhar": 0.0104,
+   "p_bankhar_cal": 0.0007
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_7126.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "samoyed"
+   ],
+   "p_bankhar": 0.0221,
+   "p_bankhar_cal": 0.0021
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_7185.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "samoyed"
+   ],
+   "p_bankhar": 0.0157,
+   "p_bankhar_cal": 0.0009
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_7312.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "spitz",
+    "akita"
+   ],
+   "p_bankhar": 0.0368,
+   "p_bankhar_cal": 0.0079
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_7618.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "alaskan_malamute",
+    "pomeranian"
+   ],
+   "p_bankhar": 0.0415,
+   "p_bankhar_cal": 0.0102
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_7826.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.0361,
+   "p_bankhar_cal": 0.0061
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_7952.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0346,
+   "p_bankhar_cal": 0.0075
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_8177.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "shetland_sheepdog"
+   ],
+   "p_bankhar": 0.003,
+   "p_bankhar_cal": 0.0
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_8279.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "alaskan_malamute"
+   ],
+   "p_bankhar": 0.0187,
+   "p_bankhar_cal": 0.0027
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_8409.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0255,
+   "p_bankhar_cal": 0.0024
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_8572.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "shetland_sheepdog",
+    "alaskan_malamute"
+   ],
+   "p_bankhar": 0.0344,
+   "p_bankhar_cal": 0.0078
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_8734.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "chow_chow",
+   "top3": [
+    "chow_chow",
+    "spitz",
+    "samoyed"
+   ],
+   "p_bankhar": 0.0448,
+   "p_bankhar_cal": 0.0088
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_9052.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "alaskan_malamute",
+   "top3": [
+    "alaskan_malamute",
+    "spitz",
+    "bankhar"
+   ],
+   "p_bankhar": 0.1392,
+   "p_bankhar_cal": 0.1534
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_9232.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "pomeranian",
+    "samoyed"
+   ],
+   "p_bankhar": 0.0041,
+   "p_bankhar_cal": 0.0001
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/spitz/n02112350_9518.jpg",
+   "truth": "spitz",
+   "species": "dog",
+   "top1": "spitz",
+   "top3": [
+    "spitz",
+    "akita",
+    "chow_chow"
+   ],
+   "p_bankhar": 0.0766,
+   "p_bankhar_cal": 0.041
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_10182.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.613,
+   "p_bankhar_cal": 0.8975
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_1121.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.1049,
+   "p_bankhar_cal": 0.0235
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_13756.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.5637,
+   "p_bankhar_cal": 0.8144
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_1451.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.8059,
+   "p_bankhar_cal": 0.9794
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_155.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "labrador_retriever",
+    "bankhar"
+   ],
+   "p_bankhar": 0.0747,
+   "p_bankhar_cal": 0.0142
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_1724.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.7124,
+   "p_bankhar_cal": 0.9748
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_1794.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "mixed_dog",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.4723,
+   "p_bankhar_cal": 0.8651
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_2097.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "leonberger"
+   ],
+   "p_bankhar": 0.6719,
+   "p_bankhar_cal": 0.8425
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_2301.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "tibetan_mastiff",
+   "top3": [
+    "tibetan_mastiff",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.3155,
+   "p_bankhar_cal": 0.217
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_2514.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "tibetan_mastiff",
+   "top3": [
+    "tibetan_mastiff",
+    "bankhar",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.4063,
+   "p_bankhar_cal": 0.3519
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_2778.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "newfoundland"
+   ],
+   "p_bankhar": 0.7167,
+   "p_bankhar_cal": 0.8817
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_290.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "tibetan_mastiff",
+   "top3": [
+    "tibetan_mastiff",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.3721,
+   "p_bankhar_cal": 0.4382
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_3305.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "tibetan_mastiff",
+   "top3": [
+    "tibetan_mastiff",
+    "bankhar",
+    "rottweiler"
+   ],
+   "p_bankhar": 0.3219,
+   "p_bankhar_cal": 0.2198
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_3522.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "bernese_mountain"
+   ],
+   "p_bankhar": 0.7338,
+   "p_bankhar_cal": 0.9612
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_3840.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "tibetan_mastiff",
+   "top3": [
+    "tibetan_mastiff",
+    "bankhar",
+    "leonberger"
+   ],
+   "p_bankhar": 0.2695,
+   "p_bankhar_cal": 0.1581
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_4310.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "newfoundland",
+   "top3": [
+    "newfoundland",
+    "bankhar",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.2861,
+   "p_bankhar_cal": 0.2045
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_4421.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "central_asian_shepherd",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.3635,
+   "p_bankhar_cal": 0.5555
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_4698.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "newfoundland",
+    "tibetan_mastiff"
+   ],
+   "p_bankhar": 0.6764,
+   "p_bankhar_cal": 0.9286
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_4820.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "tibetan_mastiff",
+   "top3": [
+    "tibetan_mastiff",
+    "bankhar",
+    "newfoundland"
+   ],
+   "p_bankhar": 0.397,
+   "p_bankhar_cal": 0.4492
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_5216.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "tibetan_mastiff",
+   "top3": [
+    "tibetan_mastiff",
+    "bankhar",
+    "bernese_mountain"
+   ],
+   "p_bankhar": 0.3783,
+   "p_bankhar_cal": 0.334
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_581.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "central_asian_shepherd",
+    "great_pyrenees"
+   ],
+   "p_bankhar": 0.4115,
+   "p_bankhar_cal": 0.5966
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_634.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "leonberger"
+   ],
+   "p_bankhar": 0.8073,
+   "p_bankhar_cal": 0.9807
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_728.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "great_pyrenees",
+    "central_asian_shepherd"
+   ],
+   "p_bankhar": 0.3126,
+   "p_bankhar_cal": 0.465
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_8370.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "central_asian_shepherd",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.6911,
+   "p_bankhar_cal": 0.9733
+  },
+  {
+   "file": "data/eval/bankhar/lookalike/tibetan_mastiff/n02108551_9132.jpg",
+   "truth": "tibetan_mastiff",
+   "species": "dog",
+   "top1": "bankhar",
+   "top3": [
+    "bankhar",
+    "tibetan_mastiff",
+    "caucasian_shepherd"
+   ],
+   "p_bankhar": 0.6301,
+   "p_bankhar_cal": 0.763
+  }
+ ]
+}

@@ -50,6 +50,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--backend", choices=("dino", "dino2", "yolo"), required=True)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--cfg", action="append", default=[], metavar="FIELD=VALUE", help="Config override, e.g. seg_tta=1")
+    ap.add_argument("--tag", default="")
     ap.add_argument("--set", choices=("oxford", "coco"), default="oxford",
                     help="coco = COCO val2017 dog/cat photos with real masks (cluttered scenes, eval only)")
     args = ap.parse_args()
@@ -62,7 +64,7 @@ def main():
     from petti_vision import Config, PettiVision
 
     # common.py imports Config before this env var exists, so pass it explicitly.
-    vision = PettiVision(Config(detector_backend=args.backend))
+    vision = PettiVision(make_cfg(args))
     det = vision.detector
     rows = []
     for name in _names(args.limit):
@@ -115,6 +117,45 @@ def main():
     print(json.dumps(report, indent=2), flush=True)
 
 
+def _edge(m: np.ndarray) -> np.ndarray:
+    e = np.zeros_like(m)
+    e[1:, :] |= m[1:, :] != m[:-1, :]
+    e[:, 1:] |= m[:, 1:] != m[:, :-1]
+    return e
+
+
+def _dilate(m: np.ndarray, r: int) -> np.ndarray:
+    from PIL import ImageFilter
+
+    return np.asarray(Image.fromarray(m.astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(2 * r + 1))) > 0
+
+
+def boundary_f(pred: np.ndarray, gt: np.ndarray, valid: np.ndarray) -> float:
+    """Boundary F-score: how well the outline itself follows the true edge
+    (tolerance 1% of the image diagonal), the metric that shows jagged/blocky masks."""
+    r = max(1, int(round(0.01 * np.hypot(*gt.shape))))
+    ep, eg = _edge(pred) & valid, _edge(gt) & valid
+    if not ep.any() or not eg.any():
+        return 0.0
+    prec = (ep & _dilate(eg, r)).sum() / ep.sum()
+    rec = (eg & _dilate(ep, r)).sum() / eg.sum()
+    return float(2 * prec * rec / (prec + rec)) if prec + rec else 0.0
+
+
+def make_cfg(args):
+    import dataclasses
+
+    from petti_vision import Config
+
+    c = Config(detector_backend=args.backend)
+    kw = {}
+    for item in args.cfg:
+        k, v = item.split("=", 1)
+        cur = getattr(c, k)
+        kw[k] = (v in ("1", "true", "True")) if isinstance(cur, bool) else type(cur)(v)
+    return dataclasses.replace(c, **kw)
+
+
 def coco_eval(args):
     """Union-of-animals mask IoU, recall and box IoU on COCO val2017 dog/cat images."""
     from petti_vision import Config, PettiVision
@@ -123,7 +164,7 @@ def coco_eval(args):
     meta = json.loads((coco / "coco_pets.json").read_text())["val"]
     if args.limit:
         meta = meta[: args.limit]
-    det = PettiVision(Config(detector_backend=args.backend)).detector
+    det = PettiVision(make_cfg(args)).detector
     rows = []
     for r in meta:
         img = Image.open(coco / "images" / r["file"]).convert("RGB")
@@ -143,7 +184,8 @@ def coco_eval(args):
         g = (gt == 1) & valid
         inter, union = (pred & g & valid).sum(), ((pred | g) & valid).sum()
         frac = float(g.mean())
-        rows.append({"hit": bool(found) and inter > 0, "iou": float(inter / union) if union else 0.0, "small": frac < 0.05, "ms": ms, "n_pred": len(found)})
+        rows.append({"hit": bool(found) and inter > 0, "iou": float(inter / union) if union else 0.0, "small": frac < 0.05, "ms": ms,
+                     "n_pred": len(found), "bf": boundary_f(pred, g, valid)})
     small = [r for r in rows if r["small"]]
     ms = sorted(r["ms"] for r in rows)
     rep = {
@@ -154,9 +196,11 @@ def coco_eval(args):
         "small_n": len(small),
         "small_recall": round(float(np.mean([r["hit"] for r in small])), 3) if small else None,
         "small_iou": round(float(np.mean([r["iou"] for r in small])), 3) if small else None,
+        "boundary_f": round(float(np.mean([r["bf"] for r in rows])), 3),
         "latency_p50_ms": round(ms[len(ms) // 2], 1),
+        "cfg": args.cfg,
     }
-    out = ROOT / "artifacts" / "reports" / f"seg_coco_{args.backend}.json"
+    out = ROOT / "artifacts" / "reports" / f"seg_coco_{args.backend}{args.tag}.json"
     out.write_text(json.dumps(rep, indent=2))
     print(json.dumps(rep, indent=2), flush=True)
 

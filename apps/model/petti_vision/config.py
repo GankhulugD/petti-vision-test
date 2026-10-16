@@ -21,6 +21,17 @@ class Config:
     detector_backend: str = _env("PETTI_DETECTOR_BACKEND", "auto")
     # "torch" (transformers, dev/training) or "onnx" (INT8 ONNX Runtime, no torch: production)
     runtime: str = _env("PETTI_RUNTIME", "torch")
+    # segmenter v2 post-processing: photo-guided edge refinement + flip test-time augmentation
+    seg_refine: bool = _env("PETTI_SEG_REFINE", "1") == "1"
+    seg_refine_r: int = int(_env("PETTI_SEG_REFINE_R", "2"))
+    # input long side for the segmenter: 644 px (46×46-patch grid) measured best on COCO val
+    # (IoU 0.73 → 0.76, boundary F 0.73 → 0.78 vs 448) at ~2.6× the DINOv2 cost; 518 is the
+    # cheaper middle ground, 448 the fastest
+    seg_long_side: int = int(_env("PETTI_SEG_LONG", "644"))
+    seg_refine_eps: float = float(_env("PETTI_SEG_REFINE_EPS", "0.001"))
+    seg_tta: bool = _env("PETTI_SEG_TTA", "0") == "1"
+    # second, zoomed-in pass on the main animal: sharper outline at ~2× the compute
+    seg_zoom: bool = _env("PETTI_SEG_ZOOM", "0") == "1"
     detector_weights: str = _env("PETTI_DETECTOR", "yolo26n-seg.pt")
     detector_conf: float = float(_env("PETTI_DETECTOR_CONF", "0.25"))
     detector_imgsz: int = int(_env("PETTI_DETECTOR_IMGSZ", "640"))

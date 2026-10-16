@@ -9,6 +9,10 @@ apps/model/data/**
 !apps/model/data/eval/manifest.json
 !apps/model/data/eval/negatives_photo_licenses.json
 !apps/model/data/eval/bench_exclude.txt
+# Commons breed photos stay local, but their credits (CC BY / BY-SA) must ship
+!apps/model/data/commons/
+apps/model/data/commons/*
+!apps/model/data/commons/attribution.json
 !apps/model/data/eval/*.csv
 !apps/model/data/eval/negatives/
 !apps/model/data/eval/negatives/**

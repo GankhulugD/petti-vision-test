@@ -51,16 +51,24 @@ _C = "cat"
 BREEDS: list[Breed] = [
     # --- Dogs common in Mongolia first ---
     Breed("mixed_dog", "mixed breed dog", "Эрлийз нохой", ("mutt", "street dog"), _D, "medium"),
-    Breed("bankhar", "Mongolian Bankhar dog", "Монгол банхар", ("large fluffy black and tan Mongolian herding dog",), _D, "large"),
-    Breed("tibetan_mastiff", "Tibetan Mastiff", "Төвд мастиф", (), _D, "giant"),
-    Breed("central_asian_shepherd", "Central Asian Shepherd dog", "Алабай", ("Alabai",), _D, "giant"),
-    Breed("caucasian_shepherd", "Caucasian Shepherd dog", "Кавказ овчарк", (), _D, "giant"),
+    # Bankhar: a heavy mastiff-type livestock guardian, NOT a spitz. The old
+    # "fluffy black and tan" phrase pulled black-and-tan huskies to Bankhar.
+    Breed("bankhar", "Mongolian Bankhar dog", "Монгол банхар",
+          ("Bankhar, a large Mongolian livestock guardian dog",
+           "black Mongolian mastiff-type dog with tan spots above the eyes",
+           "heavy-headed Mongolian Bankhar with a broad muzzle and drop ears"), _D, "large"),
+    Breed("tibetan_mastiff", "Tibetan Mastiff", "Төвд мастиф", ("Tibetan Mastiff with a thick lion-like mane",), _D, "giant"),
+    Breed("central_asian_shepherd", "Central Asian Shepherd dog", "Алабай", ("Alabai", "short-coated Alabai guardian dog with cropped ears"), _D, "giant"),
+    Breed("caucasian_shepherd", "Caucasian Shepherd dog", "Кавказ овчарк", ("Caucasian Ovcharka, a huge shaggy guardian dog",), _D, "giant"),
     Breed("german_shepherd", "German Shepherd", "Герман овчарк", (), _D, "large"),
     Breed("east_european_shepherd", "East European Shepherd", "Зүүн европ овчарк", (), _D, "large"),
     Breed("belgian_malinois", "Belgian Malinois", "Малинуа", (), _D, "large"),
-    Breed("siberian_husky", "Siberian Husky", "Хаски", (), _D, "medium"),
-    Breed("alaskan_malamute", "Alaskan Malamute", "Маламут", (), _D, "large"),
-    Breed("samoyed", "Samoyed", "Самоед", (), _D, "medium"),
+    Breed("siberian_husky", "Siberian Husky", "Хаски",
+          ("husky with a white facial mask and pointed erect ears", "wolf-like Siberian Husky sled dog",
+           "black and white husky with blue eyes"), _D, "medium"),
+    Breed("alaskan_malamute", "Alaskan Malamute", "Маламут",
+          ("large wolf-like Alaskan Malamute with a plumed curled tail", "grey and white malamute with a facial mask"), _D, "large"),
+    Breed("samoyed", "Samoyed", "Самоед", ("fluffy white Samoyed spitz",), _D, "medium"),
     Breed("golden_retriever", "Golden Retriever", "Голден ретривер", (), _D, "large"),
     Breed("labrador_retriever", "Labrador Retriever", "Лабрадор", (), _D, "large"),
     Breed("rottweiler", "Rottweiler", "Ротвейлер", (), _D, "large"),
@@ -68,6 +76,11 @@ BREEDS: list[Breed] = [
     Breed("boxer", "Boxer dog", "Боксер", (), _D, "large"),
     Breed("great_dane", "Great Dane", "Дог", (), _D, "giant"),
     Breed("saint_bernard", "Saint Bernard", "Сенбернар", (), _D, "giant"),
+    # big heavy-coated breeds: without a label of their own a black Newfoundland had
+    # nowhere to go but "Bankhar" (Oxford-IIIT Pet has photos of all three)
+    Breed("newfoundland", "Newfoundland dog", "Ньюфаундленд", ("large black Newfoundland dog",), _D, "giant"),
+    Breed("leonberger", "Leonberger", "Леонбергер", ("Leonberger with a lion-like mane and black mask",), _D, "giant"),
+    Breed("great_pyrenees", "Great Pyrenees", "Пиреней уулын нохой", ("large white Pyrenean mountain dog",), _D, "giant"),
     Breed("bernese_mountain", "Bernese Mountain Dog", "Бернийн уулын нохой", (), _D, "giant"),
     Breed("akita", "Akita", "Акита", (), _D, "large"),
     Breed("shiba_inu", "Shiba Inu", "Шиба ину", (), _D, "small"),

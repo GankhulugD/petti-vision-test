@@ -402,6 +402,7 @@ class PettiVision:
             import hashlib
 
             head = hashlib.md5(self.cfg.seg_head2_path.read_bytes()).hexdigest()[:8]
+            head += f"/L{self.cfg.seg_long_side}/ref{int(self.cfg.seg_refine)}{self.cfg.seg_refine_r}/z{int(self.cfg.seg_zoom)}"
         return f"{det}:{head}|{self.cfg.reid_model}|{self.cfg.reid_pool}|{self.cfg.vlm_model}|tta={int(self.cfg.tta)}|proj={int(self.cfg.reid_proj_path.exists())}"
 
     # ------------------------------------------------------------------ #

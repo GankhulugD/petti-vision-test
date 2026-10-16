@@ -5,8 +5,9 @@
     python3 training/retrain.py --rollback    # restore the previous version
 
 1. snapshot the current model files into artifacts/versions/<timestamp>/
-2. collect new labelled data: registrations (export_registry.py) and consented
-   user corrections (build_feedback_set.py)
+2. collect new labelled data: registrations (export_registry.py), consented
+   user corrections (build_feedback_set.py) and the Wikimedia Commons breed
+   photos (fetch_commons_breeds.py, run once)
 3. retrain the attribute heads (auto_train.py --extra ...)
 4. evaluate on the frozen Oxford test split (eval_breeds.py)
 5. gate: dog/cat top-1 may not drop by more than 1 point, ECE may not rise by
@@ -87,7 +88,7 @@ def main():
         run("export_registry")
         run("build_feedback_set")
         extra = []
-        for m in ("registry.csv", "feedback.csv"):
+        for m in ("registry.csv", "feedback.csv", "commons_breeds.csv"):  # commons: fetch_commons_breeds.py
             p = ROOT / "data" / "manifests" / m
             if p.exists() and p.stat().st_size > 100:
                 extra += ["--extra", str(p)]

@@ -22,7 +22,7 @@ from .taxonomy import AGES, BREEDS, COAT_LENGTH, COLORS, MARKS, PATTERNS, SIZES,
 
 log = logging.getLogger("petti.zeroshot")
 
-PROMPT_VERSION = "v2"
+PROMPT_VERSION = "v3"  # v3: Bankhar vs spitz prompts
 
 SPECIES_WORD = {"dog": "dog", "cat": "cat", "bird": "bird", "rabbit": "rabbit", "rodent": "small pet", "horse": "horse", "other": "animal"}
 CONDITIONED = ("dog", "cat", "other")  # prompt sets we pre-compute

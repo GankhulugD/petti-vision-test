@@ -136,6 +136,10 @@ python3 training/evaluate.py --manifest data/manifests/registry.csv --limit 300
 | Detector on cluttered scenes / Oxford | `python3 training/eval_seg.py --backend dino2 --set coco` · `--set oxford` | 3 min each |
 | Owner photos vs offline teacher (BSD Mask R-CNN) | `python3 training/probe_hard.py --backends dino2,dino` | 10 min first run (teacher cached after) |
 | Attribute heads (Oxford trainval only) | `python3 training/auto_train.py --tag clean` → `promote_heads.py --tag clean` | 5 min |
+| Commons photos of breeds Oxford lacks (Bankhar, husky, shepherds…) | `python3 training/fetch_commons_breeds.py` (once; Wikimedia rate limits) | ~35 min |
+| Heads with them | `python3 training/auto_train.py --extra data/manifests/commons_breeds.csv --tag commons` → `promote_heads.py --tag commons --report artifacts/reports/oxford_test_commons.json` | 15 min |
+| Bankhar vs look-alikes | `python3 training/bankhar_check.py [--fetch] [--heads heads_x]` | 5 min |
+| One photo, quickly | `python3 training/try_images.py photo.jpg [--server http://localhost:8765]` | seconds |
 | Breed eval on frozen Oxford test | `python3 training/eval_breeds.py` | 8 min |
 | Breed confidence calibration | `python3 training/fit_breed_calibration.py` | seconds |
 | Mark thresholds on ordinary photos | `python3 training/calibrate_marks.py` | 5 min |

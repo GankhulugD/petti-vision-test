@@ -39,7 +39,8 @@ OXFORD_MAP = {
     "beagle": "beagle", "boxer": "boxer", "chihuahua": "chihuahua", "english_cocker_spaniel": "cocker_spaniel",
     "miniature_pinscher": "miniature_pinscher", "pomeranian": "pomeranian", "pug": "pug",
     "saint_bernard": "saint_bernard", "samoyed": "samoyed", "shiba_inu": "shiba_inu",
-    "yorkshire_terrier": "yorkshire_terrier",
+    "yorkshire_terrier": "yorkshire_terrier", "newfoundland": "newfoundland", "leonberger": "leonberger",
+    "great_pyrenees": "great_pyrenees", "keeshond": "spitz",
 }
 STANFORD_MAP = {
     "chihuahua": "chihuahua", "japanese_spaniel": None, "maltese_dog": "maltese", "pekinese": "pekingese",

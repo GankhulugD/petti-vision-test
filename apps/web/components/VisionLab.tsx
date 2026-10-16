@@ -6,6 +6,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { Level, Profile } from "@/lib/api";
+import { AttributeConfidence, BreedVoteSignals, ConfidenceBadge, LEVEL_META } from "@/components/Confidence";
 import Feedback from "@/components/Feedback";
 import { SWATCH } from "@/components/ProfileView";
 import { CH, easeOut, prog, useClock } from "@/lib/stream";
@@ -13,7 +14,7 @@ import { CH, easeOut, prog, useClock } from "@/lib/stream";
 const SPECIES_MN: Record<string, string> = {
   dog: "нохой", cat: "муур", bird: "шувуу", horse: "морь", sheep: "хонь", cow: "үхэр", rabbit: "туулай", other: "амьтан",
 };
-const LEVEL_MN: Record<Level, string> = { high: "итгэлтэй", medium: "магадгүй", low: "тодорхойгүй" };
+const LEVEL_MN: Record<Level, string> = { high: LEVEL_META.high.label, medium: LEVEL_META.medium.label, low: LEVEL_META.low.label };
 const GAP = 110;
 const MAX_T = Number.MAX_SAFE_INTEGER;
 
@@ -77,7 +78,7 @@ function buildPlan(p: Profile, nFiles: number, searched?: number) {
   let a = traceEnd + 200;
   const answerAt = a;
   const noAnimal = p.quality.no_animal;
-  const eyebrow = noAnimal ? "Амьтан илрээгүй" : `${p.species.mn} · ${pct(p.species.confidence)}`;
+  const eyebrow = noAnimal ? "Амьтан илрээгүй" : `Төрөл · ${p.species.mn}`;
   a += eyebrow.length * CH + 60;
   const unsure = !!p.breed?.uncertain;
   const title = noAnimal ? "Зурган дээр нохой, муур алга" : unsure ? p.species.mn : (p.breed?.top[0]?.mn ?? p.species.mn);
@@ -139,21 +140,6 @@ function Streamed({ text, t, at }: { text: string; t: number; at: number }) {
       {n > 0 && n < toks.length && <span className="caret" />}
       <span className="invisible">{toks.slice(n).join("")}</span>
     </>
-  );
-}
-
-function Dots({ level }: { level?: Level }) {
-  if (!level) return null;
-  const n = { high: 3, medium: 2, low: 1 }[level];
-  return (
-    <span className="inline-flex items-center gap-1.5 text-[11px] text-zinc-400" title={LEVEL_MN[level]}>
-      <span className="inline-flex gap-[3px]">
-        {[0, 1, 2].map((i) => (
-          <i key={i} className={`h-1 w-1 rounded-full ${i < n ? "bg-zinc-800" : "bg-zinc-300"}`} />
-        ))}
-      </span>
-      {LEVEL_MN[level]}
-    </span>
   );
 }
 
@@ -301,6 +287,8 @@ export default function VisionLab({ files, profile, busy, onFiles, searched, com
                       stroke="white"
                       strokeWidth={1.5}
                       strokeOpacity={0.9}
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
                       vectorEffect="non-scaling-stroke"
                       className="draw"
                     />
@@ -480,19 +468,32 @@ export default function VisionLab({ files, profile, busy, onFiles, searched, com
   const answer = plan && profile && t >= plan.answerAt && (
     <div className="space-y-5">
       <div>
-        <p className="eyebrow">
-          <Typed text={plan.eyebrow} t={t} at={plan.answerAt} />
-        </p>
-        <div className="mt-1.5 flex items-baseline justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="eyebrow">
+            <Typed text={plan.eyebrow} t={t} at={plan.answerAt} />
+          </p>
+          {!noAnimal && t >= plan.answerAt && (
+            <ConfidenceBadge level={profile.species.level} percent={profile.species.confidence} />
+          )}
+        </div>
+        <div className="mt-1.5 flex flex-wrap items-start justify-between gap-3">
           <h2 className={`${compact ? "text-2xl" : "text-[32px]"} font-semibold leading-tight tracking-tight`}>
             <Typed text={plan.title} t={t} at={plan.titleAt} speed={16} />
           </h2>
-          {plan.titleConf >= 0 && (
-            <span className="font-mono text-sm tabular-nums text-zinc-400" style={{ opacity: t >= plan.titleAt ? 1 : 0 }}>
-              {Math.round(plan.titleConf * 100 * easeOut(prog(t, plan.titleAt, 700)))}%
-            </span>
+          {plan.titleConf >= 0 && t >= plan.titleAt && (
+            <div className="fade-in flex flex-wrap items-center gap-2">
+              <ConfidenceBadge
+                level={profile.breed?.level ?? profile.species.level}
+                percent={plan.titleConf * easeOut(prog(t, plan.titleAt, 700))}
+              />
+            </div>
           )}
         </div>
+        {!noAnimal && t >= plan.titleAt && (
+          <p className="mt-2 text-[11px] leading-4 text-zinc-400">
+            Хувь нь зөвхөн магадлал; доорх <span className="text-zinc-500">итгэлийн түвшин</span> нь тохируулсан босго (итгэлтэй / магадгүй / тодорхойгүй).
+          </p>
+        )}
         {plan.sub && (
           <p className="mt-1 text-sm text-zinc-500">
             <Typed text={plan.sub} t={t} at={plan.subAt} />
@@ -510,8 +511,8 @@ export default function VisionLab({ files, profile, busy, onFiles, searched, com
               ))}
               <Typed text={row.value} t={t} at={row.at} />
             </dd>
-            <div className="mt-0.5 h-4" style={{ opacity: t >= row.at + row.value.length * CH ? 1 : 0, transition: "opacity .3s" }}>
-              <Dots level={row.level} />
+            <div style={{ opacity: t >= row.at + row.value.length * CH ? 1 : 0, transition: "opacity .3s" }}>
+              <AttributeConfidence level={row.level} />
             </div>
           </div>
         ))}
@@ -546,43 +547,39 @@ export default function VisionLab({ files, profile, busy, onFiles, searched, com
     <div className={`grid gap-4 ${!compact && showPrint && votes.length > 0 ? "md:grid-cols-[1.3fr_1fr]" : ""}`}>
       {votes.length > 0 && (
         <section className="card fade-in">
-          <div className="flex items-baseline justify-between">
-            <h3 className="text-sm font-semibold">Үүлдрийг хэрхэн шийдсэн бэ</h3>
-            <span className="eyebrow">санал</span>
+          <div className="flex items-baseline justify-between gap-3">
+            <div>
+              <h3 className="text-sm font-semibold">Үүлдрийн гурван шалгалт</h3>
+              <p className="mt-0.5 text-xs leading-5 text-zinc-500">
+                Нэг зураг дээр гурван өөр аргаар санал гарна; «Нэгтгэсэн үр дүн» нь дэлгэцийн гол хариу.
+              </p>
+            </div>
+            <span className="eyebrow shrink-0">шинжилгээ</span>
           </div>
-          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-zinc-500">
-            <span className="flex items-center gap-1.5"><i className="h-1.5 w-3 rounded-full bg-zinc-300" /> Zero-shot (зураг ↔ текст)</span>
-            <span className="flex items-center gap-1.5"><i className="h-1.5 w-3 rounded-full bg-zinc-500" /> Сургасан модель</span>
-            <span className="flex items-center gap-1.5"><i className="h-1.5 w-3 rounded-full bg-zinc-900" /> Эцсийн</span>
-          </div>
-          <ul className="mt-4 space-y-3.5">
-            {votes.map((v, i) => {
-              const k = (d: number) => easeOut(prog(t, vAt + i * 90 + d, 700));
-              return (
-                <li key={v.key}>
-                  <div className="mb-1.5 flex items-baseline justify-between text-sm">
-                    <span className={i === 0 ? "font-medium text-zinc-900" : "text-zinc-600"}>{v.mn}</span>
-                    <span className="font-mono text-xs tabular-nums text-zinc-500">{Math.round(v.final * 100 * k(200))}%</span>
-                  </div>
-                  <div className="space-y-[3px]">
-                    {([
-                      [v.zero_shot, "bg-zinc-300", 0],
-                      [v.head, "bg-zinc-500", 100],
-                      [v.final, "bg-zinc-900", 200],
-                    ] as const).map(([val, cls, d], j) => (
-                      <div key={j} className="h-[3px] overflow-hidden rounded-full bg-zinc-100">
-                        {val !== null && <div className={`h-full rounded-full ${cls}`} style={{ width: `${Math.max(1, val * 100) * k(d)}%` }} />}
-                      </div>
-                    ))}
-                  </div>
+          {votes[0] && (() => {
+            const v = votes[0];
+            const k = easeOut(prog(t, vAt + 200, 700));
+            return (
+              <div className="mt-5">
+                <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                  <span className="text-sm font-semibold text-zinc-900">Гол санал: {v.mn}</span>
+                  <ConfidenceBadge level={profile.breed?.level} percent={v.final * k} />
+                </div>
+                <BreedVoteSignals vote={v} scale={k} />
+              </div>
+            );
+          })()}
+          {votes.length > 1 && (
+            <ul className="mt-5 border-t border-zinc-100 pt-4">
+              <p className="mb-2 text-[11px] font-medium uppercase tracking-wide text-zinc-400">Бусад төстэй</p>
+              {votes.slice(1, 5).map((v) => (
+                <li key={v.key} className="flex items-center justify-between py-1.5 text-sm text-zinc-600">
+                  <span>{v.mn}</span>
+                  <span className="font-mono text-xs tabular-nums text-zinc-400">{Math.round(v.final * 100)}%</span>
                 </li>
-              );
-            })}
-          </ul>
-          <p className="mt-4 text-xs leading-5 text-zinc-500">
-            SigLIP2 зургийг үүлдэр бүрийн хэдэн арван тайлбартай харьцуулна. Манай өгөгдөл дээр сургасан жижиг модель өөрийн саналаа нэмж, бүх зургаар
-            дундажлаад эцсийн хариу гарна.
-          </p>
+              ))}
+            </ul>
+          )}
         </section>
       )}
       {showPrint && (
@@ -612,7 +609,7 @@ export default function VisionLab({ files, profile, busy, onFiles, searched, com
       <p className="eyebrow">Хэрхэн ажилладаг вэ</p>
       <ol className="mt-4 space-y-4">
         {[
-          ["Илрүүлэх", "Зурган дээрх амьтныг олж, дүрсийг нь дэвсгэрээс салгана", "YOLO26n-seg"],
+          ["Илрүүлэх", "Зурган дээрх амьтныг олж, дүрсийг нь дэвсгэрээс салгана", "DINOv2-seg2"],
           ["Төрхийг кодлох", "Амьтны төрх, хээ угалзыг тоон хэлбэрт оруулна", "DINOv2"],
           ["Шинж чанар", "Үүлдэр, нас, хэмжээ, өнгө, онцгой шинжийг тайлбартай харьцуулж, сургасан модельтой хослуулна", "SigLIP2 + MLP"],
           ["Тулгах", "Алга болсон, олдсон амьтдын бүртгэлтэй төрх болон шинжээр нь тулгана", "Matcher"],
